@@ -1,0 +1,3 @@
+# 1. Introduction
+
+This Architecture Vision document outlines the strategic direction for an AI-Powered Resume and Job Tracker Platform, designed to streamline job application processes for job seekers, enhance recruitment efficiency for employers, and provide operational value to organizations by tracking employee skills and contributions. The platform leverages artificial intelligence to offer personalized resume optimization, job matching, application tracking, and internal talent discovery, with gamification integrated into both frontend and backend systems. This document aligns with TOGAF’s Architecture Development Method (ADM) Phase A to establish a clear vision for stakeholders and guide subsequent architecture development.
