@@ -14,7 +14,7 @@ Naming Convention
 This naming convention ensures clarity, consistency, and ease of discovery for all database entities.
 """
 
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, DECIMAL, Text, Unicode, UnicodeText
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, DECIMAL, Text, Unicode, UnicodeText, func
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime, timedelta
@@ -22,6 +22,22 @@ import logging
 import secrets
 
 Base = declarative_base()
+
+# Reference/lookup tables
+class Country(Base):
+    __tablename__ = 'countries'
+    
+    CountryID = Column(Integer, primary_key=True, index=True)
+    Name = Column(String(100), unique=True, nullable=False, index=True)
+    CodeAlpha2 = Column(String(2), unique=True, nullable=False)  # ISO 3166-1 alpha-2
+    CodeAlpha3 = Column(String(3), unique=True, nullable=False)  # ISO 3166-1 alpha-3
+    NumericCode = Column(String(3), nullable=False)  # ISO 3166-1 numeric
+    PhoneCode = Column(String(10), nullable=True)  # International dialing code
+    CurrencyCode = Column(String(3), nullable=True)  # ISO 4217 currency code
+    IsActive = Column(Boolean, default=True, nullable=False)
+    DisplayOrder = Column(Integer, default=999, nullable=False)  # For ordering in dropdowns
+    CreatedAt = Column(DateTime, default=func.now(), nullable=False)
+    UpdatedAt = Column(DateTime, default=func.now(), onupdate=func.now(), nullable=False)
 
 class Role(Base):
     __tablename__ = "Role"
@@ -294,3 +310,508 @@ class UserPasswordResetToken(Base):
     @staticmethod
     def generate_token():
         return secrets.token_urlsafe(32)
+
+# =============================================================================
+# ENHANCED EMAIL MANAGEMENT SYSTEM
+# =============================================================================
+
+class UserEmailAddress(Base):
+    __tablename__ = "UserEmailAddress"
+    UserEmailAddressID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    EmailAddress = Column(Unicode(255), unique=True, nullable=False, index=True)
+    EmailType = Column(Unicode(50))  # 'primary', 'personal', 'work', 'backup'
+    IsVerified = Column(Boolean, default=False)
+    IsActive = Column(Boolean, default=True)
+    IsLoginEmail = Column(Boolean, default=False)
+    VerificationToken = Column(Unicode(255))
+    VerificationExpiry = Column(DateTime)
+    VerifiedDate = Column(DateTime)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User", back_populates="email_addresses")
+
+class UserEmailAddressHistory(Base):
+    __tablename__ = "UserEmailAddressHistory"
+    UserEmailAddressHistoryID = Column(Integer, primary_key=True, autoincrement=True)
+    UserEmailAddressID = Column(Integer, ForeignKey("UserEmailAddress.UserEmailAddressID"), nullable=False)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    EmailAddress = Column(Unicode(255), nullable=False)
+    Action = Column(Unicode(50))  # 'added', 'verified', 'changed_login', 'deactivated', 'removed'
+    PreviousValue = Column(Unicode(255))
+    NewValue = Column(Unicode(255))
+    Reason = Column(Unicode(500))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+
+class UserEmailVerificationLog(Base):
+    __tablename__ = "UserEmailVerificationLog"
+    UserEmailVerificationLogID = Column(Integer, primary_key=True, autoincrement=True)
+    UserEmailAddressID = Column(Integer, ForeignKey("UserEmailAddress.UserEmailAddressID"), nullable=False)
+    VerificationToken = Column(Unicode(255))
+    VerificationAttempts = Column(Integer, default=0)
+    LastAttemptDate = Column(DateTime)
+    IsSuccessful = Column(Boolean, default=False)
+    IPAddress = Column(Unicode(50))
+    UserAgent = Column(Unicode(500))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+
+# =============================================================================
+# ENHANCED PROFILE SYSTEM
+# =============================================================================
+
+class ProfileVersion(Base):
+    __tablename__ = "ProfileVersion"
+    ProfileVersionID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    VersionNumber = Column(Integer, nullable=False)
+    IsConfirmed = Column(Boolean, default=False)
+    HappinessScore = Column(DECIMAL(3,2))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileCareerAspiration(Base):
+    __tablename__ = "ProfileCareerAspiration"
+    ProfileCareerAspirationID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    ShortTermRole = Column(Unicode(255))
+    LongTermRole = Column(Unicode(255))
+    AspirationStatement = Column(Unicode(1000))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileEducation(Base):
+    __tablename__ = "ProfileEducation"
+    ProfileEducationID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    InstitutionName = Column(Unicode(255), nullable=False)
+    Degree = Column(Unicode(255))
+    FieldOfStudy = Column(Unicode(255))
+    StartDate = Column(DateTime)
+    EndDate = Column(DateTime)
+    GPA = Column(DECIMAL(3,2))
+    Description = Column(Unicode(1000))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileWorkExperience(Base):
+    __tablename__ = "ProfileWorkExperience"
+    ProfileWorkExperienceID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    JobTitle = Column(Unicode(255), nullable=False)
+    CompanyName = Column(Unicode(255), nullable=False)
+    StartDate = Column(DateTime)
+    EndDate = Column(DateTime)
+    IsCurrent = Column(Boolean, default=False)
+    Description = Column(Unicode(2000))
+    Achievements = Column(Unicode(2000))
+    IsAchievement = Column(Boolean, default=False)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileCertification(Base):
+    __tablename__ = "ProfileCertification"
+    ProfileCertificationID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    CertificationName = Column(Unicode(255), nullable=False)
+    IssuingOrganization = Column(Unicode(255))
+    IssueDate = Column(DateTime)
+    ExpiryDate = Column(DateTime)
+    CredentialID = Column(Unicode(100))
+    Description = Column(Unicode(1000))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileProject(Base):
+    __tablename__ = "ProfileProject"
+    ProfileProjectID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    ProjectName = Column(Unicode(255), nullable=False)
+    Description = Column(Unicode(2000))
+    Technologies = Column(Unicode(500))
+    ProjectURL = Column(Unicode(500))
+    StartDate = Column(DateTime)
+    EndDate = Column(DateTime)
+    IsCurrent = Column(Boolean, default=False)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileVolunteerExperience(Base):
+    __tablename__ = "ProfileVolunteerExperience"
+    ProfileVolunteerExperienceID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    OrganizationName = Column(Unicode(255), nullable=False)
+    Role = Column(Unicode(255))
+    StartDate = Column(DateTime)
+    EndDate = Column(DateTime)
+    Description = Column(Unicode(1000))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+# =============================================================================
+# JOB DISCOVERY & LOGGING SYSTEM
+# =============================================================================
+
+class JobBoard(Base):
+    __tablename__ = "JobBoard"
+    JobBoardID = Column(Integer, primary_key=True, autoincrement=True)
+    BoardName = Column(Unicode(255), nullable=False)
+    BoardType = Column(Unicode(50))  # 'aggregator', 'recruiter', 'corporate'
+    Domain = Column(Unicode(255))
+    IndustryFocus = Column(Unicode(255))
+    FunctionalArea = Column(Unicode(255))
+    ValidationConfidence = Column(DECIMAL(3,2))
+    IsActive = Column(Boolean, default=True)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+class JobBoardJob(Base):
+    __tablename__ = "JobBoardJob"
+    JobBoardJobID = Column(Integer, primary_key=True, autoincrement=True)
+    JobBoardID = Column(Integer, ForeignKey("JobBoard.JobBoardID"), nullable=False)
+    JobTitle = Column(Unicode(255), nullable=False)
+    CompanyName = Column(Unicode(255), nullable=False)
+    JobDescription = Column(UnicodeText)
+    Location = Column(Unicode(255))
+    JobURL = Column(Unicode(500))
+    JobAgeEstimate = Column(Integer)
+    IsRepost = Column(Boolean, default=False)
+    RepostFrequency = Column(Integer)
+    UnitCount = Column(Integer, default=1)
+    IsActive = Column(Boolean, default=True)
+    # Contact Person Profile (nullable)
+    ContactPersonProfileID = Column(Integer, ForeignKey("Profile.ProfileID"))
+    ContactPersonType = Column(Unicode(50))  # 'recruiter', 'hiring_manager', 'hr_representative'
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    job_board = relationship("JobBoard")
+    contact_person = relationship("Profile")
+
+class JobBoardJobVersion(Base):
+    __tablename__ = "JobBoardJobVersion"
+    JobBoardJobVersionID = Column(Integer, primary_key=True, autoincrement=True)
+    JobBoardJobID = Column(Integer, ForeignKey("JobBoardJob.JobBoardJobID"), nullable=False)
+    VersionNumber = Column(Integer, nullable=False)
+    ChangeReason = Column(Unicode(255))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    job = relationship("JobBoardJob")
+
+class UserJobBoardJobInteraction(Base):
+    __tablename__ = "UserJobBoardJobInteraction"
+    UserJobBoardJobInteractionID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    JobBoardJobID = Column(Integer, ForeignKey("JobBoardJob.JobBoardJobID"), nullable=False)
+    InteractionType = Column(Unicode(50))  # 'viewed', 'logged', 'applied', 'bookmarked'
+    FitScore = Column(DECIMAL(5,2))
+    UserNotes = Column(Unicode(1000))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+    job = relationship("JobBoardJob")
+
+class JobBoardJobSkill(Base):
+    __tablename__ = "JobBoardJobSkill"
+    JobBoardJobSkillID = Column(Integer, primary_key=True, autoincrement=True)
+    JobBoardJobID = Column(Integer, ForeignKey("JobBoardJob.JobBoardJobID"), nullable=False)
+    SkillName = Column(Unicode(255), nullable=False)
+    SkillType = Column(Unicode(50))  # 'required', 'preferred', 'optional'
+    Importance = Column(DECIMAL(3,2))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    job = relationship("JobBoardJob")
+
+# =============================================================================
+# FIT SCORE ANALYSIS SYSTEM
+# =============================================================================
+
+class UserJobBoardJobFitScore(Base):
+    __tablename__ = "UserJobBoardJobFitScore"
+    UserJobBoardJobFitScoreID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    JobBoardJobID = Column(Integer, ForeignKey("JobBoardJob.JobBoardJobID"), nullable=False)
+    ProfileVersionID = Column(Integer, ForeignKey("ProfileVersion.ProfileVersionID"), nullable=False)
+    OverallScore = Column(DECIMAL(5,2))
+    SkillsMatched = Column(Integer)
+    SkillsPartial = Column(Integer)
+    SkillsMissing = Column(Integer)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+    job = relationship("JobBoardJob")
+    profile_version = relationship("ProfileVersion")
+
+class UserJobBoardJobFitScoreDetail(Base):
+    __tablename__ = "UserJobBoardJobFitScoreDetail"
+    UserJobBoardJobFitScoreDetailID = Column(Integer, primary_key=True, autoincrement=True)
+    UserJobBoardJobFitScoreID = Column(Integer, ForeignKey("UserJobBoardJobFitScore.UserJobBoardJobFitScoreID"), nullable=False)
+    SkillName = Column(Unicode(255), nullable=False)
+    MatchStatus = Column(Unicode(50))  # 'matched', 'partial', 'missing'
+    UserSkillLevel = Column(Unicode(50))
+    JobSkillRequirement = Column(Unicode(50))
+    Score = Column(DECIMAL(5,2))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    fit_score = relationship("UserJobBoardJobFitScore")
+
+class UserSkillGapResolution(Base):
+    __tablename__ = "UserSkillGapResolution"
+    UserSkillGapResolutionID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    SkillName = Column(Unicode(255), nullable=False)
+    ResolutionType = Column(Unicode(50))  # 'added', 'confirmed', 'learning'
+    ResolutionDate = Column(DateTime, default=datetime.utcnow)
+    Notes = Column(Unicode(1000))
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+
+# =============================================================================
+# ENHANCED RESUME & ARTIFACT SYSTEM
+# =============================================================================
+
+class ResumeResumeVersion(Base):
+    __tablename__ = "ResumeResumeVersion"
+    ResumeResumeVersionID = Column(Integer, primary_key=True, autoincrement=True)
+    ResumeID = Column(Integer, ForeignKey("Resume.ResumeID"), nullable=False)
+    ProfileVersionID = Column(Integer, ForeignKey("ProfileVersion.ProfileVersionID"), nullable=False)
+    JobBoardJobID = Column(Integer, ForeignKey("JobBoardJob.JobBoardJobID"))
+    Content = Column(UnicodeText)  # markdown format
+    Template = Column(Unicode(100))
+    Tone = Column(Unicode(50))
+    ExportFormat = Column(Unicode(50))  # 'PDF', 'DOCX', 'HTML'
+    FileURL = Column(Unicode(500))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    resume = relationship("Resume")
+    profile_version = relationship("ProfileVersion")
+    job = relationship("JobBoardJob")
+
+class CoverLetterCoverLetterVersion(Base):
+    __tablename__ = "CoverLetterCoverLetterVersion"
+    CoverLetterCoverLetterVersionID = Column(Integer, primary_key=True, autoincrement=True)
+    CoverLetterID = Column(Integer, ForeignKey("CoverLetter.CoverLetterID"), nullable=False)
+    ProfileVersionID = Column(Integer, ForeignKey("ProfileVersion.ProfileVersionID"), nullable=False)
+    JobBoardJobID = Column(Integer, ForeignKey("JobBoardJob.JobBoardJobID"))
+    Content = Column(UnicodeText)  # markdown format
+    Tone = Column(Unicode(50))
+    ExportFormat = Column(Unicode(50))
+    FileURL = Column(Unicode(500))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    cover_letter = relationship("CoverLetter")
+    profile_version = relationship("ProfileVersion")
+    job = relationship("JobBoardJob")
+
+class ExportTemplate(Base):
+    __tablename__ = "ExportTemplate"
+    ExportTemplateID = Column(Integer, primary_key=True, autoincrement=True)
+    TemplateName = Column(Unicode(255), nullable=False)
+    TemplateType = Column(Unicode(50))  # 'resume', 'cover-letter', 'report'
+    Content = Column(UnicodeText)  # HTML/CSS template
+    IsActive = Column(Boolean, default=True)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+# =============================================================================
+# GAMIFICATION SYSTEM
+# =============================================================================
+
+class UserGamificationPoints(Base):
+    __tablename__ = "UserGamificationPoints"
+    UserGamificationPointsID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    PointsEarned = Column(Integer, nullable=False)
+    PointsType = Column(Unicode(50))  # 'job_logging', 'profile_completion', 'skill_confirmation'
+    Description = Column(Unicode(255))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+
+class UserAchievement(Base):
+    __tablename__ = "UserAchievement"
+    UserAchievementID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    AchievementName = Column(Unicode(255), nullable=False)
+    AchievementDescription = Column(Unicode(500))
+    EarnedDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+
+# =============================================================================
+# NOTIFICATION SYSTEM
+# =============================================================================
+
+class UserNotification(Base):
+    __tablename__ = "UserNotification"
+    UserNotificationID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    NotificationType = Column(Unicode(50))
+    Title = Column(Unicode(255))
+    Message = Column(Unicode(1000))
+    IsRead = Column(Boolean, default=False)
+    IsEmailSent = Column(Boolean, default=False)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+
+class UserNotificationPreference(Base):
+    __tablename__ = "UserNotificationPreference"
+    UserNotificationPreferenceID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    NotificationType = Column(Unicode(50))
+    EmailEnabled = Column(Boolean, default=True)
+    InAppEnabled = Column(Boolean, default=True)
+    Frequency = Column(Unicode(50))  # 'immediate', 'daily', 'weekly'
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+
+# =============================================================================
+# ANALYTICS & DASHBOARD SYSTEM
+# =============================================================================
+
+class UserAnalytics(Base):
+    __tablename__ = "UserAnalytics"
+    UserAnalyticsID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    ProfileCompleteness = Column(DECIMAL(5,2))
+    TotalJobApplications = Column(Integer)
+    AverageFitScore = Column(DECIMAL(5,2))
+    ResumeGeneratedCount = Column(Integer)
+    LastActivityDate = Column(DateTime)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+
+class UserJobBoardJobSearchAnalytics(Base):
+    __tablename__ = "UserJobBoardJobSearchAnalytics"
+    UserJobBoardJobSearchAnalyticsID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=False)
+    JobBoardID = Column(Integer, ForeignKey("JobBoard.JobBoardID"))
+    ApplicationsCount = Column(Integer)
+    InterviewCount = Column(Integer)
+    OfferCount = Column(Integer)
+    SuccessRate = Column(DECIMAL(5,2))
+    Period = Column(Unicode(20))  # 'weekly', 'monthly', 'yearly'
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    user = relationship("User")
+    job_board = relationship("JobBoard")
+
+# =============================================================================
+# PRIVACY & CONSENT SYSTEM
+# =============================================================================
+
+class ProfileConsent(Base):
+    __tablename__ = "ProfileConsent"
+    ProfileConsentID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    ConsentType = Column(Unicode(50))  # 'contact_info', 'professional_details', 'social_media'
+    IsGranted = Column(Boolean, default=False)
+    GrantedTo = Column(Unicode(100))  # 'all_users', 'specific_user', 'job_applicants'
+    GrantedDate = Column(DateTime)
+    ExpiryDate = Column(DateTime)
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+class ProfileType(Base):
+    __tablename__ = "ProfileType"
+    ProfileTypeID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    ProfileType = Column(Unicode(50))  # 'job_seeker', 'recruiter', 'hiring_manager', 'hr_representative'
+    IsVerified = Column(Boolean, default=False)
+    VerificationMethod = Column(Unicode(100))
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+
+    profile = relationship("Profile")
+
+# Update User model to include email relationship
+User.email_addresses = relationship("UserEmailAddress", back_populates="user")

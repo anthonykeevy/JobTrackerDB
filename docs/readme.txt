@@ -194,3 +194,164 @@ For detailed setup instructions and troubleshooting, see `SETUP.md` in the proje
 | HOST | Backend server host | 0.0.0.0 |
 | PORT | Backend server port | 8000 |
 | ENVIRONMENT | Application environment | development |
+
+## 1. Schema Review Process
+
+You're correct that we need to design the complete schema based on your project requirements. Let me help you with this systematic approach:
+
+### Schema Design Process
+```
+<code_block_to_apply_changes_from>
+```
+
+**Current State Analysis:**
+- Your `setup_database.py` has basic tables (User, Profile, Role)
+- These are likely just for testing connectivity
+- We need to expand this based on your full feature set
+
+### What We Need to Review:
+1. **Career Profile System** (Epic 1)
+2. **Job Discovery & Logging** (Epic 2) 
+3. **Fit Score Analysis** (Epic 3)
+4. **Resume Tailoring** (Epic 4)
+5. **Job Search Artifacts** (Epic 6)
+6. **Dashboard Analytics** (Epic 9)
+7. **Export & File Management** (Epic 10)
+8. **Notification System** (Epic 11)
+
+## 2. Alembic Environment Process - High Level Overview
+
+Let me break down the Alembic process and environment separation:
+
+### Environment Separation Strategy
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   DEVELOPMENT   │    │    STAGING      │    │   PRODUCTION    │
+│                 │    │                 │    │                 │
+│ Database:       │    │ Database:       │    │ Database:       │
+│ JobTrackerDB_Dev│    │ JobTrackerDB_Stg│    │ JobTrackerDB_Prod│
+│                 │    │                 │    │                 │
+│ Alembic Config: │    │ Alembic Config: │    │ Alembic Config: │
+│ dev.ini         │    │ staging.ini     │    │ prod.ini        │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### Alembic Workflow Process
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    ALEMBIC DEVELOPMENT WORKFLOW                │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ 1. MODEL CHANGES                                                │
+│    ┌─────────────┐                                             │
+│    │ Update      │                                             │
+│    │ SQLAlchemy  │                                             │
+│    │ Models      │                                             │
+│    └─────────────┘                                             │
+│           │                                                     │
+│           ▼                                                     │
+│                                                                 │
+│ 2. GENERATE MIGRATION                                          │
+│    ┌─────────────┐                                             │
+│    │ alembic     │ → Creates migration file                    │
+│    │ revision    │   (e.g., 003_add_job_tracking.py)          │
+│    │ --autogenerate│                                           │
+│    └─────────────┘                                             │
+│           │                                                     │
+│           ▼                                                     │
+│                                                                 │
+│ 3. REVIEW & EDIT                                                │
+│    ┌─────────────┐                                             │
+│    │ Review      │ → Check generated SQL                       │
+│    │ Migration   │ → Add custom logic if needed                │
+│    │ File        │ → Test migration locally                    │
+│    └─────────────┘                                             │
+│           │                                                     │
+│           ▼                                                     │
+│                                                                 │
+│ 4. APPLY TO DEVELOPMENT                                        │
+│    ┌─────────────┐                                             │
+│    │ alembic     │ → Updates dev database                      │
+│    │ upgrade     │ → Tests the migration                       │
+│    │ head        │                                             │
+│    └─────────────┘                                             │
+│           │                                                     │
+│           ▼                                                     │
+│                                                                 │
+│ 5. TEST & VALIDATE                                             │
+│    ┌─────────────┐                                             │
+│    │ Run Tests   │ → Unit tests, integration tests            │
+│    │ Manual      │ → Manual testing of new features           │
+│    │ Testing     │                                             │
+│    └─────────────┘                                             │
+│           │                                                     │
+│           ▼                                                     │
+│                                                                 │
+│ 6. DEPLOY TO STAGING                                           │
+│    ┌─────────────┐                                             │
+│    │ alembic     │ → Apply to staging database                 │
+│    │ upgrade     │ → Use staging.ini config                   │
+│    │ head        │                                             │
+│    └─────────────┘                                             │
+│           │                                                     │
+│           ▼                                                     │
+│                                                                 │
+│ 7. PRODUCTION DEPLOYMENT                                       │
+│    ┌─────────────┐                                             │
+│    │ alembic     │ → Apply to production database              │
+│    │ upgrade     │ → Use prod.ini config                      │
+│    │ head        │ → Backup before applying                   │
+│    └─────────────┘                                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Environment Configuration Files
+
+```ini
+# alembic.ini (Development)
+[alembic]
+sqlalchemy.url = mssql+pyodbc://localhost/JobTrackerDB_Dev?driver=ODBC+Driver+17+for+SQL+Server
+
+# staging.ini
+[alembic]
+sqlalchemy.url = mssql+pyodbc://staging-server/JobTrackerDB_Stg?driver=ODBC+Driver+17+for+SQL+Server
+
+# production.ini
+[alembic]
+sqlalchemy.url = mssql+pyodbc://prod-server/JobTrackerDB_Prod?driver=ODBC+Driver+17+for+SQL+Server
+```
+
+### Key Commands You'll Use:
+
+```bash
+# Development
+alembic -c alembic.ini revision --autogenerate -m "Add job tracking"
+alembic -c alembic.ini upgrade head
+
+# Staging
+alembic -c staging.ini upgrade head
+
+# Production
+alembic -c production.ini upgrade head
+
+# Rollback (if needed)
+alembic -c alembic.ini downgrade -1
+```
+
+## Recommended Next Steps
+
+### Step 1: Schema Review (Priority 1)
+1. **Review your PRD and Epics** to identify all data entities
+2. **Create a comprehensive data model** covering all features
+3. **Design relationships** between entities
+4. **Validate the schema** against your user stories
+
+### Step 2: Alembic Setup (Priority 2)
+1. **Install and configure Alembic** with environment separation
+2. **Create initial migration** with the complete schema
+3. **Set up environment configurations** (dev/staging/prod)
+4. **Test the migration process**
+
+Would you like me to help you with **Step 1 - Schema Review** first? I can analyze your PRD and epics to help design the complete database schema before we implement Alembic.
