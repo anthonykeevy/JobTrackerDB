@@ -114,6 +114,58 @@
 
         // Address parsing logic from BasicInfoStep.tsx
         function parseAddressQuery(query) {
+            log('🔍 PARSING ADDRESS QUERY:', query);
+            
+            // Handle full address format (comma-separated)
+            if (query.includes(',')) {
+                const parts = query.split(',').map(part => part.trim());
+                log('📋 COMMA-SEPARATED PARTS:', parts);
+                
+                // First part should contain street address
+                const streetPart = parts[0];
+                log('🏠 STREET PART:', streetPart);
+                
+                // Extract street number and street name/type from first part
+                const streetMatch = streetPart.match(/^(\d+)\s+(.+)$/);
+                if (streetMatch) {
+                    const streetNumber = streetMatch[1];
+                    const streetNameType = streetMatch[2].toUpperCase();
+                    log('📍 STREET NUMBER:', streetNumber);
+                    log('📍 STREET NAME/TYPE:', streetNameType);
+                    
+                    // Split street name and type
+                    const nameTypeParts = streetNameType.split(' ');
+                    if (nameTypeParts.length >= 2) {
+                        // Last part is street type, everything else is street name
+                        const streetType = nameTypeParts[nameTypeParts.length - 1];
+                        const streetName = nameTypeParts.slice(0, -1).join(' ');
+                        log('✅ PARSED STREET NAME:', streetName);
+                        log('✅ PARSED STREET TYPE:', streetType);
+                        
+                        return {
+                            streetNumber,
+                            streetName,
+                            streetType,
+                            suburb: parts[1] || '',
+                            state: parts[2] || '',
+                            postcode: parts[3] || ''
+                        };
+                    } else {
+                        // Single word street name, no type
+                        log('⚠️ SINGLE WORD STREET NAME:', streetNameType);
+                        return {
+                            streetNumber,
+                            streetName: streetNameType,
+                            streetType: '',
+                            suburb: parts[1] || '',
+                            state: parts[2] || '',
+                            postcode: parts[3] || ''
+                        };
+                    }
+                }
+            }
+            
+            // Fallback for simple format
             const parts = query.trim().split(' ');
             const streetNumber = parts[0] && /^\d+/.test(parts[0]) ? parts[0] : '';
             
@@ -125,11 +177,17 @@
             
             if (remaining.length > 0) {
                 const lastWord = remaining[remaining.length - 1].toUpperCase();
+                log('🔍 SIMPLE FORMAT - CHECKING LAST WORD:', lastWord);
+                log('🔍 SIMPLE FORMAT - AVAILABLE STREET TYPES:', streetTypes);
+                
                 if (streetTypes.includes(lastWord)) {
                     streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
                     streetName = remaining.slice(0, -1).join(' ').toUpperCase();
+                    log('✅ SIMPLE FORMAT - FOUND STREET TYPE:', streetType);
+                    log('✅ SIMPLE FORMAT - EXTRACTED STREET NAME:', streetName);
                 } else {
                     streetName = remaining.join(' ').toUpperCase();
+                    log('⚠️ SIMPLE FORMAT - NO STREET TYPE FOUND, USING FULL NAME:', streetName);
                 }
             }
             

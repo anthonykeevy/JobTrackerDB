@@ -237,11 +237,17 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           
           if (remainingStreet.length > 0) {
             const lastWord = remainingStreet[remainingStreet.length - 1].toUpperCase();
+            console.log('🔍 CHECKING LAST WORD:', lastWord);
+            console.log('🔍 AVAILABLE STREET TYPES:', streetTypes);
+            
             if (streetTypes.includes(lastWord)) {
               streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
               streetName = remainingStreet.slice(0, -1).join(' ').toUpperCase();
+              console.log('✅ FOUND STREET TYPE:', streetType);
+              console.log('✅ EXTRACTED STREET NAME:', streetName);
             } else {
               streetName = remainingStreet.join(' ').toUpperCase();
+              console.log('⚠️ NO STREET TYPE FOUND, USING FULL NAME:', streetName);
             }
           }
           
@@ -264,11 +270,17 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         // Look for street type at the end
         if (remaining.length > 0) {
           const lastWord = remaining[remaining.length - 1].toUpperCase();
+          console.log('🔍 SIMPLE FORMAT - CHECKING LAST WORD:', lastWord);
+          console.log('🔍 SIMPLE FORMAT - AVAILABLE STREET TYPES:', streetTypes);
+          
           if (streetTypes.includes(lastWord)) {
             streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
             streetName = remaining.slice(0, -1).join(' ').toUpperCase();
+            console.log('✅ SIMPLE FORMAT - FOUND STREET TYPE:', streetType);
+            console.log('✅ SIMPLE FORMAT - EXTRACTED STREET NAME:', streetName);
           } else {
             streetName = remaining.join(' ').toUpperCase();
+            console.log('⚠️ SIMPLE FORMAT - NO STREET TYPE FOUND, USING FULL NAME:', streetName);
           }
         }
         
