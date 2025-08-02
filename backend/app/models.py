@@ -39,6 +39,55 @@ class Country(Base):
     CreatedAt = Column(DateTime, default=func.now(), nullable=False)
     UpdatedAt = Column(DateTime, default=func.now(), onupdate=func.now(), nullable=False)
 
+class ProfileAddress(Base):
+    """Enhanced address table with Geoscape API integration support"""
+    __tablename__ = "ProfileAddress"
+    
+    ProfileAddressID = Column(Integer, primary_key=True, autoincrement=True)
+    ProfileID = Column(Integer, ForeignKey("Profile.ProfileID"), nullable=False)
+    
+    # Standard address components
+    StreetNumber = Column(Unicode(20))
+    StreetName = Column(Unicode(255), nullable=False)
+    StreetType = Column(Unicode(50))  # Street, Road, Avenue, etc.
+    UnitNumber = Column(Unicode(20))  # Apartment, Unit, Suite
+    UnitType = Column(Unicode(50))  # Unit, Apartment, Suite, etc.
+    Suburb = Column(Unicode(100), nullable=False)
+    State = Column(Unicode(50), nullable=False)
+    Postcode = Column(Unicode(20), nullable=False)
+    Country = Column(Unicode(100), nullable=False, default='Australia')
+    
+    # Geoscape API data
+    PropertyID = Column(Unicode(100))  # Geoscape property identifier
+    Latitude = Column(DECIMAL(10, 8))
+    Longitude = Column(DECIMAL(11, 8))
+    PropertyType = Column(Unicode(100))  # Residential, Commercial, etc.
+    LandArea = Column(DECIMAL(10, 2))  # Square meters
+    FloorArea = Column(DECIMAL(10, 2))  # Square meters
+    
+    # Validation and confidence
+    IsValidated = Column(Boolean, default=False)
+    ValidationSource = Column(Unicode(50))  # 'geoscape', 'smarty_streets', 'manual'
+    ConfidenceScore = Column(DECIMAL(3, 2))  # 0.00 to 1.00
+    ValidationDate = Column(DateTime)
+    
+    # Address status
+    IsActive = Column(Boolean, default=True)
+    IsPrimary = Column(Boolean, default=False)
+    AddressType = Column(Unicode(50))  # 'residential', 'work', 'mailing', 'temporary'
+    
+    # Metadata
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+    
+    # Relationships
+    profile = relationship("Profile", back_populates="addresses")
+    
+    def __repr__(self):
+        return f"<ProfileAddress(ProfileID={self.ProfileID}, Address='{self.StreetNumber} {self.StreetName} {self.StreetType}, {self.Suburb} {self.State} {self.Postcode}')>"
+
 class Role(Base):
     __tablename__ = "Role"
     RoleID = Column(Integer, primary_key=True, autoincrement=True)
@@ -63,6 +112,7 @@ class Profile(Base):
     FirstName = Column(Unicode(100), nullable=False)
     LastName = Column(Unicode(100), nullable=False)
     Subtitle = Column(Unicode(255))
+    # Legacy address fields (deprecated - use ProfileAddress table)
     AddressLine1 = Column(Unicode(255))
     AddressLine2 = Column(Unicode(255))
     AddressLine3 = Column(Unicode(255))
@@ -79,6 +129,9 @@ class Profile(Base):
     createdBy = Column(Unicode(100))
     lastUpdated = Column(DateTime)
     updatedBy = Column(Unicode(100))
+    
+    # Relationships
+    addresses = relationship("ProfileAddress", back_populates="profile", cascade="all, delete-orphan")
 
 class User(Base):
     __tablename__ = "User"

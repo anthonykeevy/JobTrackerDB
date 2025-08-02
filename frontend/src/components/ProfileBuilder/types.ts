@@ -12,14 +12,36 @@ export interface ProfileData {
     lastName: string;
     email: string;
     phone: string;
-    // Full address fields
+    // Enhanced address fields with Geoscape API support
     address: {
-      streetAddress: string;
-      apartment?: string;
-      city: string;
+      // Standard address components
+      streetNumber?: string;
+      streetName: string;
+      streetType?: string;  // Street, Road, Avenue, etc.
+      unitNumber?: string;  // Apartment, Unit, Suite
+      unitType?: string;    // Unit, Apartment, Suite, etc.
+      suburb: string;       // City/Suburb
       state: string;
-      postalCode: string;
+      postcode: string;
       country: string;
+      
+      // Geoscape API data (optional)
+      propertyId?: string;
+      latitude?: number;
+      longitude?: number;
+      propertyType?: string;
+      landArea?: number;
+      floorArea?: number;
+      
+      // Validation data
+      isValidated?: boolean;
+      validationSource?: 'geoscape' | 'smarty_streets' | 'manual';
+      confidenceScore?: number;  // 0.00 to 1.00
+      validationDate?: string;
+      
+      // Address metadata
+      isPrimary?: boolean;
+      addressType?: 'residential' | 'work' | 'mailing' | 'temporary';
     };
     // Birth and nationality
     dateOfBirth?: string;

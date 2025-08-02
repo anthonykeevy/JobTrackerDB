@@ -25,12 +25,27 @@ const basicInfoSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().min(8, 'Please enter a valid phone number'),
   address: z.object({
-    streetAddress: z.string().min(5, 'Street address is required'),
-    apartment: z.string().optional(),
-    city: z.string().min(2, 'City is required'),
+    streetNumber: z.string().optional(),
+    streetName: z.string().min(2, 'Street name is required'),
+    streetType: z.string().optional(),
+    unitNumber: z.string().optional(),
+    unitType: z.string().optional(),
+    suburb: z.string().min(2, 'Suburb/City is required'),
     state: z.string().min(2, 'State/Province is required'),
-    postalCode: z.string().min(3, 'Postal code is required'),
+    postcode: z.string().min(3, 'Postcode is required'),
     country: z.string().min(2, 'Country is required'),
+    propertyId: z.string().optional(),
+    latitude: z.number().optional(),
+    longitude: z.number().optional(),
+    propertyType: z.string().optional(),
+    landArea: z.number().optional(),
+    floorArea: z.number().optional(),
+    isValidated: z.boolean().optional(),
+    validationSource: z.enum(['geoscape', 'smarty_streets', 'manual']).optional(),
+    confidenceScore: z.number().min(0).max(1).optional(),
+    validationDate: z.string().optional(),
+    isPrimary: z.boolean().optional(),
+    addressType: z.enum(['residential', 'work', 'mailing', 'temporary']).optional(),
   }),
   dateOfBirth: z.string().optional(),
   countryOfBirth: z.string().min(2, 'Country of birth is required'),
@@ -82,7 +97,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch
+    watch,
+    getValues,
+    setValue
   } = useForm<BasicInfoFormData>({
     resolver: zodResolver(basicInfoSchema),
     defaultValues: {
@@ -91,12 +108,27 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
       email: data.basicInfo.email || '',
       phone: data.basicInfo.phone || '',
       address: {
-        streetAddress: data.basicInfo.address?.streetAddress || '',
-        apartment: data.basicInfo.address?.apartment || '',
-        city: data.basicInfo.address?.city || '',
+        streetNumber: data.basicInfo.address?.streetNumber || '',
+        streetName: data.basicInfo.address?.streetName || '',
+        streetType: data.basicInfo.address?.streetType || '',
+        unitNumber: data.basicInfo.address?.unitNumber || '',
+        unitType: data.basicInfo.address?.unitType || '',
+        suburb: data.basicInfo.address?.suburb || '',
         state: data.basicInfo.address?.state || '',
-        postalCode: data.basicInfo.address?.postalCode || '',
+        postcode: data.basicInfo.address?.postcode || '',
         country: data.basicInfo.address?.country || 'Australia',
+        propertyId: data.basicInfo.address?.propertyId || '',
+        latitude: data.basicInfo.address?.latitude || undefined,
+        longitude: data.basicInfo.address?.longitude || undefined,
+        propertyType: data.basicInfo.address?.propertyType || '',
+        landArea: data.basicInfo.address?.landArea || undefined,
+        floorArea: data.basicInfo.address?.floorArea || undefined,
+        isValidated: data.basicInfo.address?.isValidated || false,
+        validationSource: data.basicInfo.address?.validationSource || undefined,
+        confidenceScore: data.basicInfo.address?.confidenceScore || undefined,
+        validationDate: data.basicInfo.address?.validationDate || '',
+        isPrimary: data.basicInfo.address?.isPrimary || true,
+        addressType: data.basicInfo.address?.addressType || 'residential',
       },
       dateOfBirth: data.basicInfo.dateOfBirth || '',
       countryOfBirth: data.basicInfo.countryOfBirth || '',
@@ -134,21 +166,78 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
   const validateAddress = async () => {
     const address = watch('address');
-    if (!address.streetAddress || !address.city || !address.country) return;
+    if (!address.streetName || !address.suburb || !address.country) {
+      setAddressValidation({
+        status: 'invalid',
+        message: 'Please enter street name, suburb, and country to validate address.'
+      });
+      return;
+    }
 
     setAddressValidation({ status: 'validating' });
     
-    // Simulate address validation (in real app, call Smarty Streets API)
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Mock validation result
-    const isValid = Math.random() > 0.3; // 70% success rate for demo
-    setAddressValidation({
-      status: isValid ? 'valid' : 'invalid',
-      message: isValid 
-        ? 'Address validated successfully' 
-        : 'Unable to validate address. Please check and try again.'
-    });
+    try {
+      // Simulate Geoscape API call (in real app, call actual API)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Mock Geoscape API response
+      const mockGeoscapeResponse = {
+        valid: Math.random() > 0.2, // 80% success rate for demo
+        confidence_score: Math.random() * 0.4 + 0.6, // 0.6 to 1.0
+        suggestions: [],
+        street_number: address.streetNumber || '123',
+        street_name: address.streetName,
+        street_type: address.streetType || 'Street',
+        suburb: address.suburb,
+        state: address.state,
+        postcode: address.postcode,
+        country: address.country,
+        property_id: `PROP_${Math.random().toString(36).substr(2, 9)}`,
+        latitude: -33.8688 + (Math.random() - 0.5) * 0.1, // Sydney area
+        longitude: 151.2093 + (Math.random() - 0.5) * 0.1,
+        property_type: 'Residential',
+        land_area: Math.floor(Math.random() * 500) + 200, // 200-700 sqm
+        floor_area: Math.floor(Math.random() * 200) + 100, // 100-300 sqm
+        demographics: {},
+        market_data: {}
+      };
+      
+      if (mockGeoscapeResponse.valid) {
+        // Update form with validated address data
+        const form = getValues();
+        form.address = {
+          ...form.address,
+          ...mockGeoscapeResponse,
+          isValidated: true,
+          validationSource: 'geoscape',
+          confidenceScore: mockGeoscapeResponse.confidence_score,
+          validationDate: new Date().toISOString(),
+          propertyId: mockGeoscapeResponse.property_id,
+          latitude: mockGeoscapeResponse.latitude,
+          longitude: mockGeoscapeResponse.longitude,
+          propertyType: mockGeoscapeResponse.property_type,
+          landArea: mockGeoscapeResponse.land_area,
+          floorArea: mockGeoscapeResponse.floor_area,
+        };
+        
+        setValue('address', form.address);
+        
+        setAddressValidation({
+          status: 'valid',
+          message: `Address validated with ${Math.round(mockGeoscapeResponse.confidence_score * 100)}% confidence`
+        });
+      } else {
+        setAddressValidation({
+          status: 'invalid',
+          message: 'Unable to validate address. Please check and try again.'
+        });
+      }
+    } catch (error) {
+      setAddressValidation({
+        status: 'invalid',
+        message: 'Address validation service temporarily unavailable. Please try again later.'
+      });
+    }
   };
 
   // Comprehensive country list - in production, this should come from API
@@ -352,53 +441,117 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             </div>
           )}
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Street Number */}
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Street Address *
+                Street Number
               </label>
               <input
-                {...register('address.streetAddress')}
+                {...register('address.streetNumber')}
                 type="text"
-                placeholder="123 Main Street"
-                className={`block w-full px-4 py-3 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.address?.streetAddress ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                }`}
-              />
-              {errors.address?.streetAddress && (
-                <p className="mt-1 text-sm text-red-600">{errors.address.streetAddress.message}</p>
-              )}
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Apartment/Unit (Optional)
-              </label>
-              <input
-                {...register('address.apartment')}
-                type="text"
-                placeholder="Apt 4B, Unit 12, etc."
+                placeholder="123"
                 className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
-            <div>
+            {/* Street Name */}
+            <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                City *
+                Street Name *
               </label>
               <input
-                {...register('address.city')}
+                {...register('address.streetName')}
                 type="text"
-                placeholder="Sydney"
+                placeholder="Main Street"
                 className={`block w-full px-4 py-3 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.address?.city ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  errors.address?.streetName ? 'border-red-300 bg-red-50' : 'border-gray-300'
                 }`}
               />
-              {errors.address?.city && (
-                <p className="mt-1 text-sm text-red-600">{errors.address.city.message}</p>
+              {errors.address?.streetName && (
+                <p className="mt-1 text-sm text-red-600">{errors.address.streetName.message}</p>
               )}
             </div>
 
+            {/* Street Type */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Street Type
+              </label>
+              <select
+                {...register('address.streetType')}
+                className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select type</option>
+                <option value="Street">Street</option>
+                <option value="Road">Road</option>
+                <option value="Avenue">Avenue</option>
+                <option value="Drive">Drive</option>
+                <option value="Lane">Lane</option>
+                <option value="Court">Court</option>
+                <option value="Place">Place</option>
+                <option value="Crescent">Crescent</option>
+                <option value="Boulevard">Boulevard</option>
+                <option value="Way">Way</option>
+                <option value="Close">Close</option>
+                <option value="Terrace">Terrace</option>
+                <option value="Parade">Parade</option>
+              </select>
+            </div>
+
+            {/* Unit Number */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Unit Number
+              </label>
+              <input
+                {...register('address.unitNumber')}
+                type="text"
+                placeholder="4B"
+                className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            {/* Unit Type */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Unit Type
+              </label>
+              <select
+                {...register('address.unitType')}
+                className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select type</option>
+                <option value="Unit">Unit</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Suite">Suite</option>
+                <option value="Floor">Floor</option>
+                <option value="Level">Level</option>
+                <option value="Room">Room</option>
+                <option value="Shop">Shop</option>
+                <option value="Office">Office</option>
+              </select>
+            </div>
+
+            {/* Suburb */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Suburb/City *
+              </label>
+              <input
+                {...register('address.suburb')}
+                type="text"
+                placeholder="Sydney"
+                className={`block w-full px-4 py-3 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  errors.address?.suburb ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+              />
+              {errors.address?.suburb && (
+                <p className="mt-1 text-sm text-red-600">{errors.address.suburb.message}</p>
+              )}
+            </div>
+
+            {/* State */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {watchCountry === 'Australia' ? 'State' : watchCountry === 'United States' ? 'State' : 'Province/State'} *
@@ -416,23 +569,25 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
               )}
             </div>
 
+            {/* Postcode */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {watchCountry === 'Australia' ? 'Postcode' : watchCountry === 'United States' ? 'ZIP Code' : 'Postal Code'} *
               </label>
               <input
-                {...register('address.postalCode')}
+                {...register('address.postcode')}
                 type="text"
                 placeholder={watchCountry === 'Australia' ? '2000' : watchCountry === 'United States' ? '10001' : 'Postal Code'}
                 className={`block w-full px-4 py-3 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.address?.postalCode ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  errors.address?.postcode ? 'border-red-300 bg-red-50' : 'border-gray-300'
                 }`}
               />
-              {errors.address?.postalCode && (
-                <p className="mt-1 text-sm text-red-600">{errors.address.postalCode.message}</p>
+              {errors.address?.postcode && (
+                <p className="mt-1 text-sm text-red-600">{errors.address.postcode.message}</p>
               )}
             </div>
 
+            {/* Country */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Country *
@@ -452,6 +607,26 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
               )}
             </div>
           </div>
+
+          {/* Address Validation Status */}
+          {watch('address.isValidated') && (
+            <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center">
+                <CheckCircleIcon className="w-5 h-5 text-green-600 mr-2" />
+                <div>
+                  <h4 className="text-sm font-medium text-green-900">Address Validated</h4>
+                  <p className="text-sm text-green-700">
+                    Validated via {watch('address.validationSource')} with {Math.round((watch('address.confidenceScore') || 0) * 100)}% confidence
+                  </p>
+                  {watch('address.propertyId') && (
+                    <p className="text-xs text-green-600 mt-1">
+                      Property ID: {watch('address.propertyId')}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Nationality & Birth Information */}
