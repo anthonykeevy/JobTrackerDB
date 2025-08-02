@@ -24,54 +24,86 @@ const MapComponent: React.FC<MapComponentProps> = ({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
+  const marker = useRef<mapboxgl.Marker | null>(null);
+  const popup = useRef<mapboxgl.Popup | null>(null);
+
   useEffect(() => {
     if (!mapContainer.current || !MAPBOX_TOKEN) return;
 
-    if (map.current) return; // Initialize map only once
+    if (!map.current) {
+      try {
+        map.current = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [longitude, latitude],
+          zoom: 15,
+          accessToken: MAPBOX_TOKEN,
+          // Optimize rendering and reduce WebGL warnings
+          antialias: true,
+          failIfMajorPerformanceCaveat: false,
+          preserveDrawingBuffer: false,
+          renderWorldCopies: false
+        });
 
-    try {
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [longitude, latitude],
-        zoom: 15,
-        accessToken: MAPBOX_TOKEN,
-        // Optimize rendering and reduce WebGL warnings
-        antialias: true,
-        failIfMajorPerformanceCaveat: false,
-        preserveDrawingBuffer: false,
-        renderWorldCopies: false
-      });
-
-      // Handle WebGL context errors
-      map.current.on('error', (e) => {
-        console.warn('Mapbox GL error (non-critical):', e);
-      });
-    } catch (error) {
-      console.warn('Mapbox GL initialization warning (map will still work):', error);
-      return;
+        // Handle WebGL context errors
+        map.current.on('error', (e) => {
+          console.warn('Mapbox GL error (non-critical):', e);
+        });
+      } catch (error) {
+        console.warn('Mapbox GL initialization warning (map will still work):', error);
+        return;
+      }
     }
 
-    // Add marker
-    new mapboxgl.Marker()
+    // Remove existing marker and popup
+    if (marker.current) {
+      marker.current.remove();
+    }
+    if (popup.current) {
+      popup.current.remove();
+    }
+
+    // Add new marker
+    marker.current = new mapboxgl.Marker()
       .setLngLat([longitude, latitude])
       .addTo(map.current);
 
     // Add popup with address
     if (address) {
-      new mapboxgl.Popup({ offset: 25 })
+      popup.current = new mapboxgl.Popup({ offset: 25 })
         .setLngLat([longitude, latitude])
         .setHTML(`<div class="text-sm font-medium">${address}</div>`)
         .addTo(map.current);
     }
 
+    // Update map center
+    map.current.flyTo({
+      center: [longitude, latitude],
+      zoom: 15,
+      essential: true
+    });
+
+    return () => {
+      if (marker.current) {
+        marker.current.remove();
+        marker.current = null;
+      }
+      if (popup.current) {
+        popup.current.remove();
+        popup.current = null;
+      }
+    };
+  }, [latitude, longitude, address]);
+
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
       if (map.current) {
         map.current.remove();
         map.current = null;
       }
     };
-  }, [latitude, longitude, address]);
+  }, []);
 
   // Fallback component when Mapbox token is not available
   if (!MAPBOX_TOKEN) {

@@ -188,15 +188,43 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
       // Simulate Geoscape autocomplete API call
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Mock suggestions based on the query
+      // Parse address query for better field population
+      const parseAddressQuery = (query: string) => {
+        const parts = query.trim().split(' ');
+        const streetNumber = parts[0] && /^\d+/.test(parts[0]) ? parts[0] : '';
+        
+        // Remove number if it exists, then find street type
+        const remaining = streetNumber ? parts.slice(1) : parts;
+        const streetTypes = ['PL', 'PLACE', 'ST', 'STREET', 'RD', 'ROAD', 'AVE', 'AVENUE', 'DR', 'DRIVE'];
+        
+        let streetType = '';
+        let streetName = '';
+        
+        // Look for street type at the end
+        if (remaining.length > 0) {
+          const lastWord = remaining[remaining.length - 1].toUpperCase();
+          if (streetTypes.includes(lastWord)) {
+            streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
+            streetName = remaining.slice(0, -1).join(' ').toUpperCase();
+          } else {
+            streetName = remaining.join(' ').toUpperCase();
+          }
+        }
+        
+        return { streetNumber, streetName, streetType };
+      };
+
+      // Mock suggestions with proper address parsing
+      const { streetNumber, streetName, streetType } = parseAddressQuery(query);
+      
       const mockSuggestions = [
         {
           address: `${query.toUpperCase()}, CRAIGIEBURN VIC 3064`,
           id: "G4VIC4242188",
           data: {
-            streetNumber: query.split(' ')[0] || '',
-            streetName: query.split(' ').slice(1).join(' ') || 'MILBURN',
-            streetType: 'PL',
+            streetNumber: streetNumber || '4',
+            streetName: streetName || 'MILBURN',
+            streetType: streetType || 'PLACE',
             suburb: 'CRAIGIEBURN',
             state: 'VIC',
             postcode: '3064',
@@ -208,9 +236,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           address: `${query.toUpperCase()}, GLENORCHY TAS 7010`,
           id: "GTAS7010189",
           data: {
-            streetNumber: query.split(' ')[0] || '',
-            streetName: query.split(' ').slice(1).join(' ') || 'MILBURN',
-            streetType: 'PL',
+            streetNumber: streetNumber || '4',
+            streetName: streetName || 'MILBURN',
+            streetType: streetType || 'PLACE',
             suburb: 'GLENORCHY',
             state: 'TAS',
             postcode: '7010',
@@ -222,9 +250,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           address: `${query.toUpperCase()}, ST IVES CHASE NSW 2075`,
           id: "GNSW2075190",
           data: {
-            streetNumber: query.split(' ')[0] || '',
-            streetName: query.split(' ').slice(1).join(' ') || 'MILBURN',
-            streetType: 'PL',
+            streetNumber: streetNumber || '4',
+            streetName: streetName || 'MILBURN',
+            streetType: streetType || 'PLACE',
             suburb: 'ST IVES CHASE',
             state: 'NSW',
             postcode: '2075',
