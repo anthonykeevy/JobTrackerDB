@@ -174,7 +174,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   };
 
   // Address autocomplete functionality
-  const searchAddresses = async (query: string) => {
+  const searchAddresses = React.useCallback(async (query: string) => {
     if (query.length < 3) {
       setAddressSuggestions([]);
       return;
@@ -242,9 +242,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         message: 'Error fetching address suggestions'
       });
     }
-  };
+  }, []); // No dependencies needed as it only uses state setters
 
-  const selectAddress = (suggestion: any) => {
+  const selectAddress = React.useCallback((suggestion: any) => {
     setAddressSearch(suggestion.address);
     setShowSuggestions(false);
     setSelectedAddress(suggestion.data);
@@ -270,7 +270,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
       status: 'valid',
       message: 'Address selected and validated'
     });
-  };
+  }, [setValue]); // setValue dependency from react-hook-form
 
   // Usage tracking removed from frontend - handled on backend
 
@@ -283,7 +283,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [addressSearch]);
+  }, [addressSearch, searchAddresses]); // Now searchAddresses is stable with useCallback
 
   // Click outside handler to close suggestions
   React.useEffect(() => {
