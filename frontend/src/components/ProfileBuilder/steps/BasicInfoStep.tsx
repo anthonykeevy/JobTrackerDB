@@ -90,15 +90,18 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   onNext 
 }) => {
   const [showSocialLinks, setShowSocialLinks] = useState(false);
-  const [addressValidation, setAddressValidation] = useState<{status: 'idle' | 'validating' | 'valid' | 'invalid', message?: string}>({
-    status: 'idle'
-  });
   
   // Geoscape autocomplete state
   const [addressSearch, setAddressSearch] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [addressSuggestions, setAddressSuggestions] = useState<Array<{address: string, id: string, data?: any}>>([]);
   const [selectedAddress, setSelectedAddress] = useState<any>(null);
+  const [addressValidation, setAddressValidation] = useState<{
+    status: 'idle' | 'validating' | 'valid' | 'invalid';
+    message?: string;
+  }>({ status: 'idle' });
+  const [isSearching, setIsSearching] = useState(false);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   // API usage tracking is handled on backend only
 
@@ -173,20 +176,44 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     onNext();
   };
 
-  // Address autocomplete functionality
-  const searchAddresses = React.useCallback(async (query: string) => {
+  // Debounced address search to prevent focus issues
+  const debouncedSearch = React.useCallback((query: string) => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
     if (query.length < 3) {
       setAddressSuggestions([]);
+      setShowSuggestions(false);
+      setIsSearching(false);
       return;
     }
 
-    setAddressValidation({ status: 'validating' });
-    
-    // API usage tracking is handled on backend for billing
+    setIsSearching(true);
 
-    try {
-      // Simulate Geoscape autocomplete API call
-      await new Promise(resolve => setTimeout(resolve, 500));
+    searchTimeoutRef.current = setTimeout(async () => {
+      try {
+        setAddressValidation({ status: 'validating' });
+        
+        // API usage tracking is handled on backend for billing
+        
+        // Simulate Geoscape autocomplete API call
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        await performAddressSearch(query);
+        setIsSearching(false);
+      } catch (error) {
+        setAddressValidation({
+          status: 'invalid',
+          message: 'Address search failed. Please try again.'
+        });
+        setIsSearching(false);
+      }
+    }, 500); // 500ms debounce delay
+  }, []);
+
+  // Address autocomplete functionality
+  const performAddressSearch = async (query: string) => {
       
       // Parse address query for better field population
       const parseAddressQuery = (query: string) => {
@@ -263,14 +290,18 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
       ];
 
       setAddressSuggestions(mockSuggestions);
+      setShowSuggestions(true);
       setAddressValidation({ status: 'idle' });
-    } catch (error) {
-      setAddressValidation({
-        status: 'invalid',
-        message: 'Error fetching address suggestions'
-      });
-    }
-  }, []); // No dependencies needed as it only uses state setters
+  };
+
+  // Clean up timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const selectAddress = React.useCallback((suggestion: any) => {
     setAddressSearch(suggestion.address);
@@ -302,16 +333,11 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
   // Usage tracking removed from frontend - handled on backend
 
-  // Debounced search effect
-  React.useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (addressSearch) {
-        searchAddresses(addressSearch);
-      }
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
-  }, [addressSearch, searchAddresses]); // Now searchAddresses is stable with useCallback
+  // Handle address search input changes
+  const handleAddressSearchChange = (value: string) => {
+    setAddressSearch(value);
+    debouncedSearch(value);
+  };
 
   // Click outside handler to close suggestions
   React.useEffect(() => {
@@ -582,10 +608,10 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 placeholder="Start typing to get auto-complete suggestions from the API"
                 className="block w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={addressSearch}
-                onChange={(e) => setAddressSearch(e.target.value)}
+                onChange={(e) => handleAddressSearchChange(e.target.value)}
                 onFocus={() => setShowSuggestions(true)}
               />
-              {addressValidation.status === 'validating' && (
+              {(addressValidation.status === 'validating' || isSearching) && (
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
                 </div>
