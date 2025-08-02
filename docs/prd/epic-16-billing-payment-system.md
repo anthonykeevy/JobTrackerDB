@@ -55,6 +55,13 @@ The platform operates on a subscription model at $10/month with a target of 1000
    * Refund and credit management
    * Subscription analytics and reporting
    * Revenue tracking and forecasting
+   * **API Usage & Cost Tracking Dashboard**
+     - Real-time monitoring of external API usage (Geoscape, OpenAI, etc.)
+     - Cost allocation and billing management for API services
+     - Usage analytics and budget alerts
+     - Regional API provider management (AU: Geoscape, US: SmartyStreets, etc.)
+     - API quota monitoring and usage optimization
+     - Automated cost reporting and budget forecasting
 
 7. **Financial Operations**
    * Revenue recognition and accounting integration
@@ -83,10 +90,11 @@ The platform operates on a subscription model at $10/month with a target of 1000
 **Dependencies:**
 * Stripe API and webhook infrastructure
 * User authentication and management system (Epic 7)
-* Database schema for billing data
+* Database schema for billing data (includes APIUsageTracking table)
 * Email notification system (Epic 11)
-* Admin dashboard (Epic 9)
+* Admin dashboard (Epic 9) with API usage monitoring
 * Core infrastructure (Epic 8)
+* External API integrations (Geoscape, OpenAI, regional providers)
 
 **Acceptance Criteria:**
 * Users can successfully subscribe and pay $10/month

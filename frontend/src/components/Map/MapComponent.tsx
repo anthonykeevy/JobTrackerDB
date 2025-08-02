@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 // You'll need to set your Mapbox access token
 // For now, we'll use a placeholder and fallback to a simple map representation
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN || '';
+const MAPBOX_TOKEN = import.meta.env?.VITE_MAPBOX_TOKEN || '';
 
 interface MapComponentProps {
   latitude: number;

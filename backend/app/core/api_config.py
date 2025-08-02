@@ -8,9 +8,24 @@ class APIConfig:
     """Configuration class for external API services"""
     
     # Geoscape Predictive API Configuration
-    GEOSCAPE_API_KEY: Optional[str] = os.getenv('GEOSCAPE_API_KEY')
+    GEOSCAPE_API_KEY: str = "9x4fpNyrr8VxVqWvPeKnuEWaH9vxgGxS"
+    GEOSCAPE_CONSUMER_SECRET: str = "8XkTgtu0Sz1D0aG9"
     GEOSCAPE_BASE_URL: str = "https://api.geoscape.com.au/v1"
     GEOSCAPE_TIMEOUT: int = 30  # seconds
+    
+    # Geoscape API Products (per your subscription)
+    GEOSCAPE_ADDRESSES_API: bool = True
+    GEOSCAPE_PREDICTIVE_API: bool = True
+    
+    # Regional API Configuration (Future expansion)
+    REGIONAL_API_PROVIDERS = {
+        'AU': 'geoscape',      # Australia - Geoscape
+        'US': 'smarty_streets', # United States - SmartyStreets  
+        'UK': 'postcodes_io',   # United Kingdom - Postcodes.io
+        'CA': 'canada_post',    # Canada - Canada Post
+        'EU': 'here_api',       # Europe - HERE API
+        # TODO: Add more regions as needed for global expansion
+    }
     
     # Smarty Streets API Configuration (backup address validation)
     SMARTY_STREETS_API_KEY: Optional[str] = os.getenv('SMARTY_STREETS_API_KEY')

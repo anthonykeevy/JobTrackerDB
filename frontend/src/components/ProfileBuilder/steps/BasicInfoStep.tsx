@@ -100,11 +100,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   const [addressSuggestions, setAddressSuggestions] = useState<Array<{address: string, id: string, data?: any}>>([]);
   const [selectedAddress, setSelectedAddress] = useState<any>(null);
   
-  // API usage tracking
-  const [apiUsage, setApiUsage] = useState({
-    callCounter: 13,
-    creditCounter: 1.3
-  });
+  // API usage tracking is handled on backend only
 
   const {
     register,
@@ -186,11 +182,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
     setAddressValidation({ status: 'validating' });
     
-    // Update API usage
-    setApiUsage(prev => ({
-      callCounter: prev.callCounter + 1,
-      creditCounter: prev.creditCounter + 0.1
-    }));
+    // API usage tracking is handled on backend for billing
 
     try {
       // Simulate Geoscape autocomplete API call
@@ -280,13 +272,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     });
   };
 
-  const refreshUsage = async () => {
-    // In real implementation, fetch from API
-    setApiUsage(prev => ({
-      callCounter: prev.callCounter,
-      creditCounter: prev.creditCounter
-    }));
-  };
+  // Usage tracking removed from frontend - handled on backend
 
   // Debounced search effect
   React.useEffect(() => {
@@ -595,29 +581,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             </div>
           </div>
 
-          {/* Usage Tracking */}
-          <div className="flex items-center justify-between mb-6 p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center">
-                <span className="text-sm text-gray-600 mr-2">Call counter:</span>
-                <span className="font-semibold text-gray-900">{apiUsage.callCounter}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-sm text-gray-600 mr-2">Credit counter:</span>
-                <span className="font-semibold text-gray-900">{apiUsage.creditCounter}</span>
-              </div>
-              <button
-                type="button"
-                onClick={refreshUsage}
-                className="text-blue-600 hover:text-blue-700"
-                title="Refresh usage stats"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-              </button>
-            </div>
-          </div>
+          {/* Usage tracking is now backend-only for billing management */}
 
           {/* Map Integration */}
           {selectedAddress && selectedAddress.latitude && selectedAddress.longitude && (
