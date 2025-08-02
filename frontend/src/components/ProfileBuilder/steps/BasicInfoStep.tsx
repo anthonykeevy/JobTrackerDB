@@ -244,6 +244,11 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
       // Mock suggestions with proper address parsing
       const { streetNumber, streetName, streetType } = parseAddressQuery(query);
       
+      console.log('🔍 ADDRESS PARSING DEBUG:', {
+        originalQuery: query,
+        parsedComponents: { streetNumber, streetName, streetType }
+      });
+      
       const mockSuggestions = [
         {
           address: `${query.toUpperCase()}, CRAIGIEBURN VIC 3064`,
@@ -275,7 +280,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         },
         {
           address: `${query.toUpperCase()}, ST IVES CHASE NSW 2075`,
-          id: "GNSW2075190",
+          id: streetNumber === '14' ? "GNSW2075191" : "GNSW2075190",
           data: {
             streetNumber: streetNumber || '4',
             streetName: streetName || 'MILBURN',
@@ -283,11 +288,13 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             suburb: 'ST IVES CHASE',
             state: 'NSW',
             postcode: '2075',
-            latitude: -33.7240,
-            longitude: 151.1470
+            latitude: streetNumber === '14' ? -33.7245 : -33.7240,
+            longitude: streetNumber === '14' ? 151.1475 : 151.1470
           }
         }
       ];
+
+      console.log('📦 GENERATED MOCK SUGGESTIONS:', mockSuggestions);
 
       setAddressSuggestions(mockSuggestions);
       setShowSuggestions(true);
@@ -304,32 +311,63 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   }, []);
 
   const selectAddress = React.useCallback((suggestion: any) => {
+    console.log('🏠 ADDRESS SELECTION DEBUG:', {
+      selectedAddress: suggestion.address,
+      suggestionData: suggestion.data,
+      propertyId: suggestion.id
+    });
+
     setAddressSearch(suggestion.address);
     setShowSuggestions(false);
     setSelectedAddress(suggestion.data);
     
-    // Auto-populate form fields
+    // Auto-populate form fields with detailed logging
     if (suggestion.data) {
-      setValue('address.streetNumber', suggestion.data.streetNumber || '');
-      setValue('address.streetName', suggestion.data.streetName || '');
-      setValue('address.streetType', suggestion.data.streetType || '');
-      setValue('address.suburb', suggestion.data.suburb || '');
-      setValue('address.state', suggestion.data.state || '');
-      setValue('address.postcode', suggestion.data.postcode || '');
-      setValue('address.latitude', suggestion.data.latitude || undefined);
-      setValue('address.longitude', suggestion.data.longitude || undefined);
-      setValue('address.isValidated', true);
-      setValue('address.validationSource', 'geoscape');
-      setValue('address.confidenceScore', 0.95);
-      setValue('address.validationDate', new Date().toISOString());
-      setValue('address.propertyId', suggestion.id);
+      console.log('📋 POPULATING FORM FIELDS:');
+      
+      const fieldMappings = [
+        { field: 'address.streetNumber', value: suggestion.data.streetNumber || '' },
+        { field: 'address.streetName', value: suggestion.data.streetName || '' },
+        { field: 'address.streetType', value: suggestion.data.streetType || '' },
+        { field: 'address.suburb', value: suggestion.data.suburb || '' },
+        { field: 'address.state', value: suggestion.data.state || '' },
+        { field: 'address.postcode', value: suggestion.data.postcode || '' },
+        { field: 'address.latitude', value: suggestion.data.latitude || undefined },
+        { field: 'address.longitude', value: suggestion.data.longitude || undefined },
+        { field: 'address.isValidated', value: true },
+        { field: 'address.validationSource', value: 'geoscape' },
+        { field: 'address.confidenceScore', value: 0.95 },
+        { field: 'address.validationDate', value: new Date().toISOString() },
+        { field: 'address.propertyId', value: suggestion.id }
+      ];
+
+      fieldMappings.forEach(({ field, value }) => {
+        console.log(`setValue('${field}', ${JSON.stringify(value)})`);
+        setValue(field as any, value);
+      });
+
+      // Special attention to streetType
+      console.log('🚨 STREET TYPE SPECIFIC DEBUG:', {
+        originalValue: suggestion.data.streetType,
+        afterSetValue: watch('address.streetType'),
+        formState: getValues('address.streetType')
+      });
+      
+      // Force a small delay to check if value persists
+      setTimeout(() => {
+        const currentStreetType = getValues('address.streetType');
+        console.log('🔍 STREET TYPE AFTER DELAY:', currentStreetType);
+        if (!currentStreetType) {
+          console.error('❌ STREET TYPE LOST AFTER DELAY!');
+        }
+      }, 100);
     }
 
     setAddressValidation({
       status: 'valid',
       message: 'Address selected and validated'
     });
-  }, [setValue]); // setValue dependency from react-hook-form
+  }, [setValue, watch, getValues]); // Added watch and getValues dependencies
 
   // Usage tracking removed from frontend - handled on backend
 
