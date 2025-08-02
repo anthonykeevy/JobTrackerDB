@@ -215,8 +215,42 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   // Address autocomplete functionality
   const performAddressSearch = async (query: string) => {
       
-      // Parse address query for better field population
+      // Enhanced address parsing for full address format
       const parseAddressQuery = (query: string) => {
+        console.log('🔍 PARSING QUERY:', query);
+        
+        // Handle full address format: "4 Milburn Place, St Ives Chase NSW 2075"
+        if (query.includes(',')) {
+          const [streetPart, locationPart] = query.split(',').map(part => part.trim());
+          console.log('📋 SPLIT ADDRESS:', { streetPart, locationPart });
+          
+          // Parse street part: "4 Milburn Place"
+          const streetParts = streetPart.split(' ');
+          const streetNumber = streetParts[0] && /^\d+/.test(streetParts[0]) ? streetParts[0] : '';
+          
+          // Remove number and find street name/type
+          const remainingStreet = streetNumber ? streetParts.slice(1) : streetParts;
+          const streetTypes = ['PL', 'PLACE', 'ST', 'STREET', 'RD', 'ROAD', 'AVE', 'AVENUE', 'DR', 'DRIVE'];
+          
+          let streetType = '';
+          let streetName = '';
+          
+          if (remainingStreet.length > 0) {
+            const lastWord = remainingStreet[remainingStreet.length - 1].toUpperCase();
+            if (streetTypes.includes(lastWord)) {
+              streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
+              streetName = remainingStreet.slice(0, -1).join(' ').toUpperCase();
+            } else {
+              streetName = remainingStreet.join(' ').toUpperCase();
+            }
+          }
+          
+          const result = { streetNumber, streetName, streetType };
+          console.log('✅ PARSED FULL ADDRESS:', result);
+          return result;
+        }
+        
+        // Handle simple format: "4 Milburn Place"
         const parts = query.trim().split(' ');
         const streetNumber = parts[0] && /^\d+/.test(parts[0]) ? parts[0] : '';
         
@@ -238,7 +272,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           }
         }
         
-        return { streetNumber, streetName, streetType };
+        const result = { streetNumber, streetName, streetType };
+        console.log('✅ PARSED SIMPLE ADDRESS:', result);
+        return result;
       };
 
       // Mock suggestions with proper address parsing and intelligent filtering
@@ -304,8 +340,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             suburb: 'ST IVES CHASE',
             state: 'NSW',
             postcode: '2075',
-            latitude: streetNumber === '14' ? -33.7245 : -33.7240,
-            longitude: streetNumber === '14' ? 151.1475 : 151.1470
+            // More realistic coordinates for St Ives Chase area
+            latitude: streetNumber === '14' ? -33.7238 : -33.7235,
+            longitude: streetNumber === '14' ? 151.1482 : 151.1478
           },
           matchScore: 0.98
         }

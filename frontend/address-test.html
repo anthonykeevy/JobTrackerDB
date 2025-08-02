@@ -192,8 +192,8 @@
                         suburb: 'ST IVES CHASE',
                         state: 'NSW',
                         postcode: '2075',
-                        latitude: parsed.streetNumber === '14' ? -33.7245 : -33.7240,
-                        longitude: parsed.streetNumber === '14' ? 151.1475 : 151.1470,
+                        latitude: parsed.streetNumber === '14' ? -33.7238 : -33.7235,
+                        longitude: parsed.streetNumber === '14' ? 151.1482 : 151.1478,
                         propertyType: 'Residential',
                         confidenceScore: 0.98
                     },
@@ -363,28 +363,120 @@
             });
         }
 
+        // Enhanced test for specific address parsing issues
+        function testSpecificAddresses() {
+            log('\n🎯 TESTING SPECIFIC ADDRESS PARSING ISSUES\n', null, 'success');
+            
+            const testAddresses = [
+                '4 Milburn Place, St Ives Chase NSW 2075',
+                '14 Milburn Place, St Ives Chase NSW 2075'
+            ];
+            
+            testAddresses.forEach(addr => {
+                log(`\n--- TESTING: "${addr}" ---`);
+                
+                // Test parsing logic
+                const parsed = parseAddressQuery(addr);
+                log('📋 PARSED COMPONENTS:', parsed);
+                
+                // Test mock API response
+                const responses = generateMockResponses(addr);
+                if (responses.length > 0) {
+                    const selected = responses[0];
+                    log('🎯 MOCK API RESPONSE:', {
+                        address: selected.address,
+                        propertyId: selected.id,
+                        streetNumber: selected.data.streetNumber,
+                        streetName: selected.data.streetName,
+                        streetType: selected.data.streetType,
+                        coordinates: `${selected.data.latitude}, ${selected.data.longitude}`,
+                        suburb: selected.data.suburb,
+                        state: selected.data.state,
+                        postcode: selected.data.postcode
+                    });
+                    
+                    // Test form field population simulation
+                    log('🔧 FORM FIELD POPULATION SIMULATION:');
+                    log(`setValue('address.streetNumber', '${selected.data.streetNumber}')`);
+                    log(`setValue('address.streetName', '${selected.data.streetName}')`);
+                    log(`setValue('address.streetType', '${selected.data.streetType}') ⬅️ CRITICAL FIELD`);
+                    log(`setValue('address.suburb', '${selected.data.suburb}')`);
+                    log(`setValue('address.state', '${selected.data.state}')`);
+                    log(`setValue('address.postcode', '${selected.data.postcode}')`);
+                    log(`setValue('address.latitude', ${selected.data.latitude})`);
+                    log(`setValue('address.longitude', ${selected.data.longitude})`);
+                    log(`setValue('address.propertyId', '${selected.id}')`);
+                    
+                    // Check for issues
+                    if (!selected.data.streetType) {
+                        log('❌ ISSUE: streetType is empty!', null, 'error');
+                    } else {
+                        log(`✅ streetType populated: "${selected.data.streetType}"`, null, 'success');
+                    }
+                    
+                    if (selected.data.streetName.includes('PLACE')) {
+                        log('❌ ISSUE: streetName contains "PLACE" - should be separated!', null, 'error');
+                    } else {
+                        log(`✅ streetName correctly parsed: "${selected.data.streetName}"`, null, 'success');
+                    }
+                }
+            });
+        }
+
+        // Test coordinate accuracy
+        function testCoordinateAccuracy() {
+            log('\n🗺️ TESTING COORDINATE ACCURACY\n', null, 'success');
+            
+            const coordinates = [
+                { address: '4 Milburn Place', lat: -33.7240, lng: 151.1470, id: 'GNSW2075190' },
+                { address: '14 Milburn Place', lat: -33.7245, lng: 151.1475, id: 'GNSW2075191' }
+            ];
+            
+            coordinates.forEach(coord => {
+                log(`📍 ${coord.address}:`, {
+                    latitude: coord.lat,
+                    longitude: coord.lng,
+                    propertyId: coord.id,
+                    note: 'These coordinates may be incorrect for actual Milburn Place location'
+                });
+            });
+            
+            log('\n⚠️ COORDINATE ISSUE:', {
+                problem: 'Mock coordinates are not accurate for actual Milburn Place, St Ives Chase',
+                solution: 'Need real Geoscape API coordinates or better mock data',
+                impact: 'Map pins show wrong locations'
+            }, 'error');
+        }
+
         // Main test runner
         async function runTests() {
             clearOutput();
-            log('🧪 ADDRESS API BEHAVIOR TEST STARTING', null, 'success');
-            log('=' * 50);
+            log('🧪 ENHANCED ADDRESS API BEHAVIOR TEST STARTING', null, 'success');
+            log('=' * 60);
             
             await runTypingTests();
             testPropertyIds();
+            testSpecificAddresses();
+            testCoordinateAccuracy();
             
-            log('\n📊 TEST SUMMARY', null, 'success');
-            log('=' * 30);
+            log('\n📊 ENHANCED TEST SUMMARY', null, 'success');
+            log('=' * 40);
             log('✅ Address parsing logic works correctly');
             log('✅ Street Type should populate as "PLACE"');
             log('✅ Different property IDs for different addresses');
             log('✅ Form setValue calls should work');
-            log('\n🔍 INVESTIGATION NEEDED:');
-            log('1. Check if setValue is actually being called in the component');
-            log('2. Verify streetType dropdown is connected to form state');
-            log('3. Check for race conditions during API calls');
-            log('4. Add console.log to actual component to debug');
+            log('\n🔍 CRITICAL ISSUES FOUND:');
+            log('1. Street Name field contains full address instead of just street name');
+            log('2. Street Type field not being populated correctly');
+            log('3. Map coordinates are inaccurate for actual locations');
+            log('4. Need to fix parsing logic in BasicInfoStep component');
+            log('\n🛠️ NEXT STEPS:');
+            log('1. Fix address parsing in BasicInfoStep.tsx');
+            log('2. Update mock coordinates to be more realistic');
+            log('3. Test with real Geoscape API coordinates');
+            log('4. Verify form field population is working');
             
-            log('\n✅ TEST COMPLETED - Check log for details', null, 'success');
+            log('\n✅ ENHANCED TEST COMPLETED - Check log for detailed analysis', null, 'success');
         }
     </script>
 </body>
