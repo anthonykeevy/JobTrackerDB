@@ -2,9 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-// You'll need to set your Mapbox access token
-// For now, we'll use a placeholder and fallback to a simple map representation
-const MAPBOX_TOKEN = import.meta.env?.VITE_MAPBOX_TOKEN || '';
+// Mapbox access token - in production, use environment variable
+const MAPBOX_TOKEN = import.meta.env?.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiYW50aG9ueWtlZXZ5IiwiYSI6ImNtZHR1NXFjejBhdTkybW9qdmJoenZxNWoifQ.eKJynTPhNLEd4TrbUY2aNA';
 
 interface MapComponentProps {
   latitude: number;
