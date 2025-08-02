@@ -241,17 +241,31 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         return { streetNumber, streetName, streetType };
       };
 
-      // Mock suggestions with proper address parsing
+      // Mock suggestions with proper address parsing and intelligent filtering
       const { streetNumber, streetName, streetType } = parseAddressQuery(query);
       
       console.log('🔍 ADDRESS PARSING DEBUG:', {
         originalQuery: query,
         parsedComponents: { streetNumber, streetName, streetType }
       });
+
+      // Detect location context from query
+      const queryLower = query.toLowerCase();
+      const hasSuburbContext = queryLower.includes('st ives') || queryLower.includes('chase');
+      const hasStateContext = queryLower.includes('nsw') || queryLower.includes('vic') || queryLower.includes('tas');
+      const hasPostcodeContext = queryLower.includes('2075') || queryLower.includes('3064') || queryLower.includes('7010');
       
-      const mockSuggestions = [
+      console.log('🎯 LOCATION CONTEXT DETECTION:', {
+        hasSuburbContext,
+        hasStateContext, 
+        hasPostcodeContext,
+        shouldFilter: hasSuburbContext || hasStateContext || hasPostcodeContext
+      });
+
+      // All possible addresses
+      const allAddresses = [
         {
-          address: `${query.toUpperCase()}, CRAIGIEBURN VIC 3064`,
+          address: `${streetNumber || '4'} MILBURN PLACE, CRAIGIEBURN VIC 3064`,
           id: "G4VIC4242188",
           data: {
             streetNumber: streetNumber || '4',
@@ -262,10 +276,11 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             postcode: '3064',
             latitude: -37.5850,
             longitude: 144.9400
-          }
+          },
+          matchScore: 0.95
         },
         {
-          address: `${query.toUpperCase()}, GLENORCHY TAS 7010`,
+          address: `${streetNumber || '4'} MILBURN PLACE, GLENORCHY TAS 7010`,
           id: "GTAS7010189",
           data: {
             streetNumber: streetNumber || '4',
@@ -276,10 +291,11 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             postcode: '7010',
             latitude: -42.8280,
             longitude: 147.2610
-          }
+          },
+          matchScore: 0.90
         },
         {
-          address: `${query.toUpperCase()}, ST IVES CHASE NSW 2075`,
+          address: `${streetNumber || '4'} MILBURN PLACE, ST IVES CHASE NSW 2075`,
           id: streetNumber === '14' ? "GNSW2075191" : "GNSW2075190",
           data: {
             streetNumber: streetNumber || '4',
@@ -290,11 +306,66 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             postcode: '2075',
             latitude: streetNumber === '14' ? -33.7245 : -33.7240,
             longitude: streetNumber === '14' ? 151.1475 : 151.1470
-          }
+          },
+          matchScore: 0.98
         }
       ];
 
-      console.log('📦 GENERATED MOCK SUGGESTIONS:', mockSuggestions);
+      // Smart filtering based on context
+      let filteredAddresses = allAddresses;
+
+      if (hasSuburbContext || hasStateContext || hasPostcodeContext) {
+        console.log('🔍 APPLYING INTELLIGENT FILTERING...');
+        
+        filteredAddresses = allAddresses.filter(addr => {
+          let matches = false;
+          
+          // Check suburb match
+          if (hasSuburbContext) {
+            const suburbMatch = queryLower.includes('st ives') && addr.data.suburb.toLowerCase().includes('st ives');
+            matches = matches || suburbMatch;
+            console.log(`   ${addr.data.suburb}: suburb match = ${suburbMatch}`);
+          }
+          
+          // Check state match  
+          if (hasStateContext) {
+            const stateMatch = (queryLower.includes('nsw') && addr.data.state === 'NSW') ||
+                              (queryLower.includes('vic') && addr.data.state === 'VIC') ||
+                              (queryLower.includes('tas') && addr.data.state === 'TAS');
+            matches = matches || stateMatch;
+            console.log(`   ${addr.data.state}: state match = ${stateMatch}`);
+          }
+          
+          // Check postcode match
+          if (hasPostcodeContext) {
+            const postcodeMatch = queryLower.includes(addr.data.postcode.toLowerCase());
+            matches = matches || postcodeMatch;
+            console.log(`   ${addr.data.postcode}: postcode match = ${postcodeMatch}`);
+          }
+          
+          // If no context provided, show all (early typing)
+          if (!hasSuburbContext && !hasStateContext && !hasPostcodeContext) {
+            matches = true;
+          }
+          
+          console.log(`   🎯 ${addr.data.suburb} ${addr.data.state}: final match = ${matches}`);
+          return matches;
+        });
+        
+        console.log(`📊 FILTERED: ${allAddresses.length} → ${filteredAddresses.length} addresses`);
+      }
+
+      // Sort by match score (highest first)
+      filteredAddresses.sort((a, b) => b.matchScore - a.matchScore);
+
+      // Convert to the expected format
+      const mockSuggestions = filteredAddresses.map(addr => ({
+        address: addr.address,
+        id: addr.id,
+        data: addr.data
+      }));
+
+      console.log('📦 FINAL SUGGESTIONS (after filtering):', mockSuggestions);
 
       setAddressSuggestions(mockSuggestions);
       setShowSuggestions(true);

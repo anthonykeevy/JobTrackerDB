@@ -136,59 +136,126 @@
             return { streetNumber, streetName, streetType };
         }
 
-        // Generate mock Geoscape responses
+        // Generate mock Geoscape responses with intelligent filtering
         function generateMockResponses(query) {
             log(`\n=== PROCESSING QUERY: "${query}" ===`);
             
             const parsed = parseAddressQuery(query);
             log('📋 Parsed Address Components:', parsed);
 
-            const responses = [];
-
-            if (query.toLowerCase().includes('milburn') || 
-                query.toLowerCase().includes('milbirn') || 
-                query.toLowerCase().includes('mileurn')) {
-                
-                // Base responses for Milburn
-                const baseResponses = [
-                    {
-                        address: `${parsed.streetNumber || '4'} MILBURN PLACE, CRAIGIEBURN VIC 3064`,
-                        id: "G4VIC4242188",
-                        data: {
-                            streetNumber: parsed.streetNumber || '4',
-                            streetName: 'MILBURN',
-                            streetType: 'PLACE',
-                            suburb: 'CRAIGIEBURN',
-                            state: 'VIC',
-                            postcode: '3064',
-                            latitude: -37.5850,
-                            longitude: 144.9400,
-                            propertyType: 'Residential',
-                            confidenceScore: 0.95
-                        }
-                    },
-                    {
-                        address: `${parsed.streetNumber || '4'} MILBURN PLACE, ST IVES CHASE NSW 2075`,
-                        id: parsed.streetNumber === '14' ? "GNSW2075191" : "GNSW2075190",
-                        data: {
-                            streetNumber: parsed.streetNumber || '4',
-                            streetName: 'MILBURN',
-                            streetType: 'PLACE',
-                            suburb: 'ST IVES CHASE',
-                            state: 'NSW',
-                            postcode: '2075',
-                            latitude: parsed.streetNumber === '14' ? -33.7245 : -33.7240,
-                            longitude: parsed.streetNumber === '14' ? 151.1475 : 151.1470,
-                            propertyType: 'Residential',
-                            confidenceScore: 0.98
-                        }
-                    }
-                ];
-
-                responses.push(...baseResponses);
+            if (!query.toLowerCase().includes('milburn') && 
+                !query.toLowerCase().includes('milbirn') && 
+                !query.toLowerCase().includes('mileurn')) {
+                log('🔍 Generated 0 mock responses:', []);
+                return [];
             }
 
-            log(`🔍 Generated ${responses.length} mock responses:`, responses);
+            // Detect location context from query
+            const queryLower = query.toLowerCase();
+            const hasSuburbContext = queryLower.includes('st ives') || queryLower.includes('chase');
+            const hasStateContext = queryLower.includes('nsw') || queryLower.includes('vic') || queryLower.includes('tas');
+            const hasPostcodeContext = queryLower.includes('2075') || queryLower.includes('3064') || queryLower.includes('7010');
+            
+            log('🎯 LOCATION CONTEXT DETECTION:', {
+                hasSuburbContext,
+                hasStateContext, 
+                hasPostcodeContext,
+                shouldFilter: hasSuburbContext || hasStateContext || hasPostcodeContext
+            });
+
+            // All possible addresses
+            const allAddresses = [
+                {
+                    address: `${parsed.streetNumber || '4'} MILBURN PLACE, CRAIGIEBURN VIC 3064`,
+                    id: "G4VIC4242188",
+                    data: {
+                        streetNumber: parsed.streetNumber || '4',
+                        streetName: 'MILBURN',
+                        streetType: 'PLACE',
+                        suburb: 'CRAIGIEBURN',
+                        state: 'VIC',
+                        postcode: '3064',
+                        latitude: -37.5850,
+                        longitude: 144.9400,
+                        propertyType: 'Residential',
+                        confidenceScore: 0.95
+                    },
+                    matchScore: 0.95
+                },
+                {
+                    address: `${parsed.streetNumber || '4'} MILBURN PLACE, ST IVES CHASE NSW 2075`,
+                    id: parsed.streetNumber === '14' ? "GNSW2075191" : "GNSW2075190",
+                    data: {
+                        streetNumber: parsed.streetNumber || '4',
+                        streetName: 'MILBURN',
+                        streetType: 'PLACE',
+                        suburb: 'ST IVES CHASE',
+                        state: 'NSW',
+                        postcode: '2075',
+                        latitude: parsed.streetNumber === '14' ? -33.7245 : -33.7240,
+                        longitude: parsed.streetNumber === '14' ? 151.1475 : 151.1470,
+                        propertyType: 'Residential',
+                        confidenceScore: 0.98
+                    },
+                    matchScore: 0.98
+                }
+            ];
+
+            // Smart filtering based on context
+            let filteredAddresses = allAddresses;
+
+            if (hasSuburbContext || hasStateContext || hasPostcodeContext) {
+                log('🔍 APPLYING INTELLIGENT FILTERING...');
+                
+                filteredAddresses = allAddresses.filter(addr => {
+                    let matches = false;
+                    
+                    // Check suburb match
+                    if (hasSuburbContext) {
+                        const suburbMatch = queryLower.includes('st ives') && addr.data.suburb.toLowerCase().includes('st ives');
+                        matches = matches || suburbMatch;
+                        log(`   ${addr.data.suburb}: suburb match = ${suburbMatch}`);
+                    }
+                    
+                    // Check state match  
+                    if (hasStateContext) {
+                        const stateMatch = (queryLower.includes('nsw') && addr.data.state === 'NSW') ||
+                                          (queryLower.includes('vic') && addr.data.state === 'VIC') ||
+                                          (queryLower.includes('tas') && addr.data.state === 'TAS');
+                        matches = matches || stateMatch;
+                        log(`   ${addr.data.state}: state match = ${stateMatch}`);
+                    }
+                    
+                    // Check postcode match
+                    if (hasPostcodeContext) {
+                        const postcodeMatch = queryLower.includes(addr.data.postcode.toLowerCase());
+                        matches = matches || postcodeMatch;
+                        log(`   ${addr.data.postcode}: postcode match = ${postcodeMatch}`);
+                    }
+                    
+                    // If no context provided, show all (early typing)
+                    if (!hasSuburbContext && !hasStateContext && !hasPostcodeContext) {
+                        matches = true;
+                    }
+                    
+                    log(`   🎯 ${addr.data.suburb} ${addr.data.state}: final match = ${matches}`);
+                    return matches;
+                });
+                
+                log(`📊 FILTERED: ${allAddresses.length} → ${filteredAddresses.length} addresses`);
+            }
+
+            // Sort by match score (highest first)
+            filteredAddresses.sort((a, b) => b.matchScore - a.matchScore);
+
+            // Convert to expected format
+            const responses = filteredAddresses.map(addr => ({
+                address: addr.address,
+                id: addr.id,
+                data: addr.data
+            }));
+
+            log(`🔍 Generated ${responses.length} filtered responses:`, responses);
             return responses;
         }
 
