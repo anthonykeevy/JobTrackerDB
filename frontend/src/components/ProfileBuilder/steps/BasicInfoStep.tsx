@@ -352,9 +352,9 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             suburb: 'ST IVES CHASE',
             state: 'NSW',
             postcode: '2075',
-            // More realistic coordinates for St Ives Chase area
-            latitude: streetNumber === '14' ? -33.7238 : -33.7235,
-            longitude: streetNumber === '14' ? 151.1482 : 151.1478
+            // Real coordinates for Milburn Place, St Ives Chase (from OpenStreetMap)
+            latitude: streetNumber === '14' ? -33.7020 : -33.7019,
+            longitude: streetNumber === '14' ? 151.1678 : 151.1677
           },
           matchScore: 0.98
         }

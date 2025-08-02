@@ -62,6 +62,8 @@
     <p>Testing address parsing and API responses for different input scenarios</p>
     
     <button onclick="runTests()">🚀 Run All Tests</button>
+    <button onclick="testSpecificAddresses()">🎯 Test Specific Addresses</button>
+    <button onclick="testCoordinateAccuracy()">🗺️ Test Coordinate Accuracy</button>
     <button onclick="clearOutput()">🗑️ Clear Output</button>
     <button onclick="downloadLog()">💾 Download Log</button>
     
@@ -250,8 +252,8 @@
                         suburb: 'ST IVES CHASE',
                         state: 'NSW',
                         postcode: '2075',
-                        latitude: parsed.streetNumber === '14' ? -33.7238 : -33.7235,
-                        longitude: parsed.streetNumber === '14' ? 151.1482 : 151.1478,
+                        latitude: parsed.streetNumber === '14' ? -33.7020 : -33.7019,
+                        longitude: parsed.streetNumber === '14' ? 151.1678 : 151.1677,
                         propertyType: 'Residential',
                         confidenceScore: 0.98
                     },
@@ -485,9 +487,9 @@
         function testCoordinateAccuracy() {
             log('\n🗺️ TESTING COORDINATE ACCURACY\n', null, 'success');
             
-            const coordinates = [
-                { address: '4 Milburn Place', lat: -33.7240, lng: 151.1470, id: 'GNSW2075190' },
-                { address: '14 Milburn Place', lat: -33.7245, lng: 151.1475, id: 'GNSW2075191' }
+            const             coordinates = [
+                { address: '4 Milburn Place', lat: -33.7019, lng: 151.1677, id: 'GNSW2075190' },
+                { address: '14 Milburn Place', lat: -33.7020, lng: 151.1678, id: 'GNSW2075191' }
             ];
             
             coordinates.forEach(coord => {
