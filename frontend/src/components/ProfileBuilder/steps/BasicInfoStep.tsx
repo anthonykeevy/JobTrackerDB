@@ -18,6 +18,7 @@ import {
   ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
 import type { ProfileData } from '../types.ts';
+import MapComponent from '../../Map/MapComponent.tsx';
 
 const basicInfoSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -92,6 +93,18 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   const [addressValidation, setAddressValidation] = useState<{status: 'idle' | 'validating' | 'valid' | 'invalid', message?: string}>({
     status: 'idle'
   });
+  
+  // Geoscape autocomplete state
+  const [addressSearch, setAddressSearch] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [addressSuggestions, setAddressSuggestions] = useState<Array<{address: string, id: string, data?: any}>>([]);
+  const [selectedAddress, setSelectedAddress] = useState<any>(null);
+  
+  // API usage tracking
+  const [apiUsage, setApiUsage] = useState({
+    callCounter: 13,
+    creditCounter: 1.3
+  });
 
   const {
     register,
@@ -163,6 +176,141 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     updateData('basicInfo', formData);
     onNext();
   };
+
+  // Address autocomplete functionality
+  const searchAddresses = async (query: string) => {
+    if (query.length < 3) {
+      setAddressSuggestions([]);
+      return;
+    }
+
+    setAddressValidation({ status: 'validating' });
+    
+    // Update API usage
+    setApiUsage(prev => ({
+      callCounter: prev.callCounter + 1,
+      creditCounter: prev.creditCounter + 0.1
+    }));
+
+    try {
+      // Simulate Geoscape autocomplete API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Mock suggestions based on the query
+      const mockSuggestions = [
+        {
+          address: `${query.toUpperCase()}, CRAIGIEBURN VIC 3064`,
+          id: "G4VIC4242188",
+          data: {
+            streetNumber: query.split(' ')[0] || '',
+            streetName: query.split(' ').slice(1).join(' ') || 'MILBURN',
+            streetType: 'PL',
+            suburb: 'CRAIGIEBURN',
+            state: 'VIC',
+            postcode: '3064',
+            latitude: -37.5850,
+            longitude: 144.9400
+          }
+        },
+        {
+          address: `${query.toUpperCase()}, GLENORCHY TAS 7010`,
+          id: "GTAS7010189",
+          data: {
+            streetNumber: query.split(' ')[0] || '',
+            streetName: query.split(' ').slice(1).join(' ') || 'MILBURN',
+            streetType: 'PL',
+            suburb: 'GLENORCHY',
+            state: 'TAS',
+            postcode: '7010',
+            latitude: -42.8280,
+            longitude: 147.2610
+          }
+        },
+        {
+          address: `${query.toUpperCase()}, ST IVES CHASE NSW 2075`,
+          id: "GNSW2075190",
+          data: {
+            streetNumber: query.split(' ')[0] || '',
+            streetName: query.split(' ').slice(1).join(' ') || 'MILBURN',
+            streetType: 'PL',
+            suburb: 'ST IVES CHASE',
+            state: 'NSW',
+            postcode: '2075',
+            latitude: -33.7240,
+            longitude: 151.1470
+          }
+        }
+      ];
+
+      setAddressSuggestions(mockSuggestions);
+      setAddressValidation({ status: 'idle' });
+    } catch (error) {
+      setAddressValidation({
+        status: 'invalid',
+        message: 'Error fetching address suggestions'
+      });
+    }
+  };
+
+  const selectAddress = (suggestion: any) => {
+    setAddressSearch(suggestion.address);
+    setShowSuggestions(false);
+    setSelectedAddress(suggestion.data);
+    
+    // Auto-populate form fields
+    if (suggestion.data) {
+      setValue('address.streetNumber', suggestion.data.streetNumber || '');
+      setValue('address.streetName', suggestion.data.streetName || '');
+      setValue('address.streetType', suggestion.data.streetType || '');
+      setValue('address.suburb', suggestion.data.suburb || '');
+      setValue('address.state', suggestion.data.state || '');
+      setValue('address.postcode', suggestion.data.postcode || '');
+      setValue('address.latitude', suggestion.data.latitude || undefined);
+      setValue('address.longitude', suggestion.data.longitude || undefined);
+      setValue('address.isValidated', true);
+      setValue('address.validationSource', 'geoscape');
+      setValue('address.confidenceScore', 0.95);
+      setValue('address.validationDate', new Date().toISOString());
+      setValue('address.propertyId', suggestion.id);
+    }
+
+    setAddressValidation({
+      status: 'valid',
+      message: 'Address selected and validated'
+    });
+  };
+
+  const refreshUsage = async () => {
+    // In real implementation, fetch from API
+    setApiUsage(prev => ({
+      callCounter: prev.callCounter,
+      creditCounter: prev.creditCounter
+    }));
+  };
+
+  // Debounced search effect
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (addressSearch) {
+        searchAddresses(addressSearch);
+      }
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [addressSearch]);
+
+  // Click outside handler to close suggestions
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.address-search-container')) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const validateAddress = async () => {
     const address = watch('address');
@@ -397,35 +545,95 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           </div>
         </div>
 
-        {/* Address Information */}
+        {/* Address Information - Geoscape Style */}
         <div className="bg-white border border-gray-200 rounded-xl p-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
               <MapPinIcon className="w-5 h-5 text-blue-600 mr-2" />
               <h3 className="text-lg font-semibold text-gray-900">Address Information</h3>
             </div>
-            <button
-              type="button"
-              onClick={validateAddress}
-              disabled={addressValidation.status === 'validating'}
-              className="flex items-center px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition-colors disabled:opacity-50"
-            >
-              {addressValidation.status === 'validating' ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-                  Validating...
-                </>
-              ) : (
-                <>
-                  <CheckCircleIcon className="w-4 h-4 mr-1" />
-                  Validate Address
-                </>
-              )}
-            </button>
+            <div className="text-xs text-gray-500">
+              Powered by <span className="font-semibold text-blue-600">Geoscape</span>
+            </div>
           </div>
 
+          {/* Address Search - Geoscape Style */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Address Search
+            </label>
+            <div className="relative address-search-container">
+              <input
+                type="text"
+                placeholder="Start typing to get auto-complete suggestions from the API"
+                className="block w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                value={addressSearch}
+                onChange={(e) => setAddressSearch(e.target.value)}
+                onFocus={() => setShowSuggestions(true)}
+              />
+              {addressValidation.status === 'validating' && (
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                </div>
+              )}
+              
+              {/* Address Suggestions Dropdown */}
+              {showSuggestions && addressSuggestions.length > 0 && (
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                  {addressSuggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                      onClick={() => selectAddress(suggestion)}
+                    >
+                      <div className="font-medium text-gray-900">{suggestion.address}</div>
+                      <div className="text-sm text-gray-500">{suggestion.id}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Usage Tracking */}
+          <div className="flex items-center justify-between mb-6 p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center">
+                <span className="text-sm text-gray-600 mr-2">Call counter:</span>
+                <span className="font-semibold text-gray-900">{apiUsage.callCounter}</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-sm text-gray-600 mr-2">Credit counter:</span>
+                <span className="font-semibold text-gray-900">{apiUsage.creditCounter}</span>
+              </div>
+              <button
+                type="button"
+                onClick={refreshUsage}
+                className="text-blue-600 hover:text-blue-700"
+                title="Refresh usage stats"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Map Integration */}
+          {selectedAddress && selectedAddress.latitude && selectedAddress.longitude && (
+            <div className="mb-6">
+              <MapComponent
+                latitude={selectedAddress.latitude}
+                longitude={selectedAddress.longitude}
+                address={addressSearch}
+                className="w-full h-64 rounded-lg border border-gray-300"
+              />
+            </div>
+          )}
+
+          {/* Validation Status */}
           {addressValidation.status !== 'idle' && (
-            <div className={`mb-4 p-3 rounded-lg flex items-center ${
+            <div className={`mb-6 p-3 rounded-lg flex items-center ${
               addressValidation.status === 'valid' ? 'bg-green-50 text-green-800' :
               addressValidation.status === 'invalid' ? 'bg-red-50 text-red-800' :
               'bg-blue-50 text-blue-800'

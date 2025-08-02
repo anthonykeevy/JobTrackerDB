@@ -88,6 +88,44 @@ class ProfileAddress(Base):
     def __repr__(self):
         return f"<ProfileAddress(ProfileID={self.ProfileID}, Address='{self.StreetNumber} {self.StreetName} {self.StreetType}, {self.Suburb} {self.State} {self.Postcode}')>"
 
+class APIUsageTracking(Base):
+    """Track external API usage for billing and monitoring"""
+    __tablename__ = "APIUsageTracking"
+    
+    APIUsageID = Column(Integer, primary_key=True, autoincrement=True)
+    UserID = Column(Integer, ForeignKey("User.UserID"), nullable=True)  # Can be null for system calls
+    
+    # API details
+    APIProvider = Column(Unicode(50), nullable=False)  # 'geoscape', 'smarty_streets', 'openai', etc.
+    APIEndpoint = Column(Unicode(255), nullable=False)  # Specific endpoint called
+    RequestType = Column(Unicode(50), nullable=False)  # 'autocomplete', 'validate', 'geocode', etc.
+    
+    # Usage metrics
+    CallCount = Column(Integer, default=1, nullable=False)
+    CreditCost = Column(DECIMAL(10, 4), nullable=False)  # Cost in credits/API units
+    ResponseTime = Column(Integer)  # Response time in milliseconds
+    
+    # Request/Response data
+    RequestData = Column(UnicodeText)  # JSON string of request parameters
+    ResponseStatus = Column(Unicode(20))  # 'success', 'error', 'timeout'
+    ResponseData = Column(UnicodeText)  # JSON string of response (truncated if large)
+    ErrorMessage = Column(Unicode(500))
+    
+    # Billing information
+    BillingPeriod = Column(Unicode(20))  # 'YYYY-MM' for monthly billing
+    IsBillable = Column(Boolean, default=True)
+    
+    # Metadata
+    CreatedAt = Column(DateTime, default=func.now(), nullable=False)
+    IPAddress = Column(Unicode(45))  # Support IPv6
+    UserAgent = Column(Unicode(500))
+    
+    # Relationships
+    user = relationship("User")
+    
+    def __repr__(self):
+        return f"<APIUsageTracking(Provider={self.APIProvider}, Endpoint={self.APIEndpoint}, Cost={self.CreditCost})>"
+
 class Role(Base):
     __tablename__ = "Role"
     RoleID = Column(Integer, primary_key=True, autoincrement=True)
