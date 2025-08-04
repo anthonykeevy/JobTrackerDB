@@ -10,8 +10,10 @@ class APIConfig:
     # Geoscape Predictive API Configuration
     GEOSCAPE_API_KEY: str = "9x4fpNyrr8VxVqWvPeKnuEWaH9vxgGxS"
     GEOSCAPE_CONSUMER_SECRET: str = "8XkTgtu0Sz1D0aG9"
-    GEOSCAPE_BASE_URL: str = "https://api.geoscape.com.au/v1"
+    GEOSCAPE_BASE_URL: str = "https://api.psma.com.au/v1"
     GEOSCAPE_TIMEOUT: int = 30  # seconds
+    
+
     
     # Geoscape API Products (per your subscription)
     GEOSCAPE_ADDRESSES_API: bool = True
@@ -40,6 +42,8 @@ class APIConfig:
     def validate_geoscape_config(cls) -> bool:
         """Validate that Geoscape API is properly configured"""
         return bool(cls.GEOSCAPE_API_KEY)
+    
+
     
     @classmethod
     def validate_smarty_streets_config(cls) -> bool:

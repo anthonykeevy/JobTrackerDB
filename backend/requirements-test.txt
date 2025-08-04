@@ -1,0 +1,11 @@
+# Testing dependencies for JobTrackerDB backend
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+httpx==0.25.2
+flake8==6.1.0
+black==23.11.0
+isort==5.12.0
+bandit==1.7.5
+safety==2.3.5
+psutil==5.9.6 

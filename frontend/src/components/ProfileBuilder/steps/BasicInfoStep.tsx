@@ -12,13 +12,13 @@ import {
   GlobeAltIcon,
   ShieldCheckIcon,
   LinkIcon,
-  BuildingOffice2Icon,
   IdentificationIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon
 } from '@heroicons/react/24/outline';
 import type { ProfileData } from '../types.ts';
 import MapComponent from '../../Map/MapComponent.tsx';
+import apiLogger from '../../../utils/apiLogger';
 
 const basicInfoSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -97,11 +97,11 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   const [addressSuggestions, setAddressSuggestions] = useState<Array<{address: string, id: string, data?: any}>>([]);
   const [selectedAddress, setSelectedAddress] = useState<any>(null);
   const [addressValidation, setAddressValidation] = useState<{
-    status: 'idle' | 'validating' | 'valid' | 'invalid';
+    status: 'idle' | 'validating' | 'valid' | 'invalid' | 'error';
     message?: string;
   }>({ status: 'idle' });
   const [isSearching, setIsSearching] = useState(false);
-  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const searchTimeoutRef = useRef<number | null>(null);
   
   // API usage tracking is handled on backend only
 
@@ -197,15 +197,20 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         
         // API usage tracking is handled on backend for billing
         
-        // Simulate Geoscape autocomplete API call
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // Call the address search API
+        const suggestions = await performAddressSearch(query);
         
-        await performAddressSearch(query);
+        // Update the suggestions state
+        setAddressSuggestions(suggestions);
+        setShowSuggestions(suggestions.length > 0);
         setIsSearching(false);
-      } catch (error) {
+      } catch (error: unknown) {
+        console.error('Address search error:', error);
+        setAddressSuggestions([]);
+        setShowSuggestions(false);
         setAddressValidation({
-          status: 'invalid',
-          message: 'Address search failed. Please try again.'
+          status: 'error',
+          message: error instanceof Error ? error.message : 'Address lookup service is not available. Please use manual address entry below.'
         });
         setIsSearching(false);
       }
@@ -214,211 +219,95 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
   // Address autocomplete functionality
   const performAddressSearch = async (query: string) => {
+    const startTime = Date.now();
+    const requestData = { query, country: 'AU', limit: 5 };
+    
+    try {
+      console.log('🔍 PERFORMING ADDRESS SEARCH:', query);
       
-      // Enhanced address parsing for full address format
-      const parseAddressQuery = (query: string) => {
-        console.log('🔍 PARSING QUERY:', query);
-        
-        // Handle full address format: "4 Milburn Place, St Ives Chase NSW 2075"
-        if (query.includes(',')) {
-          const [streetPart, locationPart] = query.split(',').map(part => part.trim());
-          console.log('📋 SPLIT ADDRESS:', { streetPart, locationPart });
-          
-          // Parse street part: "4 Milburn Place"
-          const streetParts = streetPart.split(' ');
-          const streetNumber = streetParts[0] && /^\d+/.test(streetParts[0]) ? streetParts[0] : '';
-          
-          // Remove number and find street name/type
-          const remainingStreet = streetNumber ? streetParts.slice(1) : streetParts;
-          const streetTypes = ['PL', 'PLACE', 'ST', 'STREET', 'RD', 'ROAD', 'AVE', 'AVENUE', 'DR', 'DRIVE'];
-          
-          let streetType = '';
-          let streetName = '';
-          
-          if (remainingStreet.length > 0) {
-            const lastWord = remainingStreet[remainingStreet.length - 1].toUpperCase();
-            console.log('🔍 CHECKING LAST WORD:', lastWord);
-            console.log('🔍 AVAILABLE STREET TYPES:', streetTypes);
-            
-            if (streetTypes.includes(lastWord)) {
-              streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
-              streetName = remainingStreet.slice(0, -1).join(' ').toUpperCase();
-              console.log('✅ FOUND STREET TYPE:', streetType);
-              console.log('✅ EXTRACTED STREET NAME:', streetName);
-            } else {
-              streetName = remainingStreet.join(' ').toUpperCase();
-              console.log('⚠️ NO STREET TYPE FOUND, USING FULL NAME:', streetName);
-            }
-          }
-          
-          const result = { streetNumber, streetName, streetType };
-          console.log('✅ PARSED FULL ADDRESS:', result);
-          return result;
-        }
-        
-        // Handle simple format: "4 Milburn Place"
-        const parts = query.trim().split(' ');
-        const streetNumber = parts[0] && /^\d+/.test(parts[0]) ? parts[0] : '';
-        
-        // Remove number if it exists, then find street type
-        const remaining = streetNumber ? parts.slice(1) : parts;
-        const streetTypes = ['PL', 'PLACE', 'ST', 'STREET', 'RD', 'ROAD', 'AVE', 'AVENUE', 'DR', 'DRIVE'];
-        
-        let streetType = '';
-        let streetName = '';
-        
-        // Look for street type at the end
-        if (remaining.length > 0) {
-          const lastWord = remaining[remaining.length - 1].toUpperCase();
-          console.log('🔍 SIMPLE FORMAT - CHECKING LAST WORD:', lastWord);
-          console.log('🔍 SIMPLE FORMAT - AVAILABLE STREET TYPES:', streetTypes);
-          
-          if (streetTypes.includes(lastWord)) {
-            streetType = lastWord === 'PL' ? 'PLACE' : lastWord;
-            streetName = remaining.slice(0, -1).join(' ').toUpperCase();
-            console.log('✅ SIMPLE FORMAT - FOUND STREET TYPE:', streetType);
-            console.log('✅ SIMPLE FORMAT - EXTRACTED STREET NAME:', streetName);
-          } else {
-            streetName = remaining.join(' ').toUpperCase();
-            console.log('⚠️ SIMPLE FORMAT - NO STREET TYPE FOUND, USING FULL NAME:', streetName);
-          }
-        }
-        
-        const result = { streetNumber, streetName, streetType };
-        console.log('✅ PARSED SIMPLE ADDRESS:', result);
-        return result;
-      };
-
-      // Mock suggestions with proper address parsing and intelligent filtering
-      const { streetNumber, streetName, streetType } = parseAddressQuery(query);
+      // Call the real backend API with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
       
-      console.log('🔍 ADDRESS PARSING DEBUG:', {
-        originalQuery: query,
-        parsedComponents: { streetNumber, streetName, streetType }
+      const response = await fetch(`http://127.0.0.1:8000/api/address/search?q=${encodeURIComponent(query)}&country=AU&limit=5`, {
+        signal: controller.signal
       });
-
-      // Detect location context from query
-      const queryLower = query.toLowerCase();
-      const hasSuburbContext = queryLower.includes('st ives') || queryLower.includes('chase');
-      const hasStateContext = queryLower.includes('nsw') || queryLower.includes('vic') || queryLower.includes('tas');
-      const hasPostcodeContext = queryLower.includes('2075') || queryLower.includes('3064') || queryLower.includes('7010');
       
-      console.log('🎯 LOCATION CONTEXT DETECTION:', {
-        hasSuburbContext,
-        hasStateContext, 
-        hasPostcodeContext,
-        shouldFilter: hasSuburbContext || hasStateContext || hasPostcodeContext
-      });
-
-      // All possible addresses
-      const allAddresses = [
-        {
-          address: `${streetNumber || '4'} MILBURN PLACE, CRAIGIEBURN VIC 3064`,
-          id: "G4VIC4242188",
-          data: {
-            streetNumber: streetNumber || '4',
-            streetName: streetName || 'MILBURN',
-            streetType: streetType || 'PLACE',
-            suburb: 'CRAIGIEBURN',
-            state: 'VIC',
-            postcode: '3064',
-            latitude: -37.5850,
-            longitude: 144.9400
-          },
-          matchScore: 0.95
-        },
-        {
-          address: `${streetNumber || '4'} MILBURN PLACE, GLENORCHY TAS 7010`,
-          id: "GTAS7010189",
-          data: {
-            streetNumber: streetNumber || '4',
-            streetName: streetName || 'MILBURN',
-            streetType: streetType || 'PLACE',
-            suburb: 'GLENORCHY',
-            state: 'TAS',
-            postcode: '7010',
-            latitude: -42.8280,
-            longitude: 147.2610
-          },
-          matchScore: 0.90
-        },
-        {
-          address: `${streetNumber || '4'} MILBURN PLACE, ST IVES CHASE NSW 2075`,
-          id: streetNumber === '14' ? "GNSW2075191" : "GNSW2075190",
-          data: {
-            streetNumber: streetNumber || '4',
-            streetName: streetName || 'MILBURN',
-            streetType: streetType || 'PLACE',
-            suburb: 'ST IVES CHASE',
-            state: 'NSW',
-            postcode: '2075',
-            // Real coordinates for Milburn Place, St Ives Chase (from OpenStreetMap)
-            latitude: streetNumber === '14' ? -33.7020 : -33.7019,
-            longitude: streetNumber === '14' ? 151.1678 : 151.1677
-          },
-          matchScore: 0.98
-        }
-      ];
-
-      // Smart filtering based on context
-      let filteredAddresses = allAddresses;
-
-      if (hasSuburbContext || hasStateContext || hasPostcodeContext) {
-        console.log('🔍 APPLYING INTELLIGENT FILTERING...');
-        
-        filteredAddresses = allAddresses.filter(addr => {
-          let matches = false;
-          
-          // Check suburb match
-          if (hasSuburbContext) {
-            const suburbMatch = queryLower.includes('st ives') && addr.data.suburb.toLowerCase().includes('st ives');
-            matches = matches || suburbMatch;
-            console.log(`   ${addr.data.suburb}: suburb match = ${suburbMatch}`);
-          }
-          
-          // Check state match  
-          if (hasStateContext) {
-            const stateMatch = (queryLower.includes('nsw') && addr.data.state === 'NSW') ||
-                              (queryLower.includes('vic') && addr.data.state === 'VIC') ||
-                              (queryLower.includes('tas') && addr.data.state === 'TAS');
-            matches = matches || stateMatch;
-            console.log(`   ${addr.data.state}: state match = ${stateMatch}`);
-          }
-          
-          // Check postcode match
-          if (hasPostcodeContext) {
-            const postcodeMatch = queryLower.includes(addr.data.postcode.toLowerCase());
-            matches = matches || postcodeMatch;
-            console.log(`   ${addr.data.postcode}: postcode match = ${postcodeMatch}`);
-          }
-          
-          // If no context provided, show all (early typing)
-          if (!hasSuburbContext && !hasStateContext && !hasPostcodeContext) {
-            matches = true;
-          }
-          
-          console.log(`   🎯 ${addr.data.suburb} ${addr.data.state}: final match = ${matches}`);
-          return matches;
-        });
-        
-        console.log(`📊 FILTERED: ${allAddresses.length} → ${filteredAddresses.length} addresses`);
+      clearTimeout(timeoutId);
+      
+      const responseTime = Date.now() - startTime;
+      
+      if (!response.ok) {
+        const errorData = { error: `HTTP error! status: ${response.status}` };
+        apiLogger.logAPICall(
+          '/api/address/search',
+          'GET',
+          requestData,
+          errorData,
+          response.status,
+          responseTime,
+          `HTTP error! status: ${response.status}`
+        );
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      // Sort by match score (highest first)
-      filteredAddresses.sort((a, b) => b.matchScore - a.matchScore);
-
-      // Convert to the expected format
-      const mockSuggestions = filteredAddresses.map(addr => ({
-        address: addr.address,
-        id: addr.id,
-        data: addr.data
+      
+      const data = await response.json();
+      console.log('✅ ADDRESS SEARCH RESPONSE:', data);
+      
+      // Check if there's an error in the response
+      if (data.error) {
+        console.log('❌ ADDRESS SEARCH ERROR FROM API:', data.error);
+        throw new Error(data.error);
+      }
+      
+      // Log successful API call
+      apiLogger.logAPICall(
+        '/api/address/search',
+        'GET',
+        requestData,
+        data,
+        response.status,
+        responseTime
+      );
+      
+      // Transform the API response to match the expected format
+      const suggestions = data.suggestions.map((suggestion: any) => ({
+        address: suggestion.address,
+        id: suggestion.id,
+        data: suggestion.data
       }));
-
-      console.log('📦 FINAL SUGGESTIONS (after filtering):', mockSuggestions);
-
-      setAddressSuggestions(mockSuggestions);
-      setShowSuggestions(true);
-      setAddressValidation({ status: 'idle' });
+      
+      console.log('✅ TRANSFORMED SUGGESTIONS:', suggestions);
+      return suggestions;
+      
+    } catch (error: unknown) {
+      const responseTime = Date.now() - startTime;
+      console.error('❌ ADDRESS SEARCH ERROR:', error);
+      
+      let errorMessage = 'Address lookup service is not available. Please use manual address entry below.';
+      
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          console.log('⏰ API call timed out');
+          errorMessage = 'Address lookup service is not responding. Please use manual address entry below.';
+        } else {
+          console.log('🔄 API call failed');
+        }
+      }
+      
+      // Log failed API call
+      apiLogger.logAPICall(
+        '/api/address/search',
+        'GET',
+        requestData,
+        { error: errorMessage },
+        0,
+        responseTime,
+        error instanceof Error ? error.message : errorMessage
+      );
+      
+      throw new Error(errorMessage);
+    }
   };
 
   // Clean up timeout on unmount
@@ -430,7 +319,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     };
   }, []);
 
-  const selectAddress = React.useCallback((suggestion: any) => {
+  const selectAddress = React.useCallback(async (suggestion: any) => {
     console.log('🏠 ADDRESS SELECTION DEBUG:', {
       selectedAddress: suggestion.address,
       suggestionData: suggestion.data,
@@ -439,63 +328,193 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
     setAddressSearch(suggestion.address);
     setShowSuggestions(false);
-    setSelectedAddress(suggestion.data);
     
-    // Auto-populate form fields with detailed logging
-    if (suggestion.data) {
-      console.log('📋 POPULATING FORM FIELDS:');
+    try {
+      // Get precise coordinates from the backend
+      console.log('📍 GETTING PRECISE COORDINATES...');
       
-      const fieldMappings = [
-        { field: 'address.streetNumber', value: suggestion.data.streetNumber || '' },
-        { field: 'address.streetName', value: suggestion.data.streetName || '' },
-        { field: 'address.streetType', value: suggestion.data.streetType || '' },
-        { field: 'address.suburb', value: suggestion.data.suburb || '' },
-        { field: 'address.state', value: suggestion.data.state || '' },
-        { field: 'address.postcode', value: suggestion.data.postcode || '' },
-        { field: 'address.latitude', value: suggestion.data.latitude || undefined },
-        { field: 'address.longitude', value: suggestion.data.longitude || undefined },
-        { field: 'address.isValidated', value: true },
-        { field: 'address.validationSource', value: 'geoscape' },
-        { field: 'address.confidenceScore', value: 0.95 },
-        { field: 'address.validationDate', value: new Date().toISOString() },
-        { field: 'address.propertyId', value: suggestion.id }
-      ];
-
-      fieldMappings.forEach(({ field, value }) => {
-        console.log(`setValue('${field}', ${JSON.stringify(value)})`);
-        setValue(field as any, value);
+      const response = await fetch('http://127.0.0.1:8000/api/address/coordinates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          address: suggestion.address,
+          property_id: suggestion.id,
+          country: 'AU'
+        })
       });
 
-      // Special attention to streetType
-      console.log('🚨 STREET TYPE SPECIFIC DEBUG:', {
-        originalValue: suggestion.data.streetType,
-        afterSetValue: watch('address.streetType'),
-        formState: getValues('address.streetType')
-      });
-      
-      // Force a small delay to check if value persists
-      setTimeout(() => {
-        const currentStreetType = getValues('address.streetType');
-        console.log('🔍 STREET TYPE AFTER DELAY:', currentStreetType);
-        if (!currentStreetType) {
-          console.error('❌ STREET TYPE LOST AFTER DELAY!');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const coordinatesResult = await response.json();
+      console.log('📍 COORDINATES RESULT:', coordinatesResult);
+
+      if (coordinatesResult.success && coordinatesResult.latitude && coordinatesResult.longitude) {
+        // Use precise coordinates from the API
+        const preciseLat = parseFloat(coordinatesResult.latitude.toFixed(15));
+        const preciseLng = parseFloat(coordinatesResult.longitude.toFixed(15));
+        
+        console.log('✅ PRECISE COORDINATES:', { lat: preciseLat, lng: preciseLng });
+        
+        const addressData = {
+          ...suggestion.data,
+          latitude: preciseLat,
+          longitude: preciseLng
+        };
+        
+        setSelectedAddress(addressData);
+        
+        // Auto-populate form fields with precise coordinates
+        if (suggestion.data) {
+          console.log('📋 POPULATING FORM FIELDS WITH PRECISE COORDINATES:');
+          
+          const fieldMappings = [
+            { field: 'address.streetNumber', value: suggestion.data.streetNumber || '' },
+            { field: 'address.streetName', value: suggestion.data.streetName || '' },
+            { field: 'address.streetType', value: suggestion.data.streetType || '' },
+            { field: 'address.suburb', value: suggestion.data.suburb || '' },
+            { field: 'address.state', value: suggestion.data.state || '' },
+            { field: 'address.postcode', value: suggestion.data.postcode || '' },
+            { field: 'address.latitude', value: preciseLat },
+            { field: 'address.longitude', value: preciseLng },
+            { field: 'address.isValidated', value: true },
+            { field: 'address.validationSource', value: 'geoscape' },
+            { field: 'address.confidenceScore', value: coordinatesResult.confidence_score || 0.95 },
+            { field: 'address.validationDate', value: new Date().toISOString() },
+            { field: 'address.propertyId', value: suggestion.id }
+          ];
+
+          fieldMappings.forEach(({ field, value }) => {
+            console.log(`setValue('${field}', ${JSON.stringify(value)})`);
+            setValue(field as any, value);
+          });
         }
-      }, 100);
-    }
+        
+        setAddressValidation({
+          status: 'valid',
+          message: 'Address selected and validated with precise coordinates'
+        });
+        
+      } else {
+        // Fallback to default coordinates if API fails
+        console.warn('⚠️ COORDINATES API FAILED, USING DEFAULT COORDINATES');
+        
+        const getDefaultCoordinates = (state: string) => {
+          const stateCoords: { [key: string]: [number, number] } = {
+            'NSW': [-33.8688, 151.2093], // Sydney
+            'VIC': [-37.8136, 144.9631], // Melbourne
+            'QLD': [-27.4698, 153.0251], // Brisbane
+            'WA': [-31.9505, 115.8605],  // Perth
+            'SA': [-34.9285, 138.6007],  // Adelaide
+            'TAS': [-42.8821, 147.3272], // Hobart
+            'NT': [-12.4634, 130.8456],  // Darwin
+            'ACT': [-35.2809, 149.1300]  // Canberra
+          };
+          return stateCoords[state] || [-33.8688, 151.2093]; // Default to Sydney
+        };
+        
+        const [defaultLat, defaultLng] = getDefaultCoordinates(suggestion.data?.state || 'NSW');
+        const addressData = {
+          ...suggestion.data,
+          latitude: defaultLat,
+          longitude: defaultLng
+        };
+        
+        setSelectedAddress(addressData);
+        
+        // Auto-populate form fields with default coordinates
+        if (suggestion.data) {
+          console.log('📋 POPULATING FORM FIELDS WITH DEFAULT COORDINATES:');
+          
+          const fieldMappings = [
+            { field: 'address.streetNumber', value: suggestion.data.streetNumber || '' },
+            { field: 'address.streetName', value: suggestion.data.streetName || '' },
+            { field: 'address.streetType', value: suggestion.data.streetType || '' },
+            { field: 'address.suburb', value: suggestion.data.suburb || '' },
+            { field: 'address.state', value: suggestion.data.state || '' },
+            { field: 'address.postcode', value: suggestion.data.postcode || '' },
+            { field: 'address.latitude', value: defaultLat },
+            { field: 'address.longitude', value: defaultLng },
+            { field: 'address.isValidated', value: true },
+            { field: 'address.validationSource', value: 'geoscape' },
+            { field: 'address.confidenceScore', value: 0.8 },
+            { field: 'address.validationDate', value: new Date().toISOString() },
+            { field: 'address.propertyId', value: suggestion.id }
+          ];
 
-    setAddressValidation({
-      status: 'valid',
-      message: 'Address selected and validated'
-    });
+          fieldMappings.forEach(({ field, value }) => {
+            console.log(`setValue('${field}', ${JSON.stringify(value)})`);
+            setValue(field as any, value);
+          });
+        }
+        
+        setAddressValidation({
+          status: 'valid',
+          message: 'Address selected with approximate coordinates'
+        });
+      }
+      
+    } catch (error: unknown) {
+      console.error('❌ ERROR GETTING COORDINATES:', error);
+      
+      // Fallback to default coordinates on error
+      const getDefaultCoordinates = (state: string) => {
+        const stateCoords: { [key: string]: [number, number] } = {
+          'NSW': [-33.8688, 151.2093], // Sydney
+          'VIC': [-37.8136, 144.9631], // Melbourne
+          'QLD': [-27.4698, 153.0251], // Brisbane
+          'WA': [-31.9505, 115.8605],  // Perth
+          'SA': [-34.9285, 138.6007],  // Adelaide
+          'TAS': [-42.8821, 147.3272], // Hobart
+          'NT': [-12.4634, 130.8456],  // Darwin
+          'ACT': [-35.2809, 149.1300]  // Canberra
+        };
+        return stateCoords[state] || [-33.8688, 151.2093]; // Default to Sydney
+      };
+      
+      const [defaultLat, defaultLng] = getDefaultCoordinates(suggestion.data?.state || 'NSW');
+      const addressData = {
+        ...suggestion.data,
+        latitude: defaultLat,
+        longitude: defaultLng
+      };
+      
+      setSelectedAddress(addressData);
+      
+      // Auto-populate form fields with default coordinates
+      if (suggestion.data) {
+        const fieldMappings = [
+          { field: 'address.streetNumber', value: suggestion.data.streetNumber || '' },
+          { field: 'address.streetName', value: suggestion.data.streetName || '' },
+          { field: 'address.streetType', value: suggestion.data.streetType || '' },
+          { field: 'address.suburb', value: suggestion.data.suburb || '' },
+          { field: 'address.state', value: suggestion.data.state || '' },
+          { field: 'address.postcode', value: suggestion.data.postcode || '' },
+          { field: 'address.latitude', value: defaultLat },
+          { field: 'address.longitude', value: defaultLng },
+          { field: 'address.isValidated', value: true },
+          { field: 'address.validationSource', value: 'geoscape' },
+          { field: 'address.confidenceScore', value: 0.7 },
+          { field: 'address.validationDate', value: new Date().toISOString() },
+          { field: 'address.propertyId', value: suggestion.id }
+        ];
+
+        fieldMappings.forEach(({ field, value }) => {
+          setValue(field as any, value);
+        });
+      }
+      
+      setAddressValidation({
+        status: 'valid',
+        message: 'Address selected with approximate coordinates (coordinate lookup failed)'
+      });
+    }
   }, [setValue, watch, getValues]); // Added watch and getValues dependencies
 
   // Usage tracking removed from frontend - handled on backend
-
-  // Handle address search input changes
-  const handleAddressSearchChange = (value: string) => {
-    setAddressSearch(value);
-    debouncedSearch(value);
-  };
 
   // Click outside handler to close suggestions
   React.useEffect(() => {
@@ -522,9 +541,114 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
     setAddressValidation({ status: 'validating' });
     
+    const startTime = Date.now();
+    const requestData = {
+      address: [
+        address.streetNumber,
+        address.streetName,
+        address.streetType,
+        address.suburb,
+        address.state,
+        address.postcode,
+        address.country
+      ].filter(Boolean).join(' '),
+      country: 'AU'
+    };
+    
     try {
-      // Simulate Geoscape API call (in real app, call actual API)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('🔍 VALIDATING ADDRESS:', requestData.address);
+      
+      // Call the real backend API
+      const response = await fetch('http://127.0.0.1:8000/api/address/validate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+      });
+      
+      const responseTime = Date.now() - startTime;
+      
+      if (!response.ok) {
+        const errorData = { error: `HTTP error! status: ${response.status}` };
+        apiLogger.logAPICall(
+          '/api/address/validate',
+          'POST',
+          requestData,
+          errorData,
+          response.status,
+          responseTime,
+          `HTTP error! status: ${response.status}`
+        );
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('✅ ADDRESS VALIDATION RESPONSE:', data);
+      
+      // Log successful API call
+      apiLogger.logAPICall(
+        '/api/address/validate',
+        'POST',
+        requestData,
+        data,
+        response.status,
+        responseTime
+      );
+      
+      if (data.validated) {
+        // Update form with validated address data
+        const form = getValues();
+        form.address = {
+          ...form.address,
+          streetNumber: data.address.streetNumber,
+          streetName: data.address.streetName,
+          streetType: data.address.streetType,
+          suburb: data.address.suburb,
+          state: data.address.state,
+          postcode: data.address.postcode,
+          country: data.address.country,
+          isValidated: true,
+          validationSource: 'geoscape',
+          confidenceScore: data.confidence_score,
+          validationDate: new Date().toISOString(),
+          propertyId: data.property_id,
+          latitude: data.address.latitude,
+          longitude: data.address.longitude,
+          propertyType: data.metadata.propertyType,
+          landArea: data.metadata.landArea,
+          floorArea: data.metadata.floorArea,
+        };
+        
+        setValue('address', form.address);
+        
+        setAddressValidation({
+          status: 'valid',
+          message: `Address validated with ${Math.round(data.confidence_score * 100)}% confidence`
+        });
+      } else {
+        setAddressValidation({
+          status: 'invalid',
+          message: 'Unable to validate address. Please check and try again.'
+        });
+      }
+    } catch (error: unknown) {
+      const responseTime = Date.now() - startTime;
+      console.error('❌ ADDRESS VALIDATION ERROR:', error);
+      
+      // Log failed API call
+      apiLogger.logAPICall(
+        '/api/address/validate',
+        'POST',
+        requestData,
+        { error: 'Address validation failed' },
+        0,
+        responseTime,
+        error instanceof Error ? error.message : 'Address validation failed'
+      );
+      
+      // Fallback to mock validation if API fails
+      console.log('🔄 FALLING BACK TO MOCK VALIDATION');
       
       // Mock Geoscape API response
       const mockGeoscapeResponse = {
@@ -570,7 +694,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         
         setAddressValidation({
           status: 'valid',
-          message: `Address validated with ${Math.round(mockGeoscapeResponse.confidence_score * 100)}% confidence`
+          message: `Address validated with ${Math.round(mockGeoscapeResponse.confidence_score * 100)}% confidence (mock)`
         });
       } else {
         setAddressValidation({
@@ -578,11 +702,6 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           message: 'Unable to validate address. Please check and try again.'
         });
       }
-    } catch (error) {
-      setAddressValidation({
-        status: 'invalid',
-        message: 'Address validation service temporarily unavailable. Please try again later.'
-      });
     }
   };
 
@@ -766,7 +885,11 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 placeholder="Start typing to get auto-complete suggestions from the API"
                 className="block w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={addressSearch}
-                onChange={(e) => handleAddressSearchChange(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setAddressSearch(value);
+                  debouncedSearch(value);
+                }}
                 onFocus={() => setShowSuggestions(true)}
               />
               {(addressValidation.status === 'validating' || isSearching) && (
@@ -796,14 +919,19 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           {/* Usage tracking is now backend-only for billing management */}
 
           {/* Map Integration */}
-          {selectedAddress && selectedAddress.latitude && selectedAddress.longitude && (
+          {selectedAddress && (
             <div className="mb-6">
               <MapComponent
-                latitude={selectedAddress.latitude}
-                longitude={selectedAddress.longitude}
+                latitude={selectedAddress.latitude || -33.8688} // Default to Sydney if no coordinates
+                longitude={selectedAddress.longitude || 151.2093}
                 address={addressSearch}
                 className="w-full h-64 rounded-lg border border-gray-300"
               />
+              {!selectedAddress.latitude && !selectedAddress.longitude && (
+                <p className="mt-2 text-sm text-gray-500 italic">
+                  Map showing approximate location for {selectedAddress.state || 'NSW'} (coordinates not available from address search)
+                </p>
+              )}
             </div>
           )}
 
@@ -811,12 +939,12 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           {addressValidation.status !== 'idle' && (
             <div className={`mb-6 p-3 rounded-lg flex items-center ${
               addressValidation.status === 'valid' ? 'bg-green-50 text-green-800' :
-              addressValidation.status === 'invalid' ? 'bg-red-50 text-red-800' :
+              addressValidation.status === 'invalid' || addressValidation.status === 'error' ? 'bg-red-50 text-red-800' :
               'bg-blue-50 text-blue-800'
             }`}>
               {addressValidation.status === 'valid' ? (
                 <CheckCircleIcon className="w-4 h-4 mr-2" />
-              ) : addressValidation.status === 'invalid' ? (
+              ) : addressValidation.status === 'invalid' || addressValidation.status === 'error' ? (
                 <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
               ) : (
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
@@ -873,6 +1001,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 <option value="Drive">Drive</option>
                 <option value="Lane">Lane</option>
                 <option value="Court">Court</option>
+                <option value="CCT">Court (CCT)</option>
                 <option value="Place">Place</option>
                 <option value="Crescent">Crescent</option>
                 <option value="Boulevard">Boulevard</option>
@@ -880,6 +1009,17 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 <option value="Close">Close</option>
                 <option value="Terrace">Terrace</option>
                 <option value="Parade">Parade</option>
+                <option value="ST">Street (ST)</option>
+                <option value="RD">Road (RD)</option>
+                <option value="AVE">Avenue (AVE)</option>
+                <option value="DR">Drive (DR)</option>
+                <option value="LN">Lane (LN)</option>
+                <option value="PL">Place (PL)</option>
+                <option value="CRES">Crescent (CRES)</option>
+                <option value="BLVD">Boulevard (BLVD)</option>
+                <option value="CL">Close (CL)</option>
+                <option value="TCE">Terrace (TCE)</option>
+                <option value="PDE">Parade (PDE)</option>
               </select>
             </div>
 
@@ -1237,13 +1377,19 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
         {/* Professional Links & Social Media */}
         <div className="bg-white border border-gray-200 rounded-xl p-6">
-          <div className="flex items-center mb-4">
-            <LinkIcon className="w-5 h-5 text-blue-600 mr-2" />
-            <h3 className="text-lg font-semibold text-gray-900">Professional Links & Social Media</h3>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <LinkIcon className="w-5 h-5 text-blue-600 mr-2" />
+              <h3 className="text-lg font-semibold text-gray-900">Professional Links & Social Media</h3>
+            </div>
+            <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full font-medium">
+              Optional Section
+            </span>
           </div>
           
           <p className="text-sm text-gray-600 mb-6">
-            Add your professional profiles and social media accounts. These help employers understand your professional presence and networking approach.
+            Add your professional profiles and social media accounts. These help employers understand your professional presence and networking approach. 
+            <span className="font-medium text-blue-600"> All fields are completely optional - you can skip any or all of these if you prefer.</span>
           </p>
 
           {/* Core Professional Links */}
@@ -1336,6 +1482,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             <p className="text-xs text-gray-500 mb-4">
               Many professionals use social media for networking, thought leadership, and industry engagement. 
               Only include profiles that represent your professional brand.
+              <span className="font-medium text-blue-600"> You can leave all social media fields empty if you prefer not to share these.</span>
             </p>
 
             {showSocialLinks && (

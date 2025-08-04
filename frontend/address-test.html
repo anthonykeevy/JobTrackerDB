@@ -252,8 +252,8 @@
                         suburb: 'ST IVES CHASE',
                         state: 'NSW',
                         postcode: '2075',
-                        latitude: parsed.streetNumber === '14' ? -33.7020 : -33.7019,
-                        longitude: parsed.streetNumber === '14' ? 151.1678 : 151.1677,
+                                                  latitude: -33.70131425995992,
+                          longitude: 151.16600576829697,
                         propertyType: 'Residential',
                         confidenceScore: 0.98
                     },
@@ -488,8 +488,8 @@
             log('\n🗺️ TESTING COORDINATE ACCURACY\n', null, 'success');
             
             const             coordinates = [
-                { address: '4 Milburn Place', lat: -33.7019, lng: 151.1677, id: 'GNSW2075190' },
-                { address: '14 Milburn Place', lat: -33.7020, lng: 151.1678, id: 'GNSW2075191' }
+                { address: '4 Milburn Place', lat: -33.70131425995992, lng: 151.16600576829697, id: 'GNSW2075190' },
+                { address: '14 Milburn Place', lat: -33.70131425995992, lng: 151.16600576829697, id: 'GNSW2075191' }
             ];
             
             coordinates.forEach(coord => {

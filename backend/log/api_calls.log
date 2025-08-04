@@ -1,0 +1,3627 @@
+2025-08-03 20:29:58,065 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T20:29:58.065445",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "test",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "Address lookup service error: Geoscape API error: 401 - {\"fault\":{\"faultstring\":\"Invalid ApiKey\",\"detail\":{\"errorcode\":\"oauth.v2.InvalidApiKey\"}}}",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "test",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 464642.0
+}
+2025-08-03 20:41:35,001 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T20:41:35.001300",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "Address lookup service error: Geoscape API error: 401 - {\"fault\":{\"faultstring\":\"Invalid ApiKey\",\"detail\":{\"errorcode\":\"oauth.v2.InvalidApiKey\"}}}",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 665738.0
+}
+2025-08-03 21:22:53,775 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:22:53.775740",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "API request failed with status 401: {\"fault\":{\"faultstring\":\"Invalid ApiKey\",\"detail\":{\"errorcode\":\"oauth.v2.InvalidApiKey\"}}}",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 1397647.0
+}
+2025-08-03 21:33:04,513 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:33:04.513721",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 970.12
+}
+2025-08-03 21:34:04,776 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:04.776505",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Mi",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MI MI ST, OATLEY NSW 2223",
+        "id": "GANSW705572168",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MI MI",
+          "streetType": "ST",
+          "suburb": "OATLEY",
+          "state": "NSW",
+          "postcode": "2223",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MIA BELLA DR, HOPETOUN PARK VIC 3340",
+        "id": "GAVIC424585594",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA BELLA",
+          "streetType": "DR",
+          "suburb": "HOPETOUN PARK",
+          "state": "VIC",
+          "postcode": "3340",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MIA CL, RESERVOIR VIC 3073",
+        "id": "GAVIC421444789",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA",
+          "streetType": "CL",
+          "suburb": "RESERVOIR",
+          "state": "VIC",
+          "postcode": "3073",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MIA CT, BELL PARK VIC 3215",
+        "id": "GAVIC423226132",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA",
+          "streetType": "CT",
+          "suburb": "BELL PARK",
+          "state": "VIC",
+          "postcode": "3215",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MIA CT, ELLENBROOK WA 6069",
+        "id": "GAWA_147334392",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA",
+          "streetType": "CT",
+          "suburb": "ELLENBROOK",
+          "state": "WA",
+          "postcode": "6069",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Mi",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 875.27
+}
+2025-08-03 21:34:06,127 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:06.127357",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Mil",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MIL-LEL DR, MIL-LEL SA 5291",
+        "id": "GASA_425190943",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIL-LEL",
+          "streetType": "DR",
+          "suburb": "MIL-LEL",
+          "state": "SA",
+          "postcode": "5291",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILA PL, MARAYONG NSW 2148",
+        "id": "GANSW705267369",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILA",
+          "streetType": "PL",
+          "suburb": "MARAYONG",
+          "state": "NSW",
+          "postcode": "2148",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILAGRO FAWY, SEVILLE GROVE WA 6112",
+        "id": "GAWA_162577124",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAGRO",
+          "streetType": "FAWY",
+          "suburb": "SEVILLE GROVE",
+          "state": "WA",
+          "postcode": "6112",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILAK PL, WHALAN NSW 2770",
+        "id": "GANSW706344901",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAK",
+          "streetType": "PL",
+          "suburb": "WHALAN",
+          "state": "NSW",
+          "postcode": "2770",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILAN AV, WANNEROO WA 6065",
+        "id": "GAWA_162983814",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAN",
+          "streetType": "AV",
+          "suburb": "WANNEROO",
+          "state": "WA",
+          "postcode": "6065",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Mil",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1178.13
+}
+2025-08-03 21:34:06,896 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:06.896080",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milbu",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBUN ST, WOODRIDGE QLD 4114",
+        "id": "GAQLD720860677",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBUN",
+          "streetType": "ST",
+          "suburb": "WOODRIDGE",
+          "state": "QLD",
+          "postcode": "4114",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milbu",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1131.46
+}
+2025-08-03 21:34:08,061 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:08.061839",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milbur",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milbur",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 809.44
+}
+2025-08-03 21:34:10,163 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:10.163536",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1056.38
+}
+2025-08-03 21:34:11,217 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:11.217824",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn ",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn ",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 902.31
+}
+2025-08-03 21:34:13,062 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:13.062230",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn place",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 Milburn place",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 834.2
+}
+2025-08-03 21:34:59,087 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:34:59.087365",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "9 Vival",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "9 VIVALDI AV, STIRLING WA 6021",
+        "id": "GAWA_160643122",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "AV",
+          "suburb": "STIRLING",
+          "state": "WA",
+          "postcode": "6021",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "9 VIVALDI CR, CLAREMONT MEADOWS NSW 2747",
+        "id": "GANSW704407807",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "CR",
+          "suburb": "CLAREMONT MEADOWS",
+          "state": "NSW",
+          "postcode": "2747",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "9 VIVALDI CT, TEMPLESTOWE VIC 3106",
+        "id": "GAVIC421833666",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "CT",
+          "suburb": "TEMPLESTOWE",
+          "state": "VIC",
+          "postcode": "3106",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "9 VIVALDI DR, JUNCTION VILLAGE VIC 3977",
+        "id": "GAVIC720833330",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "DR",
+          "suburb": "JUNCTION VILLAGE",
+          "state": "VIC",
+          "postcode": "3977",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "9 VIVALDI PL, BEAUMONT HILLS NSW 2155",
+        "id": "GANSW716563064",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "PL",
+          "suburb": "BEAUMONT HILLS",
+          "state": "NSW",
+          "postcode": "2155",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "9 Vival",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1026.68
+}
+2025-08-03 21:35:00,697 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:35:00.697566",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "9 Vivaldi",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "9 VIVALDI AV, STIRLING WA 6021",
+        "id": "GAWA_160643122",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "AV",
+          "suburb": "STIRLING",
+          "state": "WA",
+          "postcode": "6021",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "9 VIVALDI CR, CLAREMONT MEADOWS NSW 2747",
+        "id": "GANSW704407807",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "CR",
+          "suburb": "CLAREMONT MEADOWS",
+          "state": "NSW",
+          "postcode": "2747",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "9 VIVALDI CT, TEMPLESTOWE VIC 3106",
+        "id": "GAVIC421833666",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "CT",
+          "suburb": "TEMPLESTOWE",
+          "state": "VIC",
+          "postcode": "3106",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "9 VIVALDI DR, JUNCTION VILLAGE VIC 3977",
+        "id": "GAVIC720833330",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "DR",
+          "suburb": "JUNCTION VILLAGE",
+          "state": "VIC",
+          "postcode": "3977",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "9 VIVALDI PL, BEAUMONT HILLS NSW 2155",
+        "id": "GANSW716563064",
+        "data": {
+          "streetNumber": "9",
+          "streetName": "VIVALDI",
+          "streetType": "PL",
+          "suburb": "BEAUMONT HILLS",
+          "state": "NSW",
+          "postcode": "2155",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "9 Vivaldi",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 991.22
+}
+2025-08-03 21:40:04,729 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:04.729856",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 931.27
+}
+2025-08-03 21:40:10,528 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:10.528563",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "219 Nor",
+    "country": "AU",
+    "limit": 3
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "219 NORMAN ST, BALLARAT NORTH VIC 3350",
+        "id": "GAVIC423834288",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORMAN",
+          "streetType": "ST",
+          "suburb": "BALLARAT NORTH",
+          "state": "VIC",
+          "postcode": "3350",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "219 NORRING RD, WEDGECARRUP WA 6315",
+        "id": "GAWA_162256790",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORRING",
+          "streetType": "RD",
+          "suburb": "WEDGECARRUP",
+          "state": "WA",
+          "postcode": "6315",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "219 NORRIS RD, BRACKEN RIDGE QLD 4017",
+        "id": "GAQLD156304488",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORRIS",
+          "streetType": "RD",
+          "suburb": "BRACKEN RIDGE",
+          "state": "QLD",
+          "postcode": "4017",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "219 NORTH BEACH DR, TUART HILL WA 6060",
+        "id": "GAWA_162412697",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORTH BEACH",
+          "streetType": "DR",
+          "suburb": "TUART HILL",
+          "state": "WA",
+          "postcode": "6060",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "219 NORTH CURRAMORE RD, CURRAMORE NSW 2533",
+        "id": "GANSW704548627",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORTH CURRAMORE",
+          "streetType": "RD",
+          "suburb": "CURRAMORE",
+          "state": "NSW",
+          "postcode": "2533",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "219 Nor",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 915.33
+}
+2025-08-03 21:40:46,107 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:46.107851",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 M",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 M G PL, PORT WILLUNGA SA 5173",
+        "id": "GASA_425502435",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "M G",
+          "streetType": "PL",
+          "suburb": "PORT WILLUNGA",
+          "state": "SA",
+          "postcode": "5173",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MAAHU AMBL, MERNDA VIC 3754",
+        "id": "GAVIC424622900",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MAAHU",
+          "streetType": "AMBL",
+          "suburb": "MERNDA",
+          "state": "VIC",
+          "postcode": "3754",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MAALAK TURN, DALYELLUP WA 6230",
+        "id": "GAWA_162575004",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MAALAK",
+          "streetType": "TURN",
+          "suburb": "DALYELLUP",
+          "state": "WA",
+          "postcode": "6230",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MAAS CT, GUNNEDAH NSW 2380",
+        "id": "GANSW721236989",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MAAS",
+          "streetType": "CT",
+          "suburb": "GUNNEDAH",
+          "state": "NSW",
+          "postcode": "2380",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "BALMORAL GARDENS NORTH 4 MAAS CT, WATERFORD WEST QLD 4133",
+        "id": "GAQLD157298683",
+        "data": {
+          "streetNumber": "BALMORAL",
+          "streetName": "GARDENS NORTH 4 MAAS",
+          "streetType": "CT",
+          "suburb": "WATERFORD WEST",
+          "state": "QLD",
+          "postcode": "4133",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 M",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1118.27
+}
+2025-08-03 21:40:50,120 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:50.120197",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Mi",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MI MI ST, OATLEY NSW 2223",
+        "id": "GANSW705572168",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MI MI",
+          "streetType": "ST",
+          "suburb": "OATLEY",
+          "state": "NSW",
+          "postcode": "2223",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MIA BELLA DR, HOPETOUN PARK VIC 3340",
+        "id": "GAVIC424585594",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA BELLA",
+          "streetType": "DR",
+          "suburb": "HOPETOUN PARK",
+          "state": "VIC",
+          "postcode": "3340",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MIA CL, RESERVOIR VIC 3073",
+        "id": "GAVIC421444789",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA",
+          "streetType": "CL",
+          "suburb": "RESERVOIR",
+          "state": "VIC",
+          "postcode": "3073",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MIA CT, BELL PARK VIC 3215",
+        "id": "GAVIC423226132",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA",
+          "streetType": "CT",
+          "suburb": "BELL PARK",
+          "state": "VIC",
+          "postcode": "3215",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MIA CT, ELLENBROOK WA 6069",
+        "id": "GAWA_147334392",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIA",
+          "streetType": "CT",
+          "suburb": "ELLENBROOK",
+          "state": "WA",
+          "postcode": "6069",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Mi",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1097.91
+}
+2025-08-03 21:40:51,808 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:51.808139",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Mil",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MIL-LEL DR, MIL-LEL SA 5291",
+        "id": "GASA_425190943",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIL-LEL",
+          "streetType": "DR",
+          "suburb": "MIL-LEL",
+          "state": "SA",
+          "postcode": "5291",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILA PL, MARAYONG NSW 2148",
+        "id": "GANSW705267369",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILA",
+          "streetType": "PL",
+          "suburb": "MARAYONG",
+          "state": "NSW",
+          "postcode": "2148",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILAGRO FAWY, SEVILLE GROVE WA 6112",
+        "id": "GAWA_162577124",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAGRO",
+          "streetType": "FAWY",
+          "suburb": "SEVILLE GROVE",
+          "state": "WA",
+          "postcode": "6112",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILAK PL, WHALAN NSW 2770",
+        "id": "GANSW706344901",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAK",
+          "streetType": "PL",
+          "suburb": "WHALAN",
+          "state": "NSW",
+          "postcode": "2770",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILAN AV, WANNEROO WA 6065",
+        "id": "GAWA_162983814",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAN",
+          "streetType": "AV",
+          "suburb": "WANNEROO",
+          "state": "WA",
+          "postcode": "6065",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Mil",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 955.06
+}
+2025-08-03 21:40:54,940 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:54.940706",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milb",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBA RD, CARINGBAH NSW 2229",
+        "id": "GANSW704314067",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBA",
+          "streetType": "RD",
+          "suburb": "CARINGBAH",
+          "state": "NSW",
+          "postcode": "2229",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBANK AV, GILLES PLAINS SA 5086",
+        "id": "GASA_422267072",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBANK",
+          "streetType": "AV",
+          "suburb": "GILLES PLAINS",
+          "state": "SA",
+          "postcode": "5086",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBANKE ST, PORTLAND VIC 3305",
+        "id": "GAVIC421461292",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBANKE",
+          "streetType": "ST",
+          "suburb": "PORTLAND",
+          "state": "VIC",
+          "postcode": "3305",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBONG ST, SUNNYBANK QLD 4109",
+        "id": "GAQLD157176272",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBONG",
+          "streetType": "ST",
+          "suburb": "SUNNYBANK",
+          "state": "QLD",
+          "postcode": "4109",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBONG TCE, ASHMORE QLD 4214",
+        "id": "GAQLD156223714",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBONG",
+          "streetType": "TCE",
+          "suburb": "ASHMORE",
+          "state": "QLD",
+          "postcode": "4214",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milb",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1255.23
+}
+2025-08-03 21:40:56,613 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:56.613366",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1003.05
+}
+2025-08-03 21:40:59,373 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:40:59.373483",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn ",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn ",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1068.39
+}
+2025-08-03 21:41:01,492 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:41:01.492136",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn p",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 Milburn p",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1855.04
+}
+2025-08-03 21:41:01,625 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:41:01.625113",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn pl",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 Milburn pl",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 859.26
+}
+2025-08-03 21:41:26,620 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:41:26.620901",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milb",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBA RD, CARINGBAH NSW 2229",
+        "id": "GANSW704314067",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBA",
+          "streetType": "RD",
+          "suburb": "CARINGBAH",
+          "state": "NSW",
+          "postcode": "2229",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBANK AV, GILLES PLAINS SA 5086",
+        "id": "GASA_422267072",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBANK",
+          "streetType": "AV",
+          "suburb": "GILLES PLAINS",
+          "state": "SA",
+          "postcode": "5086",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBANKE ST, PORTLAND VIC 3305",
+        "id": "GAVIC421461292",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBANKE",
+          "streetType": "ST",
+          "suburb": "PORTLAND",
+          "state": "VIC",
+          "postcode": "3305",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBONG ST, SUNNYBANK QLD 4109",
+        "id": "GAQLD157176272",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBONG",
+          "streetType": "ST",
+          "suburb": "SUNNYBANK",
+          "state": "QLD",
+          "postcode": "4109",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBONG TCE, ASHMORE QLD 4214",
+        "id": "GAQLD156223714",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBONG",
+          "streetType": "TCE",
+          "suburb": "ASHMORE",
+          "state": "QLD",
+          "postcode": "4214",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milb",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 837.11
+}
+2025-08-03 21:41:28,885 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:41:28.885341",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn ",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn ",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1443.12
+}
+2025-08-03 21:41:28,992 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:41:28.992777",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn pl",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 Milburn pl",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 797.75
+}
+2025-08-03 21:44:27,489 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:44:27.489176",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 3
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 946.48
+}
+2025-08-03 21:46:24,598 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:46:24.598576",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 mil",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MIL-LEL DR, MIL-LEL SA 5291",
+        "id": "GASA_425190943",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MIL-LEL",
+          "streetType": "DR",
+          "suburb": "MIL-LEL",
+          "state": "SA",
+          "postcode": "5291",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILA PL, MARAYONG NSW 2148",
+        "id": "GANSW705267369",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILA",
+          "streetType": "PL",
+          "suburb": "MARAYONG",
+          "state": "NSW",
+          "postcode": "2148",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILAGRO FAWY, SEVILLE GROVE WA 6112",
+        "id": "GAWA_162577124",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAGRO",
+          "streetType": "FAWY",
+          "suburb": "SEVILLE GROVE",
+          "state": "WA",
+          "postcode": "6112",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILAK PL, WHALAN NSW 2770",
+        "id": "GANSW706344901",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAK",
+          "streetType": "PL",
+          "suburb": "WHALAN",
+          "state": "NSW",
+          "postcode": "2770",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILAN AV, WANNEROO WA 6065",
+        "id": "GAWA_162983814",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILAN",
+          "streetType": "AV",
+          "suburb": "WANNEROO",
+          "state": "WA",
+          "postcode": "6065",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 mil",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 901.19
+}
+2025-08-03 21:46:26,296 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:46:26.296508",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1068.18
+}
+2025-08-03 21:46:28,793 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:46:28.793822",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 milburn pl",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 milburn pl",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 866.89
+}
+2025-08-03 21:53:03,160 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:03.160711",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": false,
+    "error": "API request failed with status 405: {\"detail\":\"Method Not Allowed\"}",
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284"
+  },
+  "status_code": 400,
+  "response_time_ms": 1016.69
+}
+2025-08-03 21:53:03,240 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:03.240488",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "error": "Failed to get coordinates: 1 validation error for AddressCoordinatesResponse\naddress\n  Input should be a valid dictionary [type=dict_type, input_value='4 MILBURN CCT, BOOLAROO NSW 2284', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/dict_type"
+  },
+  "status_code": 503,
+  "response_time_ms": 1096.25
+}
+2025-08-03 21:53:08,702 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:08.702319",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": false,
+    "error": "API request failed with status 405: {\"detail\":\"Method Not Allowed\"}",
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284"
+  },
+  "status_code": 400,
+  "response_time_ms": 923.92
+}
+2025-08-03 21:53:08,709 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:08.709101",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "error": "Failed to get coordinates: 1 validation error for AddressCoordinatesResponse\naddress\n  Input should be a valid dictionary [type=dict_type, input_value='4 MILBURN CCT, BOOLAROO NSW 2284', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/dict_type"
+  },
+  "status_code": 503,
+  "response_time_ms": 930.55
+}
+2025-08-03 21:53:26,646 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:26.645923",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": false,
+    "error": "API request failed with status 405: {\"detail\":\"Method Not Allowed\"}",
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284"
+  },
+  "status_code": 400,
+  "response_time_ms": 968.83
+}
+2025-08-03 21:53:26,743 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:26.743844",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "error": "Failed to get coordinates: 1 validation error for AddressCoordinatesResponse\naddress\n  Input should be a valid dictionary [type=dict_type, input_value='4 MILBURN CCT, BOOLAROO NSW 2284', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/dict_type"
+  },
+  "status_code": 503,
+  "response_time_ms": 1066.56
+}
+2025-08-03 21:53:51,446 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:53:51.446428",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": false,
+    "error": "API request failed with status 405: {\"detail\":\"Method Not Allowed\"}",
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284"
+  },
+  "status_code": 400,
+  "response_time_ms": 999.2
+}
+2025-08-03 21:54:18,150 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:54:18.150831",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "CCT",
+      "suburb": "BOOLAROO",
+      "state": "NSW",
+      "postcode": "2284",
+      "latitude": null,
+      "longitude": null,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW720344230",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 968.68
+}
+2025-08-03 21:55:08,311 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:55:08.311564",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 milburn ",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 milburn ",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 873.89
+}
+2025-08-03 21:55:09,694 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:55:09.694100",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 milburn place",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 milburn place",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 834.66
+}
+2025-08-03 21:55:13,812 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:55:13.812204",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+    "property_id": "GANSW706441690",
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "PL",
+      "suburb": "ST IVES CHASE",
+      "state": "NSW",
+      "postcode": "2075",
+      "latitude": null,
+      "longitude": null,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW706441690",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 873.36
+}
+2025-08-03 21:58:03,068 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:58:03.068638",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 MILBURN PL, ST IVES CHASE NSW 207",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      }
+    ],
+    "total_count": 1,
+    "query": "4 MILBURN PL, ST IVES CHASE NSW 207",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1204.58
+}
+2025-08-03 21:58:09,027 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:58:09.027278",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 MILBURN PL, ST IVES CHASE NSW 20",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      }
+    ],
+    "total_count": 1,
+    "query": "4 MILBURN PL, ST IVES CHASE NSW 20",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 1053.36
+}
+2025-08-03 21:58:21,068 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:58:21.067955",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 MILBURN PL",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 MILBURN PL",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 951.91
+}
+2025-08-03 21:58:26,687 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T21:58:26.687594",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+    "property_id": "GAVIC420842188",
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -37.8136,
+    "longitude": 144.9631,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "PL",
+      "suburb": "CRAIGIEBURN",
+      "state": "VIC",
+      "postcode": "3064",
+      "latitude": null,
+      "longitude": null,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GAVIC420842188",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 1341.85
+}
+2025-08-03 22:05:18,796 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T22:05:18.796875",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "CCT",
+      "suburb": "BOOLAROO",
+      "state": "NSW",
+      "postcode": "2284",
+      "latitude": null,
+      "longitude": null,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW720344230",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 899.85
+}
+2025-08-03 22:05:44,445 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T22:05:44.445216",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "CCT",
+      "suburb": "BOOLAROO",
+      "state": "NSW",
+      "postcode": "2284",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW720344230",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 958.44
+}
+2025-08-03 22:05:50,429 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T22:05:50.429753",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "123 GEORGE ST, SYDNEY NSW 2000",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "123",
+      "streetName": "GEORGE",
+      "streetType": "ST",
+      "suburb": "THE ROCKS",
+      "state": "NSW",
+      "postcode": "2000",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW716577913",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 1083.6
+}
+2025-08-03 22:05:56,633 - INFO - API_CALL: {
+  "timestamp": "2025-08-03T22:05:56.633510",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "123 COLLINS ST, MELBOURNE VIC 3000",
+    "property_id": null,
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -37.8136,
+    "longitude": 144.9631,
+    "address": {
+      "streetNumber": "123",
+      "streetName": "COLLINS",
+      "streetType": "ST",
+      "suburb": "MELBOURNE",
+      "state": "VIC",
+      "postcode": "3000",
+      "latitude": -37.8136,
+      "longitude": 144.9631,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GAVIC412702472",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 1041.12
+}

@@ -1,4 +1,4 @@
-import React from "react";
+// React import removed as it's not needed in modern React
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import RegisterScreen from "./components/RegisterScreen";
 import LoginScreen from "./components/LoginScreen";

@@ -117,7 +117,7 @@ const ProfileBuilder: React.FC = () => {
 
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
-  const updateProfileData = useCallback((section: keyof ProfileData, data: any) => {
+  const updateProfileData = useCallback((section: keyof ProfileData, data: Partial<ProfileData[keyof ProfileData]>) => {
     setProfileData(prev => ({
       ...prev,
       [section]: data,
