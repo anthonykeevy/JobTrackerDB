@@ -79,7 +79,7 @@ jobs:
     - name: Install frontend dependencies
       run: |
         cd frontend
-        npm ci
+        npm ci --legacy-peer-deps || npm ci --force
 
     - name: Run linting
       run: |
@@ -137,7 +137,7 @@ jobs:
       run: |
         cd frontend
         echo "=== Installing frontend dependencies ==="
-        npm ci || echo "npm ci completed with warnings"
+        npm ci --legacy-peer-deps || npm ci --force || echo "npm ci completed with warnings"
         echo "=== Building frontend ==="
         npm run build || echo "Frontend build completed with warnings"
         echo "=== Frontend build completed ==="
