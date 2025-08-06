@@ -1,0 +1,80 @@
+
+        ANTHONY KEEVY
+        Software Engineer & Technical Lead
+        Email: anthony.keevy@example.com
+        Phone: +61 400 123 456
+        Location: Sydney, NSW, Australia
+        LinkedIn: linkedin.com/in/anthonykeevy
+        
+        PROFESSIONAL SUMMARY
+        Experienced software engineer with 8+ years in full-stack development, specializing in 
+        React, Node.js, and cloud technologies. Proven track record of leading development teams 
+        and delivering scalable solutions.
+        
+        WORK EXPERIENCE
+        
+        Senior Software Engineer
+        TechCorp Australia | Sydney, NSW
+        January 2022 - Present
+        • Led development of microservices architecture using Node.js and React
+        • Reduced API response time by 40% through optimization
+        • Mentored 3 junior developers and conducted code reviews
+        • Technologies: React, Node.js, AWS, Docker, MongoDB
+        
+        Software Developer
+        Digital Solutions Inc | Melbourne, VIC
+        March 2020 - December 2021
+        • Developed full-stack web applications using React and Python
+        • Implemented CI/CD pipelines using GitHub Actions
+        • Collaborated with UX team to improve user experience
+        • Technologies: React, Python, Django, PostgreSQL
+        
+        EDUCATION
+        
+        Bachelor of Computer Science
+        University of Technology Sydney
+        Graduated: May 2019
+        GPA: 6.2/7.0
+        
+        Master of Information Technology
+        University of Sydney
+        Graduated: December 2021
+        GPA: 6.8/7.0
+        
+        SKILLS
+        
+        Technical Skills:
+        • Programming Languages: JavaScript, Python, TypeScript, Java
+        • Frontend: React, Vue.js, HTML5, CSS3, SASS
+        • Backend: Node.js, Express, Django, FastAPI
+        • Databases: MongoDB, PostgreSQL, Redis
+        • Cloud: AWS, Azure, Docker, Kubernetes
+        • Tools: Git, GitHub, VS Code, Jira
+        
+        Soft Skills:
+        • Leadership, Team Management, Problem Solving
+        • Communication, Mentoring, Agile Methodologies
+        
+        CERTIFICATIONS
+        
+        AWS Certified Solutions Architect - Associate
+        Amazon Web Services | Issued: March 2023 | Expires: March 2026
+        
+        Microsoft Certified: Azure Developer Associate
+        Microsoft | Issued: June 2022 | Expires: June 2025
+        
+        PROJECTS
+        
+        E-commerce Platform
+        • Built full-stack e-commerce solution with React and Node.js
+        • Implemented payment processing with Stripe
+        • Deployed on AWS with CI/CD pipeline
+        • Technologies: React, Node.js, MongoDB, AWS, Stripe
+        • URL: https://github.com/anthonykeevy/ecommerce
+        
+        Task Management App
+        • Developed collaborative task management application
+        • Real-time updates using WebSocket
+        • User authentication and role-based access
+        • Technologies: React, Node.js, Socket.io, PostgreSQL
+        

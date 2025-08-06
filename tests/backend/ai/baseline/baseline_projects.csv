@@ -1,0 +1,3 @@
+Name,Description,Achievements,Technologies,URL,Notes
+E-commerce Platform,Built full-stack e-commerce solution with React and Node.js,Built full-stack e-commerce solution with React and Node.js; Implemented payment processing with Stripe; Deployed on AWS with CI/CD pipeline,React; Node.js; MongoDB; AWS; Stripe,https://github.com/anthonykeevy/ecommerce,
+Task Management App,Developed collaborative task management application,Developed collaborative task management application; Real-time updates using WebSocket; User authentication and role-based access,React; Node.js; Socket.io; PostgreSQL,,

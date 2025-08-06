@@ -1,0 +1,158 @@
+{
+  "personal_info": {
+    "name": "ANTHONY KEEVY",
+    "email": "anthony.keevy@example.com",
+    "phone": "+61 400 123 456",
+    "location": "Sydney, NSW, Australia",
+    "linkedin": "linkedin.com/in/anthonykeevy"
+  },
+  "summary": "Experienced software engineer with 8+ years in full-stack development, specializing in React, Node.js, and cloud technologies. Proven track record of leading development teams and delivering scalable solutions.",
+  "work_experience": [
+    {
+      "company": "TechCorp Australia",
+      "position": "Senior Software Engineer",
+      "location": "Sydney, NSW",
+      "start_date": "January 2022",
+      "end_date": "Present",
+      "description": "Led development of microservices architecture using Node.js and React",
+      "achievements": [
+        "Led development of microservices architecture using Node.js and React",
+        "Reduced API response time by 40% through optimization",
+        "Mentored 3 junior developers and conducted code reviews"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "AWS",
+        "Docker",
+        "MongoDB"
+      ]
+    },
+    {
+      "company": "Digital Solutions Inc",
+      "position": "Software Developer",
+      "location": "Melbourne, VIC",
+      "start_date": "March 2020",
+      "end_date": "December 2021",
+      "description": "Developed full-stack web applications using React and Python",
+      "achievements": [
+        "Developed full-stack web applications using React and Python",
+        "Implemented CI/CD pipelines using GitHub Actions",
+        "Collaborated with UX team to improve user experience"
+      ],
+      "technologies": [
+        "React",
+        "Python",
+        "Django",
+        "PostgreSQL"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Technology Sydney",
+      "degree": "Bachelor of Computer Science",
+      "field_of_study": "Computer Science",
+      "graduation_date": "May 2019",
+      "gpa": "6.2/7.0"
+    },
+    {
+      "institution": "University of Sydney",
+      "degree": "Master of Information Technology",
+      "field_of_study": "Information Technology",
+      "graduation_date": "December 2021",
+      "gpa": "6.8/7.0"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Technical",
+      "skills": [
+        "JavaScript",
+        "Python",
+        "TypeScript",
+        "Java",
+        "React",
+        "Vue.js",
+        "HTML5",
+        "CSS3",
+        "SASS",
+        "Node.js",
+        "Express",
+        "Django",
+        "FastAPI",
+        "MongoDB",
+        "PostgreSQL",
+        "Redis",
+        "AWS",
+        "Azure",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Jira"
+      ]
+    },
+    {
+      "category": "Soft",
+      "skills": [
+        "Leadership",
+        "Team Management",
+        "Problem Solving",
+        "Communication",
+        "Mentoring",
+        "Agile Methodologies"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Solutions Architect - Associate",
+      "issuer": "Amazon Web Services",
+      "date_earned": "March 2023",
+      "expiry_date": "March 2026"
+    },
+    {
+      "name": "Microsoft Certified: Azure Developer Associate",
+      "issuer": "Microsoft",
+      "date_earned": "June 2022",
+      "expiry_date": "June 2025"
+    }
+  ],
+  "projects": [
+    {
+      "name": "E-commerce Platform",
+      "description": "Built full-stack e-commerce solution with React and Node.js",
+      "achievements": [
+        "Built full-stack e-commerce solution with React and Node.js",
+        "Implemented payment processing with Stripe",
+        "Deployed on AWS with CI/CD pipeline"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "AWS",
+        "Stripe"
+      ],
+      "url": "https://github.com/anthonykeevy/ecommerce"
+    },
+    {
+      "name": "Task Management App",
+      "description": "Developed collaborative task management application",
+      "achievements": [
+        "Developed collaborative task management application",
+        "Real-time updates using WebSocket",
+        "User authentication and role-based access"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "Socket.io",
+        "PostgreSQL"
+      ],
+      "url": ""
+    }
+  ]
+}
