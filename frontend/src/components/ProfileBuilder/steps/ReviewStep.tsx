@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   CheckCircleIcon,
   PencilIcon,
@@ -12,12 +12,12 @@ import {
   CodeBracketIcon,
   ChartBarIcon,
   TrophyIcon,
-  CalendarIcon,
+  // CalendarIcon,
   MapPinIcon,
   EnvelopeIcon,
-  PhoneIcon,
-  LinkIcon,
-  StarIcon
+  // PhoneIcon,
+  // LinkIcon,
+  // StarIcon
 } from '@heroicons/react/24/outline';
 import type { ProfileData } from '../types.ts';
 
@@ -35,7 +35,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
   data, 
   onJumpToStep 
 }) => {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  // const [activeSection, setActiveSection] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -62,7 +62,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
     filledFields += basicFields.filter(field => data.basicInfo[field as keyof typeof data.basicInfo]).length;
     
     // Address completeness
-    if (data.basicInfo.address?.streetAddress && data.basicInfo.address?.city && data.basicInfo.address?.country) {
+    if (data.basicInfo.address?.streetName && data.basicInfo.address?.suburb && data.basicInfo.address?.country) {
       filledFields += 1;
     }
     
@@ -354,10 +354,10 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
                         {data.basicInfo.email}
                       </span>
                     )}
-                    {data.basicInfo.address?.city && data.basicInfo.address?.country && (
+                    {data.basicInfo.address?.suburb && data.basicInfo.address?.country && (
                       <span className="flex items-center">
                         <MapPinIcon className="w-3 h-3 mr-1" />
-                        {data.basicInfo.address.city}, {data.basicInfo.address.country}
+                        {data.basicInfo.address.suburb}, {data.basicInfo.address.country}
                       </span>
                     )}
                   </div>

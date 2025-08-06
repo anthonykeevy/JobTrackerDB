@@ -906,3 +906,27 @@ class ProfileType(Base):
 
 # Update User model to include email relationship
 User.email_addresses = relationship("UserEmailAddress", back_populates="user")
+
+class PromptManagement(Base):
+    """Manage AI prompts for different operations"""
+    __tablename__ = "PromptManagement"
+    
+    PromptID = Column(Integer, primary_key=True, autoincrement=True)
+    PromptName = Column(Unicode(100), nullable=False, unique=True)
+    PromptType = Column(Unicode(50), nullable=False)  # 'resume_parse', 'address_validation', 'job_matching', etc.
+    PromptVersion = Column(Unicode(20), nullable=False, default='1.0')
+    SystemPrompt = Column(UnicodeText, nullable=False)
+    UserPrompt = Column(UnicodeText, nullable=False)
+    Description = Column(Unicode(500))
+    ExpectedOutput = Column(UnicodeText)  # JSON schema or example
+    ValidationRules = Column(UnicodeText)  # JSON validation rules
+    IsActive = Column(Boolean, default=True)
+    IsDefault = Column(Boolean, default=False)
+    PerformanceMetrics = Column(UnicodeText)  # JSON metrics
+    createdDate = Column(DateTime, default=datetime.utcnow)
+    createdBy = Column(Unicode(100))
+    lastUpdated = Column(DateTime)
+    updatedBy = Column(Unicode(100))
+    
+    def __repr__(self):
+        return f"<PromptManagement(PromptName='{self.PromptName}', Type='{self.PromptType}', Version='{self.PromptVersion}')>"

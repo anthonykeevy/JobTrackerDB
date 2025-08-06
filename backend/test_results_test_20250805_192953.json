@@ -1,0 +1,391 @@
+{
+  "test_id": "test_20250805_192953",
+  "prompt_version": "1.2",
+  "timestamp": "2025-08-05T19:29:53.175128",
+  "total_extraction_count": 14,
+  "total_expected_count": 14,
+  "overall_accuracy": 100.0,
+  "overall_completeness": 100.0,
+  "raw_extracted_data": {
+    "personal_info": {
+      "name": "ANTHONY KEEVY",
+      "email": "anthony.keevy@example.com",
+      "phone": "+61 400 123 456",
+      "location": "Sydney, NSW, Australia"
+    },
+    "summary": "Experienced software engineer with 8+ years in full-stack development, specializing in React, Node.js, and cloud technologies. Proven track record of leading development teams and delivering scalable solutions.",
+    "work_experience": [
+      {
+        "company": "TechCorp Australia",
+        "position": "Senior Software Engineer",
+        "start_date": "2022-01",
+        "end_date": "Present",
+        "description": "Led development of microservices architecture using Node.js and React. Reduced API response time by 40% through optimization. Mentored 3 junior developers and conducted code reviews.",
+        "achievements": [
+          "Led development of microservices architecture",
+          "Reduced API response time by 40%",
+          "Mentored 3 junior developers"
+        ],
+        "technologies": [
+          "React",
+          "Node.js",
+          "AWS",
+          "Docker",
+          "MongoDB"
+        ]
+      },
+      {
+        "company": "Digital Solutions Inc",
+        "position": "Software Developer",
+        "start_date": "2020-03",
+        "end_date": "2021-12",
+        "description": "Developed full-stack web applications using React and Python. Implemented CI/CD pipelines using GitHub Actions. Collaborated with UX team to improve user experience.",
+        "achievements": [
+          "Developed full-stack web applications",
+          "Implemented CI/CD pipelines",
+          "Collaborated with UX team"
+        ],
+        "technologies": [
+          "React",
+          "Python",
+          "Django",
+          "PostgreSQL"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "institution": "University of Technology Sydney",
+        "degree": "Bachelor of Computer Science",
+        "field_of_study": "Computer Science",
+        "graduation_date": "2019-05",
+        "gpa": "6.2/7.0"
+      },
+      {
+        "institution": "University of Sydney",
+        "degree": "Master of Information Technology",
+        "field_of_study": "Information Technology",
+        "graduation_date": "2021-12",
+        "gpa": "6.8/7.0"
+      }
+    ],
+    "skills": [
+      {
+        "category": "Technical",
+        "skills": [
+          "JavaScript",
+          "Python",
+          "TypeScript",
+          "Java",
+          "React",
+          "Vue.js",
+          "HTML5",
+          "CSS3",
+          "SASS",
+          "Node.js",
+          "Express",
+          "Django",
+          "FastAPI",
+          "MongoDB",
+          "PostgreSQL",
+          "Redis",
+          "AWS",
+          "Azure",
+          "Docker",
+          "Kubernetes",
+          "Git",
+          "GitHub",
+          "VS Code",
+          "Jira"
+        ]
+      },
+      {
+        "category": "Soft",
+        "skills": [
+          "Leadership",
+          "Team Management",
+          "Problem Solving",
+          "Communication",
+          "Mentoring",
+          "Agile Methodologies"
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect - Associate",
+        "issuer": "Amazon Web Services",
+        "date_earned": "2023-03",
+        "expiry_date": "2026-03"
+      },
+      {
+        "name": "Microsoft Certified: Azure Developer Associate",
+        "issuer": "Microsoft",
+        "date_earned": "2022-06",
+        "expiry_date": "2025-06"
+      }
+    ],
+    "projects": [
+      {
+        "name": "E-commerce Platform",
+        "description": "Built full-stack e-commerce solution with React and Node.js. Implemented payment processing with Stripe. Deployed on AWS with CI/CD pipeline.",
+        "technologies": [
+          "React",
+          "Node.js",
+          "MongoDB",
+          "AWS",
+          "Stripe"
+        ],
+        "url": "https://github.com/anthonykeevy/ecommerce"
+      },
+      {
+        "name": "Task Management App",
+        "description": "Developed collaborative task management application. Real-time updates using WebSocket. User authentication and role-based access.",
+        "technologies": [
+          "React",
+          "Node.js",
+          "Socket.io",
+          "PostgreSQL"
+        ],
+        "url": null
+      }
+    ]
+  },
+  "expected_data": {
+    "personal_info": {
+      "name": "Anthony Keevy",
+      "email": "anthony.keevy@example.com",
+      "phone": "+61 400 123 456",
+      "location": "Sydney, NSW, Australia"
+    },
+    "summary": "Experienced software engineer with 8+ years in full-stack development, specializing in React, Node.js, and cloud technologies. Proven track record of leading development teams and delivering scalable solutions.",
+    "work_experience": [
+      {
+        "company": "TechCorp Australia",
+        "position": "Senior Software Engineer",
+        "start_date": "2022-01",
+        "end_date": "Present",
+        "description": "Led development of microservices architecture using Node.js and React",
+        "achievements": [
+          "Reduced API response time by 40% through optimization",
+          "Mentored 3 junior developers and conducted code reviews"
+        ],
+        "technologies": [
+          "React",
+          "Node.js",
+          "AWS",
+          "Docker",
+          "MongoDB"
+        ]
+      },
+      {
+        "company": "Digital Solutions Inc",
+        "position": "Software Developer",
+        "start_date": "2020-03",
+        "end_date": "2021-12",
+        "description": "Developed full-stack web applications using React and Python",
+        "achievements": [
+          "Implemented CI/CD pipelines using GitHub Actions",
+          "Collaborated with UX team to improve user experience"
+        ],
+        "technologies": [
+          "React",
+          "Python",
+          "Django",
+          "PostgreSQL"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "institution": "University of Technology Sydney",
+        "degree": "Bachelor of Computer Science",
+        "field_of_study": "Computer Science",
+        "graduation_date": "2019-05",
+        "gpa": "6.2/7.0"
+      },
+      {
+        "institution": "University of Sydney",
+        "degree": "Master of Information Technology",
+        "field_of_study": "Information Technology",
+        "graduation_date": "2021-12",
+        "gpa": "6.8/7.0"
+      }
+    ],
+    "skills": [
+      {
+        "category": "Technical",
+        "skills": [
+          "JavaScript",
+          "Python",
+          "TypeScript",
+          "Java",
+          "React",
+          "Vue.js",
+          "HTML5",
+          "CSS3",
+          "SASS",
+          "Node.js",
+          "Express",
+          "Django",
+          "FastAPI",
+          "MongoDB",
+          "PostgreSQL",
+          "Redis",
+          "AWS",
+          "Azure",
+          "Docker",
+          "Kubernetes",
+          "Git",
+          "GitHub",
+          "VS Code",
+          "Jira"
+        ]
+      },
+      {
+        "category": "Soft",
+        "skills": [
+          "Leadership",
+          "Team Management",
+          "Problem Solving",
+          "Communication",
+          "Mentoring",
+          "Agile Methodologies"
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect - Associate",
+        "issuer": "Amazon Web Services",
+        "date_earned": "2023-03",
+        "expiry_date": "2026-03"
+      },
+      {
+        "name": "Microsoft Certified: Azure Developer Associate",
+        "issuer": "Microsoft",
+        "date_earned": "2022-06",
+        "expiry_date": "2025-06"
+      }
+    ],
+    "projects": [
+      {
+        "name": "E-commerce Platform",
+        "description": "Built full-stack e-commerce solution with React and Node.js",
+        "technologies": [
+          "React",
+          "Node.js",
+          "MongoDB",
+          "AWS",
+          "Stripe"
+        ],
+        "url": "https://github.com/anthonykeevy/ecommerce"
+      },
+      {
+        "name": "Task Management App",
+        "description": "Developed collaborative task management application",
+        "technologies": [
+          "React",
+          "Node.js",
+          "Socket.io",
+          "PostgreSQL"
+        ],
+        "url": ""
+      }
+    ]
+  },
+  "processing_time": 42.120607,
+  "token_usage": {
+    "input": 0,
+    "output": 0
+  },
+  "cost": 0.0,
+  "subject_areas": {
+    "personal_info": {
+      "area_name": "personal_info",
+      "extraction_count": 4,
+      "expected_count": 4,
+      "accuracy_percentage": 100,
+      "completeness_percentage": 100.0,
+      "quality_score": 100.0,
+      "missing_fields": [],
+      "extracted_fields": [
+        "name",
+        "email",
+        "phone",
+        "location"
+      ],
+      "issues": []
+    },
+    "work_experience": {
+      "area_name": "work_experience",
+      "extraction_count": 2,
+      "expected_count": 2,
+      "accuracy_percentage": 100.0,
+      "completeness_percentage": 100.0,
+      "quality_score": 100.0,
+      "missing_fields": [],
+      "extracted_fields": [
+        "experience_1",
+        "experience_2"
+      ],
+      "issues": []
+    },
+    "education": {
+      "area_name": "education",
+      "extraction_count": 2,
+      "expected_count": 2,
+      "accuracy_percentage": 100.0,
+      "completeness_percentage": 100.0,
+      "quality_score": 100.0,
+      "missing_fields": [],
+      "extracted_fields": [
+        "education_1",
+        "education_2"
+      ],
+      "issues": []
+    },
+    "skills": {
+      "area_name": "skills",
+      "extraction_count": 2,
+      "expected_count": 2,
+      "accuracy_percentage": 100,
+      "completeness_percentage": 100.0,
+      "quality_score": 100.0,
+      "missing_fields": [],
+      "extracted_fields": [
+        "skill_group_1",
+        "skill_group_2"
+      ],
+      "issues": []
+    },
+    "certifications": {
+      "area_name": "certifications",
+      "extraction_count": 2,
+      "expected_count": 2,
+      "accuracy_percentage": 100.0,
+      "completeness_percentage": 100.0,
+      "quality_score": 100.0,
+      "missing_fields": [],
+      "extracted_fields": [
+        "certification_1",
+        "certification_2"
+      ],
+      "issues": []
+    },
+    "projects": {
+      "area_name": "projects",
+      "extraction_count": 2,
+      "expected_count": 2,
+      "accuracy_percentage": 100.0,
+      "completeness_percentage": 100.0,
+      "quality_score": 100.0,
+      "missing_fields": [],
+      "extracted_fields": [
+        "project_1",
+        "project_2"
+      ],
+      "issues": []
+    }
+  }
+}

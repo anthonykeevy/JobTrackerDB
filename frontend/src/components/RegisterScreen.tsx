@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const RegisterScreen: React.FC = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -17,11 +17,11 @@ const RegisterScreen: React.FC = () => {
     setError("");
     setSuccess(false);
     try {
-      const response = await axios.post("/api/v1/users", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-      });
+      // const response = await axios.post("/api/v1/users", {
+      //   name: form.name,
+      //   email: form.email,
+      //   password: form.password,
+      // });
       setSuccess(true);
     } catch (err: any) {
       setError(

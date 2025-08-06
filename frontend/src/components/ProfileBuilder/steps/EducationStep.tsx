@@ -219,11 +219,12 @@ const EducationStep: React.FC<EducationStepProps> = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Institution Name */}
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor={`institutionName-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                         Institution Name *
                       </label>
                       <input
                         {...register(`education.${index}.institutionName`)}
+                        id={`institutionName-${index}`}
                         type="text"
                         placeholder="e.g., Stanford University"
                         className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -241,11 +242,12 @@ const EducationStep: React.FC<EducationStepProps> = ({
 
                     {/* Degree */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor={`degree-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                         Degree *
                       </label>
                       <select
                         {...register(`education.${index}.degree`)}
+                        id={`degree-${index}`}
                         className={`block w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                           errors.education?.[index]?.degree 
                             ? 'border-red-300 bg-red-50' 
@@ -266,11 +268,12 @@ const EducationStep: React.FC<EducationStepProps> = ({
 
                     {/* Field of Study */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor={`fieldOfStudy-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                         Field of Study *
                       </label>
                       <input
                         {...register(`education.${index}.fieldOfStudy`)}
+                        id={`fieldOfStudy-${index}`}
                         type="text"
                         placeholder="e.g., Computer Science"
                         className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -288,11 +291,12 @@ const EducationStep: React.FC<EducationStepProps> = ({
 
                     {/* Dates */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor={`startDate-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                         Start Date *
                       </label>
                       <input
                         {...register(`education.${index}.startDate`)}
+                        id={`startDate-${index}`}
                         type="month"
                         className={`block w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                           errors.education?.[index]?.startDate 
@@ -322,9 +326,10 @@ const EducationStep: React.FC<EducationStepProps> = ({
                     {/* Currently Enrolled & GPA */}
                     <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="flex items-center">
+                        <label htmlFor={`currentlyEnrolled-${index}`} className="flex items-center">
                           <input
                             {...register(`education.${index}.isCurrentlyEnrolled`)}
+                            id={`currentlyEnrolled-${index}`}
                             type="checkbox"
                             className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                           />
@@ -333,16 +338,20 @@ const EducationStep: React.FC<EducationStepProps> = ({
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor={`gpa-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                           GPA (optional)
                         </label>
                         <input
-                          {...register(`education.${index}.gpa`, { valueAsNumber: true })}
+                          {...register(`education.${index}.gpa`, { 
+                            valueAsNumber: true,
+                            setValueAs: (value) => value === '' ? undefined : Number(value)
+                          })}
+                          id={`gpa-${index}`}
                           type="number"
                           step="0.01"
                           min="0"
                           max="4"
-                          placeholder="3.5"
+                          placeholder="e.g., 3.8"
                           className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                       </div>
@@ -429,19 +438,20 @@ const EducationStep: React.FC<EducationStepProps> = ({
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Certification Name */}
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Certification Name *
-                          </label>
-                          <input
-                            {...register(`certifications.${index}.certificationName`)}
-                            type="text"
-                            placeholder="e.g., AWS Certified Solutions Architect"
-                            className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                              errors.certifications?.[index]?.certificationName 
-                                ? 'border-red-300 bg-red-50' 
-                                : 'border-gray-300'
-                            }`}
-                          />
+                        <label htmlFor={`certificationName-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
+                          Certification Name *
+                        </label>
+                        <input
+                          {...register(`certifications.${index}.certificationName`)}
+                          id={`certificationName-${index}`}
+                          type="text"
+                          placeholder="e.g., AWS Certified Solutions Architect"
+                          className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                            errors.certifications?.[index]?.certificationName 
+                              ? 'border-red-300 bg-red-50' 
+                              : 'border-gray-300'
+                          }`}
+                        />
                           {errors.certifications?.[index]?.certificationName && (
                             <p className="mt-1 text-sm text-red-600">
                               {errors.certifications[index]?.certificationName?.message}
@@ -451,11 +461,12 @@ const EducationStep: React.FC<EducationStepProps> = ({
 
                         {/* Issuing Organization */}
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor={`issuingOrganization-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                             Issuing Organization *
                           </label>
                           <input
                             {...register(`certifications.${index}.issuingOrganization`)}
+                            id={`issuingOrganization-${index}`}
                             type="text"
                             placeholder="e.g., Amazon Web Services"
                             className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -473,11 +484,12 @@ const EducationStep: React.FC<EducationStepProps> = ({
 
                         {/* Issue Date */}
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor={`issueDate-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                             Issue Date *
                           </label>
                           <input
                             {...register(`certifications.${index}.issueDate`)}
+                            id={`issueDate-${index}`}
                             type="month"
                             className={`block w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                               errors.certifications?.[index]?.issueDate 

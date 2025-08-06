@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   RocketLaunchIcon,
   PlusIcon,
@@ -281,7 +281,7 @@ const ProjectsStep: React.FC<ProjectsStepProps> = ({
                 </div>
 
                 {/* Role */}
-                {watch(`projects.${index}.teamSize`) > 1 && (
+                {watch(`projects.${index}.teamSize`) && Number(watch(`projects.${index}.teamSize`)) > 1 && (
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Your Role

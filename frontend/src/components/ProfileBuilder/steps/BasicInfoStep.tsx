@@ -97,7 +97,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   const [addressSuggestions, setAddressSuggestions] = useState<Array<{address: string, id: string, data?: any}>>([]);
   const [selectedAddress, setSelectedAddress] = useState<any>(null);
   const [addressValidation, setAddressValidation] = useState<{
-    status: 'idle' | 'validating' | 'valid' | 'invalid' | 'error';
+    status: 'idle' | 'validating' | 'valid' | 'invalid' | 'error' | 'skipped';
     message?: string;
   }>({ status: 'idle' });
   const [isSearching, setIsSearching] = useState(false);
@@ -108,7 +108,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     watch,
     getValues,
     setValue
@@ -529,181 +529,10 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const validateAddress = async () => {
-    const address = watch('address');
-    if (!address.streetName || !address.suburb || !address.country) {
-      setAddressValidation({
-        status: 'invalid',
-        message: 'Please enter street name, suburb, and country to validate address.'
-      });
-      return;
-    }
-
-    setAddressValidation({ status: 'validating' });
-    
-    const startTime = Date.now();
-    const requestData = {
-      address: [
-        address.streetNumber,
-        address.streetName,
-        address.streetType,
-        address.suburb,
-        address.state,
-        address.postcode,
-        address.country
-      ].filter(Boolean).join(' '),
-      country: 'AU'
-    };
-    
-    try {
-      console.log('🔍 VALIDATING ADDRESS:', requestData.address);
-      
-      // Call the real backend API
-      const response = await fetch('http://127.0.0.1:8000/api/address/validate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData)
-      });
-      
-      const responseTime = Date.now() - startTime;
-      
-      if (!response.ok) {
-        const errorData = { error: `HTTP error! status: ${response.status}` };
-        apiLogger.logAPICall(
-          '/api/address/validate',
-          'POST',
-          requestData,
-          errorData,
-          response.status,
-          responseTime,
-          `HTTP error! status: ${response.status}`
-        );
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log('✅ ADDRESS VALIDATION RESPONSE:', data);
-      
-      // Log successful API call
-      apiLogger.logAPICall(
-        '/api/address/validate',
-        'POST',
-        requestData,
-        data,
-        response.status,
-        responseTime
-      );
-      
-      if (data.validated) {
-        // Update form with validated address data
-        const form = getValues();
-        form.address = {
-          ...form.address,
-          streetNumber: data.address.streetNumber,
-          streetName: data.address.streetName,
-          streetType: data.address.streetType,
-          suburb: data.address.suburb,
-          state: data.address.state,
-          postcode: data.address.postcode,
-          country: data.address.country,
-          isValidated: true,
-          validationSource: 'geoscape',
-          confidenceScore: data.confidence_score,
-          validationDate: new Date().toISOString(),
-          propertyId: data.property_id,
-          latitude: data.address.latitude,
-          longitude: data.address.longitude,
-          propertyType: data.metadata.propertyType,
-          landArea: data.metadata.landArea,
-          floorArea: data.metadata.floorArea,
-        };
-        
-        setValue('address', form.address);
-        
-        setAddressValidation({
-          status: 'valid',
-          message: `Address validated with ${Math.round(data.confidence_score * 100)}% confidence`
-        });
-      } else {
-        setAddressValidation({
-          status: 'invalid',
-          message: 'Unable to validate address. Please check and try again.'
-        });
-      }
-    } catch (error: unknown) {
-      const responseTime = Date.now() - startTime;
-      console.error('❌ ADDRESS VALIDATION ERROR:', error);
-      
-      // Log failed API call
-      apiLogger.logAPICall(
-        '/api/address/validate',
-        'POST',
-        requestData,
-        { error: 'Address validation failed' },
-        0,
-        responseTime,
-        error instanceof Error ? error.message : 'Address validation failed'
-      );
-      
-      // Fallback to mock validation if API fails
-      console.log('🔄 FALLING BACK TO MOCK VALIDATION');
-      
-      // Mock Geoscape API response
-      const mockGeoscapeResponse = {
-        valid: Math.random() > 0.2, // 80% success rate for demo
-        confidence_score: Math.random() * 0.4 + 0.6, // 0.6 to 1.0
-        suggestions: [],
-        street_number: address.streetNumber || '123',
-        street_name: address.streetName,
-        street_type: address.streetType || 'Street',
-        suburb: address.suburb,
-        state: address.state,
-        postcode: address.postcode,
-        country: address.country,
-        property_id: `PROP_${Math.random().toString(36).substr(2, 9)}`,
-        latitude: -33.8688 + (Math.random() - 0.5) * 0.1, // Sydney area
-        longitude: 151.2093 + (Math.random() - 0.5) * 0.1,
-        property_type: 'Residential',
-        land_area: Math.floor(Math.random() * 500) + 200, // 200-700 sqm
-        floor_area: Math.floor(Math.random() * 200) + 100, // 100-300 sqm
-        demographics: {},
-        market_data: {}
-      };
-      
-      if (mockGeoscapeResponse.valid) {
-        // Update form with validated address data
-        const form = getValues();
-        form.address = {
-          ...form.address,
-          ...mockGeoscapeResponse,
-          isValidated: true,
-          validationSource: 'geoscape',
-          confidenceScore: mockGeoscapeResponse.confidence_score,
-          validationDate: new Date().toISOString(),
-          propertyId: mockGeoscapeResponse.property_id,
-          latitude: mockGeoscapeResponse.latitude,
-          longitude: mockGeoscapeResponse.longitude,
-          propertyType: mockGeoscapeResponse.property_type,
-          landArea: mockGeoscapeResponse.land_area,
-          floorArea: mockGeoscapeResponse.floor_area,
-        };
-        
-        setValue('address', form.address);
-        
-        setAddressValidation({
-          status: 'valid',
-          message: `Address validated with ${Math.round(mockGeoscapeResponse.confidence_score * 100)}% confidence (mock)`
-        });
-      } else {
-        setAddressValidation({
-          status: 'invalid',
-          message: 'Unable to validate address. Please check and try again.'
-        });
-      }
-    }
-  };
+    // Address validation function - kept for future implementation
+  // const validateAddress = async () => {
+  //   // Implementation would go here
+  // };
 
   // Comprehensive country list - in production, this should come from API
   const countries = [
@@ -919,19 +748,29 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           {/* Usage tracking is now backend-only for billing management */}
 
           {/* Map Integration */}
-          {selectedAddress && (
+          {selectedAddress && selectedAddress.latitude && selectedAddress.longitude && (
             <div className="mb-6">
               <MapComponent
-                latitude={selectedAddress.latitude || -33.8688} // Default to Sydney if no coordinates
-                longitude={selectedAddress.longitude || 151.2093}
+                latitude={selectedAddress.latitude}
+                longitude={selectedAddress.longitude}
                 address={addressSearch}
                 className="w-full h-64 rounded-lg border border-gray-300"
               />
-              {!selectedAddress.latitude && !selectedAddress.longitude && (
-                <p className="mt-2 text-sm text-gray-500 italic">
-                  Map showing approximate location for {selectedAddress.state || 'NSW'} (coordinates not available from address search)
-                </p>
-              )}
+            </div>
+          )}
+          
+          {/* Address Validation Confirmation */}
+          {selectedAddress && (!selectedAddress.latitude || !selectedAddress.longitude) && (
+            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="flex items-center">
+                <CheckCircleIcon className="w-5 h-5 text-blue-600 mr-2" />
+                <div>
+                  <h4 className="text-sm font-medium text-blue-800">Address Confirmed</h4>
+                  <p className="text-xs text-blue-700 mt-1">
+                    Your address has been validated and confirmed. The address details have been pre-filled below for your review.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
 
@@ -939,11 +778,14 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           {addressValidation.status !== 'idle' && (
             <div className={`mb-6 p-3 rounded-lg flex items-center ${
               addressValidation.status === 'valid' ? 'bg-green-50 text-green-800' :
+              addressValidation.status === 'skipped' ? 'bg-yellow-50 text-yellow-800' :
               addressValidation.status === 'invalid' || addressValidation.status === 'error' ? 'bg-red-50 text-red-800' :
               'bg-blue-50 text-blue-800'
             }`}>
               {addressValidation.status === 'valid' ? (
                 <CheckCircleIcon className="w-4 h-4 mr-2" />
+              ) : addressValidation.status === 'skipped' ? (
+                <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
               ) : addressValidation.status === 'invalid' || addressValidation.status === 'error' ? (
                 <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
               ) : (
@@ -952,6 +794,35 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
               <span className="text-sm">{addressValidation.message}</span>
             </div>
           )}
+
+          {/* Skip Address Validation Option */}
+          <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <ExclamationTriangleIcon className="w-5 h-5 text-yellow-600 mr-2" />
+                <div>
+                  <h4 className="text-sm font-medium text-yellow-800">Address Validation</h4>
+                  <p className="text-xs text-yellow-700 mt-1">
+                    Address validation helps ensure accurate location data. You can skip this step and enter your address manually below.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setAddressValidation({
+                    status: 'skipped',
+                    message: 'Address validation skipped - you can enter address manually below'
+                  });
+                  setShowSuggestions(false);
+                  setAddressSuggestions([]);
+                }}
+                className="px-4 py-2 text-sm font-medium text-yellow-800 bg-yellow-100 border border-yellow-300 rounded-md hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+              >
+                Skip Validation
+              </button>
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Street Number */}

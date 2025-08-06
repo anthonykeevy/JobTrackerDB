@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   AcademicCapIcon, 
   BriefcaseIcon, 
@@ -28,7 +28,7 @@ const schema = z.object({
   shortTermRole: z.string().min(2, 'Short-term role goal is required'),
   longTermRole: z.string().min(2, 'Long-term role goal is required'),
   aspirationStatement: z.string().min(10, 'Please provide a detailed career aspiration statement'),
-  targetIndustries: z.array(z.string()).min(1, 'Please select at least one target industry'),
+  targetIndustries: z.array(z.string()).optional(),
   workPreferences: z.object({
     arrangements: z.array(z.object({
       type: z.enum(['remote', 'hybrid', 'onsite', 'flexible']),
@@ -171,12 +171,13 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
           
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="currentTitle" className="block text-sm font-medium text-gray-700 mb-2">
                 Current Job Title *
                 <span className="text-xs text-gray-500 ml-1">(What's your current position?)</span>
               </label>
               <input
                 {...register('currentTitle')}
+                id="currentTitle"
                 type="text"
                 placeholder="e.g., Senior Software Engineer, Marketing Manager"
                 className={`block w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -190,11 +191,12 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="shortTermRole" className="block text-sm font-medium text-gray-700 mb-2">
                   Short-term Goal (1-2 years) *
                 </label>
                 <input
                   {...register('shortTermRole')}
+                  id="shortTermRole"
                   type="text"
                   placeholder="e.g., Lead Developer, Senior Manager"
                   className={`block w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -207,11 +209,12 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="longTermRole" className="block text-sm font-medium text-gray-700 mb-2">
                   Long-term Goal (3-5 years) *
                 </label>
                 <input
                   {...register('longTermRole')}
+                  id="longTermRole"
                   type="text"
                   placeholder="e.g., Engineering Director, VP of Marketing"
                   className={`block w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -225,11 +228,12 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="aspirationStatement" className="block text-sm font-medium text-gray-700 mb-2">
                 Career Vision Statement *
               </label>
               <textarea
                 {...register('aspirationStatement')}
+                id="aspirationStatement"
                 rows={4}
                 placeholder="Describe your career aspirations, what drives you professionally, and the impact you want to make..."
                 className={`block w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${
@@ -369,6 +373,7 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
                             type="button"
                             onClick={() => movePreference(index, 'up')}
                             disabled={index === 0}
+                            data-testid="move-up"
                             className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <ArrowUpIcon className="w-4 h-4" />
@@ -377,6 +382,7 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
                             type="button"
                             onClick={() => movePreference(index, 'down')}
                             disabled={index === watchedArrangements.length - 1}
+                            data-testid="move-down"
                             className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <ArrowDownIcon className="w-4 h-4" />
@@ -415,11 +421,12 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700 mb-2">
                   Employment Type *
                 </label>
                 <select
                   {...register('salaryExpectations.employmentType')}
+                  id="employmentType"
                   className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="full-time">Full-time</option>
@@ -431,11 +438,15 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Payment Period *
+                <label htmlFor="paymentPeriod" className="block text-sm font-medium text-gray-700 mb-2">
+                  Salary Period *
+                  <span className="text-xs text-gray-500 ml-1">
+                    (What period does your salary expectation cover?)
+                  </span>
                 </label>
                 <select
                   {...register('salaryExpectations.period')}
+                  id="paymentPeriod"
                   className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   {watchedEmploymentType === 'freelance' || watchedEmploymentType === 'contract' ? (
@@ -459,11 +470,12 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="currency" className="block text-sm font-medium text-gray-700 mb-2">
                   Currency *
                 </label>
                 <select
                   {...register('salaryExpectations.currency')}
+                  id="currency"
                   className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   {CURRENCIES.map((currency) => (
@@ -475,14 +487,15 @@ export default function CareerAspirationStep({ data, updateData, onNext, onPrevi
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Expected Amount *
+                <label htmlFor="expectedAmount" className="block text-sm font-medium text-gray-700 mb-2">
+                  Salary Expectation *
                   <span className="text-xs text-gray-500 ml-1">
                     ({selectedCurrency?.symbol} {watchedPeriod})
                   </span>
                 </label>
                 <input
                   {...register('salaryExpectations.amount')}
+                  id="expectedAmount"
                   type="text"
                   placeholder={`e.g., ${selectedCurrency?.symbol}${watchedPeriod === 'hourly' ? '50' : watchedPeriod === 'daily' ? '400' : watchedPeriod === 'weekly' ? '2000' : watchedPeriod === 'monthly' ? '8000' : '100000'}`}
                   className={`block w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${

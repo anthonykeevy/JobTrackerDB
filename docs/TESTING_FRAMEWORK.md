@@ -1,215 +1,252 @@
-# JobTrackerDB Testing Framework
+# Testing Framework Documentation
 
 ## Overview
+This document outlines the comprehensive testing framework for the JobTrackerDB AI resume parsing system. The framework is designed to evaluate and improve the accuracy of AI-powered resume parsing through systematic testing and comparison against baseline datasets.
 
-The JobTrackerDB Testing Framework provides a comprehensive, organized approach to testing all components of the application. This framework ensures consistent testing practices, proper file organization, and accurate baseline data for AI prompt evaluation.
-
-## 📁 Directory Structure
-
+## Directory Structure
 ```
 tests/
-├── backend/                    # Backend-specific tests
-│   ├── ai/                    # AI/Resume parsing tests
-│   │   ├── baseline/          # Baseline data extraction
-│   │   ├── performance/       # Performance testing
-│   │   └── prompts/           # Prompt management tests
-│   ├── api/                   # API endpoint tests
-│   ├── database/              # Database tests
-│   └── integration/           # Backend integration tests
-├── frontend/                  # Frontend-specific tests
-│   ├── components/            # Component tests
-│   ├── pages/                 # Page tests
-│   └── integration/           # Frontend integration tests
-├── general/                   # General testing
-│   ├── performance/           # Performance tests
-│   ├── security/              # Security tests
-│   └── e2e/                  # End-to-end tests
-└── data/                      # Test data and exports
-    ├── resumes/               # Sample resumes
-    ├── baseline/              # Baseline datasets
-    └── exports/               # Test exports
+├── backend/
+│   ├── ai/
+│   │   ├── baseline/           # Baseline dataset creation and management
+│   │   │   ├── test_ai_parsing_baseline.py
+│   │   │   ├── extract_resume_content.py
+│   │   │   ├── create_real_baseline.py
+│   │   │   └── test_baseline_usage.py
+│   │   ├── prompts/            # Prompt effectiveness testing
+│   │   │   ├── compare_prompt_versions.py
+│   │   │   └── compare_prompt_effectiveness.py
+│   │   └── performance/        # Performance and cost analysis
+│   └── integration/            # End-to-end workflow testing
+├── frontend/                   # Frontend component testing
+└── e2e/                       # End-to-end user journey testing
 ```
 
-## 🧪 Testing Categories
+## Testing Categories
 
-### Backend Tests
-- **AI Tests**: Resume parsing, prompt management, performance evaluation
-- **API Tests**: Endpoint functionality, request/response validation
-- **Database Tests**: Data persistence, migrations, stored procedures
-- **Integration Tests**: Component interaction, workflow testing
+### 1. Baseline Dataset Management
+**Purpose**: Create and maintain accurate baseline datasets for comparison testing.
 
-### Frontend Tests
-- **Component Tests**: Individual React component functionality
-- **Page Tests**: Full page rendering and interaction
-- **Integration Tests**: Component integration, routing
+**Key Files**:
+- `tests/backend/ai/baseline/test_ai_parsing_baseline.py` - Runs AI parsing on real resume
+- `tests/backend/ai/baseline/create_real_baseline.py` - Creates manually verified baseline
+- `tests/backend/ai/baseline/extract_resume_content.py` - Extracts raw resume content
 
-### General Tests
-- **Performance Tests**: Load testing, response time analysis
-- **Security Tests**: Authentication, authorization, data protection
-- **E2E Tests**: Complete user workflow testing
+**Current Status**: ✅ **COMPLETED**
+- Manual baseline correction completed on 2025-08-06
+- Corrected baseline dataset: `corrected_baseline_dataset_20250806_143321.json`
+- All sections verified and corrected based on user feedback
 
-### Data Management
-- **Resumes**: Sample resume files for testing
-- **Baseline**: Ground truth datasets for AI testing
-- **Exports**: Test result exports and reports
+**Baseline Dataset Summary**:
+- **Personal Info**: 5 fields (name, email, phone, location, LinkedIn)
+- **Work Experience**: 4 entries with corrected locations
+- **Education**: 8 entries verified
+- **Skills**: 58 skills across 4 categories
+- **Certifications**: 2 certifications verified
+- **Projects**: Empty (confirmed correct)
+- **Summary**: 388 characters, comprehensive professional summary
 
-## 🚀 Getting Started
+### 2. Prompt Effectiveness Testing
+**Purpose**: Compare different AI prompt versions against the baseline to measure improvements.
 
-### Running Baseline Extraction
+**Key Files**:
+- `tests/backend/ai/prompts/compare_prompt_versions.py` - Main comparison tool
+- `tests/backend/ai/prompts/compare_prompt_effectiveness.py` - Detailed metrics
+
+**Current Status**: 🔄 **READY FOR TESTING**
+- Framework is operational
+- Corrected baseline is ready for comparison
+- Ready to test new prompt versions
+
+### 3. Performance Testing
+**Purpose**: Monitor AI usage costs, response times, and token efficiency.
+
+**Key Files**:
+- `tests/backend/ai/performance/` - Performance analysis tools
+
+**Current Status**: 📋 **PLANNED**
+
+### 4. Integration Testing
+**Purpose**: Test complete workflows from resume upload to profile population.
+
+**Key Files**:
+- `tests/backend/integration/` - Integration test suites
+
+**Current Status**: 📋 **PLANNED**
+
+## Getting Started
+
+### Prerequisites
+1. Python 3.8+ with required packages
+2. Access to OpenAI API
+3. Resume file: `Resume/Anthony Keevy Resume 202506.docx`
+
+### Quick Start Commands
 ```bash
-cd tests/backend/ai/baseline
-python extract_resume_baseline.py
+# From backend directory
+cd backend
+
+# Run AI parsing baseline test
+python ../tests/backend/ai/baseline/test_ai_parsing_baseline.py
+
+# Compare prompt versions
+python ../tests/backend/ai/prompts/compare_prompt_versions.py
+
+# Generate baseline correction summary
+python baseline_correction_summary.py
 ```
 
-### Running Performance Tests
-```bash
-cd tests/backend/ai/performance
-python test_resume_parser_performance.py
-```
+## Data Management
 
-### Running API Tests
-```bash
-cd tests/backend/api
-python test_api_endpoints.py
-```
+### Baseline Dataset
+The baseline dataset serves as the "ground truth" for comparison testing. It contains manually verified data extracted from the real resume.
 
-## 📊 Test Data Management
+**Current Baseline**: `corrected_baseline_dataset_20250806_143321.json`
 
-### Baseline Data
-The baseline data is extracted from a comprehensive test resume and serves as the "ground truth" for evaluating AI prompt effectiveness. Files include:
-
-- `baseline_resume_content.txt`: Raw resume text
-- `baseline_personal_info.csv`: Personal information fields
-- `baseline_work_experience.csv`: Work experience entries
-- `baseline_education.csv`: Education records
-- `baseline_skills.csv`: Skills by category
-- `baseline_certifications.csv`: Certification records
-- `baseline_projects.csv`: Project information
-- `baseline_summary.csv`: Professional summary
-- `baseline_dataset.json`: Complete structured dataset
+**Key Corrections Applied**:
+1. Added location: 'Sydney, Australia'
+2. Added LinkedIn: 'https://www.linkedin.com/in/anthony-keevy-5733286/'
+3. Corrected work experience locations to country format (Australia)
+4. Verified all other extracted data as accurate
+5. Confirmed projects section is empty (correct)
 
 ### Performance Metrics
-Tests generate detailed performance metrics including:
-- Extraction accuracy by subject area
-- Completeness scores
-- Processing time
-- Token usage and costs
-- Quality assessments
+The framework tracks several key metrics:
+- **Accuracy**: Percentage of correctly extracted fields
+- **Completeness**: Percentage of available fields extracted
+- **Token Efficiency**: Cost per extraction
+- **Response Quality**: JSON validity and structure
 
-## 🔧 Configuration
+## Configuration
 
-### Environment Setup
-Ensure the backend environment is properly configured:
+### Environment Variables
 ```bash
-cd backend
-pip install -r requirements.txt
+OPENAI_API_KEY=your_api_key_here
+DATABASE_URL=your_database_connection_string
 ```
 
-### Database Connection
-Tests require access to the development database (`JobTrackerDB_Dev`).
+### Test Configuration
+- **Resume File**: `../Resume/Anthony Keevy Resume 202506.docx`
+- **Output Directory**: `ai_baseline_results/`
+- **Model**: `gpt-3.5-turbo` (optimized for cost and performance)
 
-## 📈 Continuous Improvement
+## Continuous Improvement Workflow
 
-### Prompt Testing Workflow
-1. **Extract Baseline**: Run baseline extractor to create ground truth
-2. **Manual Verification**: Review and correct CSV files
-3. **Update Baseline**: Incorporate corrections into JSON dataset
-4. **Test Prompts**: Run performance tests against baseline
-5. **Compare Results**: Analyze improvements and regressions
-6. **Iterate**: Refine prompts based on results
+### 1. Baseline Creation ✅ COMPLETED
+- [x] Extract content from real resume
+- [x] Run AI parsing with current prompt
+- [x] Manually correct AI extraction errors
+- [x] Create verified baseline dataset
 
-### Performance Tracking
-- Track accuracy improvements over time
-- Monitor cost efficiency
-- Document prompt version changes
-- Maintain historical test results
+### 2. Prompt Testing 🔄 IN PROGRESS
+- [ ] Test new prompt versions
+- [ ] Compare against baseline
+- [ ] Measure accuracy improvements
+- [ ] Document findings
 
-## 🛠️ Maintenance
+### 3. Performance Optimization 📋 PLANNED
+- [ ] Analyze token usage patterns
+- [ ] Optimize prompt length
+- [ ] Implement cost controls
+- [ ] Monitor response times
+
+### 4. Integration Validation 📋 PLANNED
+- [ ] Test complete user workflows
+- [ ] Validate database persistence
+- [ ] Verify frontend integration
+- [ ] End-to-end testing
+
+## Maintenance
+
+### Regular Tasks
+1. **Weekly**: Review and update baseline dataset
+2. **Monthly**: Test new prompt versions
+3. **Quarterly**: Performance analysis and optimization
 
 ### File Organization
-- Keep test files in appropriate directories
-- Use descriptive naming conventions
-- Maintain clear separation of concerns
-- Document test purposes and expected outcomes
+- All test results are stored in `ai_baseline_results/`
+- Corrected files are prefixed with `corrected_`
+- Timestamps are included in filenames for versioning
 
-### Data Management
-- Version control baseline datasets
-- Archive historical test results
-- Clean up temporary files regularly
-- Maintain data quality standards
+## Contributing
 
-## 📝 Contributing
-
-When adding new tests:
-1. Place files in appropriate directories
-2. Follow existing naming conventions
+### Adding New Tests
+1. Create test file in appropriate directory
+2. Follow naming convention: `test_*.py`
 3. Include comprehensive documentation
-4. Add to this README if needed
-5. Update test runners if applicable
+4. Add to this documentation
 
-## 🔍 Troubleshooting
+### Reporting Issues
+1. Document the issue with specific details
+2. Include test data and expected results
+3. Provide error messages and stack traces
+4. Suggest potential solutions
+
+## Troubleshooting
 
 ### Common Issues
-- **Path Issues**: Ensure Python path includes backend directory
-- **Database Connection**: Verify database is running and accessible
-- **Dependencies**: Check all required packages are installed
-- **Permissions**: Ensure write access to test directories
+1. **Module Import Errors**: Ensure backend directory is in Python path
+2. **File Not Found**: Check relative paths from execution directory
+3. **API Rate Limits**: Implement retry logic and token optimization
+4. **JSON Parsing Errors**: Validate AI response format
 
-### Debug Mode
-Enable detailed logging for troubleshooting:
-```python
-import logging
-logging.basicConfig(level=logging.DEBUG)
-```
+### Debug Tools
+- `test_active_prompt.py` - Verify current prompt
+- `test_truncation.py` - Test resume content truncation
+- `test_prompt_size.py` - Analyze prompt token usage
 
-## 📚 Additional Resources
+## Additional Resources
 
-- [Backend Testing Guide](../backend/README.md)
-- [API Documentation](../docs/api.md)
-- [Database Schema](../docs/schema.md)
-- [Performance Testing Guide](../docs/performance.md)
+### Documentation
+- `docs/PROJECT_INDEX.md` - Central navigation
+- `docs/PROJECT_COMPLETION_SUMMARY.md` - Project status
+- `README.md` - Main project overview
 
-## 🎯 Key Files
+### Key Files
+- `backend/app/api/resume.py` - Main AI parsing logic
+- `backend/app/services/prompt_service.py` - Prompt management
+- `backend/improve_resume_prompt.py` - Prompt versioning
 
-### Baseline Dataset Files
-Located in `tests/backend/ai/baseline/`:
-- `extract_resume_baseline.py` - Baseline data extractor
-- `baseline_dataset.json` - Complete structured dataset
-- `baseline_*.csv` - Individual subject area files
+### Current Baseline Dataset
+- **File**: `corrected_baseline_dataset_20250806_143321.json`
+- **Sections**: 7 (personal_info, work_experience, education, skills, certifications, projects, summary)
+- **Total Fields**: 100+ individual data points
+- **Status**: Manually verified and corrected
 
-### Performance Testing Files
-Located in `tests/backend/ai/performance/`:
-- `test_resume_parser_performance.py` - Performance evaluation framework
+## Version Control
 
-### Prompt Management Files
-Located in `tests/backend/ai/prompts/`:
-- `test_prompt_management.py` - Prompt management tests
-- `compare_prompt_versions.py` - Version comparison tools
-- `improve_resume_prompt.py` - Prompt improvement utilities
+### Baseline Versioning
+- Each baseline correction creates a new timestamped file
+- Previous versions are retained for comparison
+- Version history is documented in this file
 
-## 📊 Current Baseline Dataset Summary
+### Prompt Versioning
+- Prompts are stored in database with version numbers
+- Active prompt is tracked for testing
+- Version comparison tools available
 
-- **Personal Info**: 5 fields
-- **Work Experience**: 2 entries
-- **Education**: 2 entries
-- **Skills**: 30 skills in 2 categories
-- **Certifications**: 2 entries
-- **Projects**: 2 entries
+## Checklist for New Tests
 
-## 🔄 Version Control
+### Before Running Tests
+- [ ] Verify resume file exists and is accessible
+- [ ] Check OpenAI API key is valid
+- [ ] Ensure database connection is working
+- [ ] Confirm baseline dataset is up to date
 
-All test files and baseline data should be committed to version control:
-```bash
-git add tests/
-git commit -m "Add comprehensive testing framework and baseline dataset"
-```
+### After Running Tests
+- [ ] Review test results for accuracy
+- [ ] Document any new findings
+- [ ] Update baseline if necessary
+- [ ] Commit changes to version control
 
-## 📋 Checklist for New Tests
+### Quality Assurance
+- [ ] All tests pass without errors
+- [ ] Results are consistent across runs
+- [ ] Performance metrics are within acceptable ranges
+- [ ] Documentation is updated
 
-- [ ] Place test file in appropriate directory
-- [ ] Follow naming conventions
-- [ ] Include proper documentation
-- [ ] Add to relevant test runners
-- [ ] Update this documentation if needed
-- [ ] Test the new test file
-- [ ] Commit to version control 
+---
+
+**Last Updated**: 2025-08-06
+**Current Status**: Baseline correction completed, ready for prompt effectiveness testing
+**Next Milestone**: Prompt version comparison and optimization 

@@ -19,11 +19,52 @@ interface ResumeUploadStepProps {
   isLastStep: boolean;
 }
 
-const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ onNext }) => {
+interface ParsedResumeData {
+  personal_info?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    location?: string;
+  };
+  summary?: string;
+  work_experience?: Array<{
+    company: string;
+    position: string;
+    start_date: string;
+    end_date: string;
+    description: string;
+  }>;
+  education?: Array<{
+    institution: string;
+    degree: string;
+    field_of_study: string;
+    graduation_date: string;
+    gpa?: string;
+  }>;
+  skills?: Array<{
+    category: string;
+    skills: string[];
+  }>;
+  certifications?: Array<{
+    name: string;
+    issuer: string;
+    date_earned: string;
+    expiry_date?: string;
+  }>;
+  projects?: Array<{
+    name: string;
+    description: string;
+    technologies: string[];
+    url?: string;
+  }>;
+}
+
+const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ data, updateData, onNext }) => {
   const [uploadState, setUploadState] = useState<'idle' | 'uploading' | 'processing' | 'success' | 'error'>('idle');
   const [dragActive, setDragActive] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [processingProgress, setProcessingProgress] = useState(0);
+  const [parsedData, setParsedData] = useState<ParsedResumeData | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -57,37 +98,197 @@ const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ onNext }) => {
     const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'];
     if (!validTypes.includes(file.type)) {
       setUploadState('error');
+      setErrorMessage('Invalid file type. Please upload a PDF, DOC, or DOCX file.');
       return;
     }
 
-    setUploadedFile(file);
+    // Validate file size (10MB limit)
+    if (file.size > 10 * 1024 * 1024) {
+      setUploadState('error');
+      setErrorMessage('File size too large. Please upload a file smaller than 10MB.');
+      return;
+    }
+
     setUploadState('uploading');
+    setErrorMessage('');
 
-    // Simulate upload progress
-    for (let i = 0; i <= 100; i += 10) {
-      setProcessingProgress(i);
-      await new Promise(resolve => setTimeout(resolve, 100));
+    try {
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('file', file);
+
+      // Upload and parse resume
+      const response = await fetch('http://localhost:8000/api/v1/resume/parse?user_id=1', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to parse resume');
+      }
+
+      const result = await response.json();
+      
+      if (result.success && result.extracted_data) {
+        setParsedData(result.extracted_data);
+        
+        // Save the parsed data to the database
+        try {
+          const saveResponse = await fetch('http://localhost:8000/api/v1/resume/save-first', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              user_id: 1, // TODO: Get actual user ID from auth context
+              resume_data: result.extracted_data
+            }),
+          });
+
+          if (saveResponse.ok) {
+            const saveResult = await saveResponse.json();
+            console.log('✅ Resume data saved to database:', saveResult.message);
+            setUploadState('success');
+          } else {
+            console.error('❌ Failed to save resume data to database');
+            setUploadState('success'); // Still show success for parsing, but log the save error
+          }
+        } catch (saveError) {
+          console.error('❌ Error saving resume data to database:', saveError);
+          setUploadState('success'); // Still show success for parsing
+        }
+      } else {
+        throw new Error(result.error || 'Failed to extract data from resume');
+      }
+
+    } catch (error) {
+      console.error('Resume parsing error:', error);
+      setUploadState('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to parse resume');
     }
-
-    setUploadState('processing');
-    setProcessingProgress(0);
-
-    // Simulate AI processing
-    for (let i = 0; i <= 100; i += 5) {
-      setProcessingProgress(i);
-      await new Promise(resolve => setTimeout(resolve, 150));
-    }
-
-    setUploadState('success');
   };
 
   const proceedWithParsedData = () => {
-    // In a real implementation, this would pass the parsed data to the profile
+    if (parsedData) {
+      // Update profile data with parsed information
+      if (parsedData.personal_info) {
+        const personalInfo = parsedData.personal_info;
+        updateData('basicInfo', {
+          ...data.basicInfo,
+          firstName: personalInfo.name?.split(' ')[0] || '',
+          lastName: personalInfo.name?.split(' ').slice(1).join(' ') || '',
+          email: personalInfo.email || '',
+          phone: personalInfo.phone || '',
+          location: personalInfo.location || '',
+        });
+      }
+
+      if (parsedData.summary) {
+        updateData('basicInfo', {
+          ...data.basicInfo,
+          summary: parsedData.summary,
+        });
+      }
+
+      if (parsedData.work_experience) {
+        updateData('workExperience', {
+          ...data.workExperience,
+          experiences: parsedData.work_experience.map(exp => ({
+            company: exp.company,
+            position: exp.position,
+            startDate: exp.start_date,
+            endDate: exp.end_date,
+            description: exp.description,
+            achievements: [],
+            technologies: [],
+          })),
+        });
+      }
+
+      if (parsedData.education) {
+        updateData('education', {
+          ...data.education,
+          institutions: parsedData.education.map(edu => ({
+            institution: edu.institution,
+            degree: edu.degree,
+            fieldOfStudy: edu.field_of_study,
+            graduationDate: edu.graduation_date,
+            gpa: edu.gpa || '',
+            certifications: [],
+          })),
+        });
+      }
+
+      if (parsedData.skills) {
+        const skillsData = {
+          technical: [],
+          soft: [],
+          languages: [],
+          other: [],
+        };
+
+        parsedData.skills.forEach(skillGroup => {
+          if (skillGroup.category.toLowerCase().includes('technical')) {
+            skillsData.technical = skillGroup.skills;
+          } else if (skillGroup.category.toLowerCase().includes('soft')) {
+            skillsData.soft = skillGroup.skills;
+          } else if (skillGroup.category.toLowerCase().includes('language')) {
+            skillsData.languages = skillGroup.skills;
+          } else {
+            skillsData.other = skillGroup.skills;
+          }
+        });
+
+        updateData('skills', skillsData);
+      }
+
+      if (parsedData.projects) {
+        updateData('projects', {
+          ...data.projects,
+          projects: parsedData.projects.map(project => ({
+            name: project.name,
+            description: project.description,
+            technologies: project.technologies,
+            url: project.url || '',
+            imageUrl: '',
+          })),
+        });
+      }
+    }
+
     onNext();
   };
 
   const skipUpload = () => {
     onNext();
+  };
+
+  const getExtractedDataSummary = () => {
+    if (!parsedData) return [];
+    
+    const summary = [];
+    if (parsedData.work_experience?.length) {
+      summary.push(`✓ Found ${parsedData.work_experience.length} work experience${parsedData.work_experience.length > 1 ? 's' : ''}`);
+    }
+    if (parsedData.education?.length) {
+      summary.push(`✓ Found ${parsedData.education.length} education record${parsedData.education.length > 1 ? 's' : ''}`);
+    }
+    if (parsedData.skills?.length) {
+      const totalSkills = parsedData.skills.reduce((acc, skill) => acc + skill.skills.length, 0);
+      summary.push(`✓ Identified ${totalSkills} skills across ${parsedData.skills.length} categories`);
+    }
+    if (parsedData.certifications?.length) {
+      summary.push(`✓ Found ${parsedData.certifications.length} certification${parsedData.certifications.length > 1 ? 's' : ''}`);
+    }
+    if (parsedData.projects?.length) {
+      summary.push(`✓ Identified ${parsedData.projects.length} project${parsedData.projects.length > 1 ? 's' : ''}`);
+    }
+    if (parsedData.personal_info?.name) {
+      summary.push(`✓ Extracted personal information`);
+    }
+    
+    return summary;
   };
 
   return (
@@ -172,7 +373,7 @@ const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ onNext }) => {
                 'Extract project information and achievements',
                 'Smart data validation and error checking',
                 'Save hours of manual data entry'
-              ].map((benefit, index) => (
+              ].map((benefit) => (
                 <div key={benefit} className="flex items-start space-x-2">
                   <CheckCircleIcon className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
                   <span className="text-blue-800">{benefit}</span>
@@ -258,11 +459,9 @@ const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ onNext }) => {
           <div className="bg-green-50 rounded-lg p-6 mb-6 text-left">
             <h4 className="font-medium text-green-900 mb-3">Extracted Information:</h4>
             <div className="space-y-2 text-sm text-green-800">
-              <div>✓ Found 3 work experiences</div>
-              <div>✓ Identified 15 technical skills</div>
-              <div>✓ Extracted education details</div>
-              <div>✓ Found 2 certifications</div>
-              <div>✓ Identified 4 projects</div>
+              {getExtractedDataSummary().map((item, index) => (
+                <div key={index}>{item}</div>
+              ))}
             </div>
           </div>
 
@@ -299,7 +498,7 @@ const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ onNext }) => {
           </h3>
           
           <p className="text-gray-600 mb-6">
-            Please make sure your file is a PDF, DOC, or DOCX format and under 10MB.
+            {errorMessage || 'Please make sure your file is a PDF, DOC, or DOCX format and under 10MB.'}
           </p>
 
           <div className="flex justify-center space-x-4">

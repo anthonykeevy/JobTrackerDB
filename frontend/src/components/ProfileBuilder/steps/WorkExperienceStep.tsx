@@ -184,11 +184,12 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Job Title */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor={`jobTitle-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                     Job Title *
                   </label>
                   <input
                     {...register(`workExperience.${index}.jobTitle`)}
+                    id={`jobTitle-${index}`}
                     type="text"
                     placeholder="e.g., Senior Software Engineer"
                     className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -206,7 +207,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
 
                 {/* Company Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor={`companyName-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                     Company Name *
                   </label>
                   <div className="relative">
@@ -215,6 +216,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
                     </div>
                     <input
                       {...register(`workExperience.${index}.companyName`)}
+                      id={`companyName-${index}`}
                       type="text"
                       placeholder="e.g., Google Inc."
                       className={`block w-full pl-10 pr-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -233,7 +235,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
 
                 {/* Start Date */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor={`startDate-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                     Start Date *
                   </label>
                   <div className="relative">
@@ -242,6 +244,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
                     </div>
                     <input
                       {...register(`workExperience.${index}.startDate`)}
+                      id={`startDate-${index}`}
                       type="month"
                       className={`block w-full pl-10 pr-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                         errors.workExperience?.[index]?.startDate 
@@ -259,7 +262,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
 
                 {/* End Date */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor={`endDate-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                     End Date
                   </label>
                   <div className="relative">
@@ -268,6 +271,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
                     </div>
                     <input
                       {...register(`workExperience.${index}.endDate`)}
+                      id={`endDate-${index}`}
                       type="month"
                       disabled={watch(`workExperience.${index}.isCurrentRole`)}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
@@ -277,9 +281,10 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
 
                 {/* Current Role Checkbox */}
                 <div className="md:col-span-2">
-                  <label className="flex items-center">
+                  <label htmlFor={`isCurrentRole-${index}`} className="flex items-center">
                     <input
                       {...register(`workExperience.${index}.isCurrentRole`)}
+                      id={`isCurrentRole-${index}`}
                       type="checkbox"
                       className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                     />
@@ -290,11 +295,12 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
 
               {/* Job Description */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor={`description-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                   Job Description *
                 </label>
                 <textarea
                   {...register(`workExperience.${index}.description`)}
+                  id={`description-${index}`}
                   rows={4}
                   placeholder="Describe your role, responsibilities, and key contributions..."
                   className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${
@@ -321,6 +327,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
                     type="button"
                     onClick={() => toggleAchievements(index)}
                     className="text-sm text-blue-600 hover:text-blue-700"
+                    data-testid={`expand-achievements-${index}`}
                   >
                     {expandedAchievements[index] ? 'Collapse' : 'Expand'}
                   </button>
@@ -382,6 +389,7 @@ const WorkExperienceStep: React.FC<WorkExperienceStepProps> = ({
                     type="button"
                     onClick={() => toggleSkills(index)}
                     className="text-sm text-blue-600 hover:text-blue-700"
+                    data-testid={`expand-skills-${index}`}
                   >
                     {expandedSkills[index] ? 'Collapse' : 'Expand'}
                   </button>

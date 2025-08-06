@@ -1,0 +1,59 @@
+Category,Skill,AI_Extracted,Manual_Correction,Notes
+Strategic Leadership & Management,Team Leadership,AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,"Project Management (Agile, Waterfall, SCRUM Master)",AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,Vendor Management,AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,ITIL,AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,SDLC,AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,Process Engineering,AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,Planning & Budgeting,AI_Extracted,AI_Extracted,Verified as correct
+Strategic Leadership & Management,Outsourcing,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Data Strategy,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,ETL Pipeline Design & Implementation,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Data Modeling (Normalized Structures),AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Data Governance,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,SQL Server,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Power BI,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Operational Data Warehouses,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Data Analysis,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Reporting,AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,AI Model Development (Categorization),AI_Extracted,AI_Extracted,Verified as correct
+Data & Analytics,Machine Learning (ML),AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,"Robotic Process Automation (RPA - UiPath, Power Automate)",AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,API Development & Integration,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,System Automation,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,"ERP Systems (Oracle 11i, Pronto, SAP, AS400)",AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,"CRM (Microsoft CRM, Salesforce)",AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,MRP (Infor),AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,Office 365,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,Azure,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,AWS,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,Zabbix,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,VDI,AI_Extracted,AI_Extracted,Verified as correct
+Automation & Systems,Apigee,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Python,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,SQL Server,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Azure Data Factory,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Databricks,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,CI/CD,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,UiPath,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Azure,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,SSIS,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Power Automate,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Office 365,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,SAP,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,IDS(AS400),AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,ERA,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Autoline,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,SAP Commerce cloud,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Emarsys,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Salesforce Marketing Cloud,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Oracle 11i eBS,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,"BI (Cognos, TM1, Yellowfin, SSRS)",AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Microsoft Exchange,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,SharePoint,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Lync,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,.NET,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Cursor,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,ChatGPT Suite,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Loveable,AI_Extracted,AI_Extracted,Verified as correct
+Key Technologies,Gemini Suite,AI_Extracted,AI_Extracted,Verified as correct

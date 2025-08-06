@@ -1,0 +1,111 @@
+Anthony Keevy
+0414785260 | anthonykeevy@gmail.com | LinkedIn
+Summary
+Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.
+Professional Skills
+Strategic Leadership & Management: Team Leadership, Project Management (Agile, Waterfall, SCRUM Master), Vendor Management, ITIL, SDLC, Process Engineering, Planning & Budgeting, Outsourcing.
+Data & Analytics: Data Strategy, ETL Pipeline Design & Implementation, Data Modeling (Normalized Structures), Data Governance, SQL Server, Power BI, Operational Data Warehouses, Data Analysis, Reporting, AI Model Development (Categorization), Machine Learning (ML).
+Automation & Systems: Robotic Process Automation (RPA - UiPath, Power Automate), API Development & Integration, System Automation, ERP Systems (Oracle 11i, Pronto, SAP, AS400), CRM (Microsoft CRM, Salesforce), MRP (Infor), Office 365, Azure, AWS, Zabbix, VDI, Apigee.
+Key Technologies: Python, SQL Server, Azure Data Factory, Databricks, CI/CD, UiPath, Azure, SSIS, Power Automate, Office 365, SAP, IDS(AS400), ERA, Autoline, SAP Commerce cloud, Emarsys, Salesforce Marketing Cloud, Oracle 11i eBS, BI (Cognos, TM1, Yellowfin, SSRS), Microsoft Exchange, SharePoint, Lync, .NET, Cursor, ChatGPT Suite, Loveable, Gemini Suite
+Education
+Accounting, UNSW – 2004
+Project Management, UNSW – 2004
+Marketing for Technical Managers, UNSW – 2005
+T-SQL05 Writing & Queries in SQL Server 2005, New Horizons – 2008
+XPPS Operations, Xerox Corporation USA – 2010
+XOS Technical Analyst, Fuji Xerox Australia – 2010
+SCRUM Master, Access Agile – 2014
+Implementing Office 365, Microsoft (Certified) – 2015
+Career Summary
+Data Lead and Product Manager, Inchcape Global – Nov 2022 to May 2025
+IT Manager, Peugeot Citroën Australia – Dec 2020 to Jan 2023
+Automation Lead, Inchcape Australia – Mar 2020 to Nov 2020
+Infrastructure Engineer, Inchcape Australia – Feb 2018 to Feb 2020
+Network and Infrastructure Administrator, Dicker Data Ltd – Mar 2015 to Feb 2018
+IT Manager Asia Pacific, Fuji Xerox Asia Pacific – Jan 2005 to Feb 2015
+Supply Chain Project Manager, Fuji Xerox Asia Pacific – Oct 2007 to Jun 2009
+Regional Supply Chain Analyst & Demand Planner, Fuji Xerox Asia Pacific – Jan 2005 to Sep 2007
+IT Manager, Teleperformance Australia – Sep 2002 to Jan 2005
+Experience
+Data Lead & Product Manager
+Inchcape Global (Digital Parts) | Nov 2022 – May 2025
+Responsibilities
+Defined and led the enterprise data vision and delivery strategy for PartsLane’s B2B e-commerce platform across multiple international markets.
+Directed the architecture and implementation of data infrastructure, pipelines, and APIs to support real-time product, pricing, and service data flows into SAP Commerce Cloud.
+Established and enforced enterprise-wide data governance, quality controls, and compliance with security and operational standards.
+Managed cross-functional engineering teams and offshore resources, growing the data function to 13 members and scaling delivery through structured onboarding and process alignment.
+Championed integration strategies across SAP ERP, Autoline DMS, and external vendors, enabling standardized ingestion and transformation of heterogeneous data.
+Oversaw platform automation initiatives, continuous improvement cycles, and cost optimization through proactive service review frameworks.
+Achievements
+Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model.
+Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem.
+Enabled automated product lifecycle management via rule-based triggers, improving accuracy and reducing manual intervention.
+Achieved and maintained EMPS scores >80% while actively representing data in strategic customer forums and onboarding sessions.
+Sustained 70% team focus on innovation and platform evolution by implementing a structured pipeline for project prioritization and delivery.
+IT Manager
+Inchcape Australia (Peugeot Citroën Australia) | Dec 2020 – Jan 2023
+Responsibilities
+Managed all IT systems and services across distribution and retail operations, including ERP, CRM, application development, and vendor relationships.
+Oversaw ITIL-aligned service delivery, contract management, and SLA compliance.
+Directed implementation of a new dealer portal, replacing legacy infrastructure.
+Led the development of APIs to synchronize internal systems with external vendors, enhancing integration and data reliability.
+Achievements
+Delivered improved reporting and operational stability through end-to-end system automation.
+Successfully implemented a modern digital portal, streamlining dealer access and communications.
+Automation Lead
+Inchcape Australia (Finance) | Mar 2020 – Nov 2020
+Responsibilities
+Established and led a UiPath-based RPA Center of Excellence, defining governance, infrastructure, and delivery frameworks.
+Engaged with stakeholders to prioritize automation opportunities and manage full lifecycle delivery.
+Achievements
+Reduced invoice processing effort by 60% through AP automation.
+Automated 70% of bank-statement reconciliation using RPA and ML.
+Delivered cross-system automation for SAP, Concur, Coupa, and Basware.
+Infrastructure Engineer
+Inchcape Australia (IT) | Feb 2018 – Feb 2020
+Responsibilities
+Rolled out Office 365 across two major business units (300+ users).
+Led the deployment of UiPath servers and Cisco telephony systems.
+Reviewed telco and print service contracts, driving substantial cost reductions.
+Achievements
+Achieved a 20% telco cost reduction through analytical review and renegotiation.
+Improved infrastructure ROI through targeted system reviews.
+Network & Infrastructure Administrator
+Dicker Data Ltd | Mar 2015 – Feb 2018
+Responsibilities
+Managed IT infrastructure and applications for 500 users across 10 sites in ANZ.
+Directed data centre operations, cloud transitions, and infrastructure procurement.
+Led governance, compliance, and strategic IT planning for ASX-listed business.
+Achievements
+Migrated 90% of on-prem servers to a data centre with zero downtime.
+Rolled out Office 365 and transitioned workloads to Azure, reducing storage and licensing costs.
+IT Manager – Asia Pacific
+Fuji Xerox Asia Pacific (FXPC) | Jan 2010 – Feb 2015
+Responsibilities
+Led all IT services for the Printer Channel across 12 countries and 8 offices, supporting 350 users.
+Directed infrastructure, vendor management, security, and support operations.
+Oversaw budgeting, planning, project management, and regional IT governance.
+Achievements
+Designed and implemented a custom CRM system for distributor performance, lead tracking, and quote configuration, improving visibility of sales pipelines across APAC.
+Offshored application development to India and outsourced desktop support, reducing costs by 42% and 20% respectively.
+Virtualized regional server infrastructure, reducing licensing and power costs by over 30%.
+Delivered regional web-based customer portals and operational tools, improving communication efficiency by 50%.
+Recognized with the President Club Award (FY2008) for outstanding contribution.
+Supply Chain Project Manager
+Fuji Xerox Asia Pacific (FXPC) | Oct 2007 – Dec 2009
+Responsibilities
+Project managed the regional rollout of Infor Demand Planner across 12 countries.
+Designed and implemented data architecture and reporting processes to support demand planning and inventory optimisation.
+Achievements
+Delivered a scalable, forecast-driven MRP implementation that significantly improved planning accuracy.
+Reduced regional inventory by 40% and streamlined replenishment through enriched data insights.
+Regional Supply Chain Analyst & Demand Planner
+Fuji Xerox Asia Pacific (FXPC) | Jan 2005 – Sep 2007
+Responsibilities
+Developed and deployed automated demand planning tools using Excel and MS Access, initially for Australia and later scaled across Asia Pacific.
+Conducted detailed analysis of demand trends and planning accuracy, supporting strategic inventory decisions.
+Achievements
+Built and rolled out automated planning solutions to 8 countries, significantly reducing manual workload and improving forecast reliability.
+Initiated evaluation of commercial MRP systems, leading to Infor’s selection.
+IT Manager
+Teleperformance Australia | Sep 2002 – Jan 2005

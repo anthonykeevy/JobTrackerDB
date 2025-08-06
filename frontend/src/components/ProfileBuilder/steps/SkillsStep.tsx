@@ -19,7 +19,7 @@ const skillsSchema = z.object({
     id: z.string(),
     skillName: z.string().min(2, 'Skill name is required'),
     proficiency: z.enum(['beginner', 'intermediate', 'advanced', 'expert']),
-    skillType: z.enum(['technical', 'soft', 'language', 'certification']),
+    skillType: z.enum(['technical', 'soft', 'language']),
     yearsOfExperience: z.number().min(0).max(50).optional(),
   })),
 });
@@ -41,7 +41,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
   updateData, 
   onNext 
 }) => {
-  const [activeCategory, setActiveCategory] = useState<'technical' | 'soft' | 'language' | 'certification'>('technical');
+  const [activeCategory, setActiveCategory] = useState<'technical' | 'soft' | 'language'>('technical');
   const [skillSuggestions] = useState({
     technical: [
       'JavaScript', 'Python', 'React', 'Node.js', 'SQL', 'AWS', 'Docker', 'Git',
@@ -57,10 +57,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
       'English', 'Spanish', 'French', 'German', 'Chinese (Mandarin)', 'Japanese',
       'Portuguese', 'Italian', 'Russian', 'Arabic', 'Hindi', 'Korean'
     ],
-    certification: [
-      'AWS Certified Solutions Architect', 'Google Cloud Professional', 'Azure Fundamentals',
-      'PMP', 'Scrum Master', 'CompTIA Security+', 'CISSP', 'Six Sigma', 'Salesforce Admin'
-    ]
+
   });
 
   const {
@@ -69,7 +66,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
     control,
     formState: { errors },
     watch,
-    setValue
+    // setValue
   } = useForm<SkillsFormData>({
     resolver: zodResolver(skillsSchema),
     defaultValues: {
@@ -129,7 +126,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
       case 'technical': return ComputerDesktopIcon;
       case 'soft': return ChatBubbleLeftRightIcon;
       case 'language': return LanguageIcon;
-      case 'certification': return CheckBadgeIcon;
+  
       default: return CodeBracketIcon;
     }
   };
@@ -150,11 +147,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
       description: 'Spoken languages and proficiency levels',
       color: 'purple'
     },
-    certification: {
-      title: 'Certifications',
-      description: 'Professional certifications and credentials',
-      color: 'yellow'
-    }
+
   };
 
   return (
@@ -168,7 +161,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
           Skills & Expertise
         </h2>
         <p className="text-gray-600">
-          Showcase your technical skills, soft skills, languages, and certifications with proficiency levels.
+          Showcase your technical skills, soft skills, and languages with proficiency levels.
         </p>
       </div>
 
@@ -189,6 +182,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
                   ? `border-${info.color}-500 bg-${info.color}-50`
                   : 'border-gray-200 hover:border-gray-300 bg-white'
               }`}
+              data-testid={`category-${key}`}
             >
               <div className="flex items-center mb-2">
                 <IconComponent className={`w-5 h-5 mr-2 ${
@@ -265,11 +259,12 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       {/* Skill Name */}
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor={`skillName-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                           Skill Name *
                         </label>
                         <input
                           {...register(`skills.${index}.skillName`)}
+                          id={`skillName-${index}`}
                           type="text"
                           placeholder={`Enter ${activeCategory} skill...`}
                           className={`block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
@@ -287,11 +282,12 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
 
                       {/* Proficiency */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor={`proficiency-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                           Proficiency *
                         </label>
                         <select
                           {...register(`skills.${index}.proficiency`)}
+                          id={`proficiency-${index}`}
                           className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         >
                           <option value="beginner">Beginner</option>
@@ -304,11 +300,12 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
                       {/* Years of Experience & Remove Button */}
                       <div className="flex items-end space-x-2">
                         <div className="flex-1">
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor={`yearsOfExperience-${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                             Years
                           </label>
                           <input
                             {...register(`skills.${index}.yearsOfExperience`, { valueAsNumber: true })}
+                            id={`yearsOfExperience-${index}`}
                             type="number"
                             min="0"
                             max="50"
@@ -320,6 +317,7 @@ const SkillsStep: React.FC<SkillsStepProps> = ({
                           type="button"
                           onClick={() => removeSkill(index)}
                           className="p-2 text-red-500 hover:text-red-700 transition-colors"
+                          aria-label="Remove skill"
                         >
                           <TrashIcon className="w-5 h-5" />
                         </button>

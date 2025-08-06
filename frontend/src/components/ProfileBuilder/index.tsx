@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -31,6 +31,10 @@ const STEPS = [
 
 const ProfileBuilder: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState('');
+  const [profileScore, setProfileScore] = useState<any>(null);
   const [profileData, setProfileData] = useState<ProfileData>({
     resumeData: undefined,
     basicInfo: {
@@ -117,12 +121,124 @@ const ProfileBuilder: React.FC = () => {
 
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
+  // Load saved profile data on component mount
+  useEffect(() => {
+    const loadProfileData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('http://localhost:8000/api/v1/resume/load-profile/1'); // TODO: Get actual user ID
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.data) {
+            const savedData = result.data;
+            
+            // Update profile data with saved information
+            setProfileData(prev => ({
+              ...prev,
+              basicInfo: {
+                ...prev.basicInfo,
+                firstName: savedData.basic_info.firstName || '',
+                lastName: savedData.basic_info.lastName || '',
+                email: savedData.basic_info.email || '',
+                phone: savedData.basic_info.phone || '',
+                summary: savedData.basic_info.summary || '',
+                location: savedData.basic_info.location || '',
+                dateOfBirth: savedData.basic_info.dateOfBirth ? new Date(savedData.basic_info.dateOfBirth).toISOString().split('T')[0] : '',
+                nationality: savedData.basic_info.nationality || '',
+                address: savedData.basic_info.address || prev.basicInfo.address,
+              },
+              workExperience: savedData.work_experience || [],
+              education: savedData.education || [],
+              skills: savedData.skills || { technical: [], soft: [], languages: [], other: [] },
+              certifications: savedData.certifications || [],
+              projects: savedData.projects || [],
+            }));
+          }
+        }
+        
+        // Load profile score
+        await loadProfileScore();
+      } catch (error) {
+        console.error('Failed to load profile data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProfileData();
+  }, []);
+
+  const loadProfileScore = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/profile/score/1'); // TODO: Get actual user ID
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+          setProfileScore(result.data);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load profile score:', error);
+    }
+  };
+
+  const saveProfileSection = async (section: string, data: any) => {
+    try {
+      setIsSaving(true);
+      setSaveMessage('Saving your data...');
+      
+      const response = await fetch('http://localhost:8000/api/v1/profile/save-section', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: 1, // TODO: Get actual user ID
+          section: section,
+          data: data
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setSaveMessage('✅ Data saved successfully!');
+        
+        // Reload profile score after saving
+        await loadProfileScore();
+        
+        // Clear success message after 3 seconds
+        setTimeout(() => setSaveMessage(''), 3000);
+      } else {
+        setSaveMessage('❌ Failed to save data. Please try again.');
+      }
+    } catch (error) {
+      console.error('Failed to save profile section:', error);
+      setSaveMessage('❌ Error saving data. Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const updateProfileData = useCallback((section: keyof ProfileData, data: Partial<ProfileData[keyof ProfileData]>) => {
     setProfileData(prev => ({
       ...prev,
       [section]: data,
     }));
   }, []);
+
+  // Overloaded function to handle both single and section updates
+  const updateData = useCallback((sectionOrData: keyof ProfileData | Partial<ProfileData>, data?: Partial<ProfileData[keyof ProfileData]>) => {
+    if (typeof sectionOrData === 'string' && data) {
+      // Section update: (section, data)
+      updateProfileData(sectionOrData as keyof ProfileData, data);
+    } else {
+      // Full data update: (data)
+      setProfileData(prev => ({
+        ...prev,
+        ...(sectionOrData as Partial<ProfileData>),
+      }));
+    }
+  }, [updateProfileData]);
 
   const markStepComplete = (stepIndex: number) => {
     setCompletedSteps(prev => new Set([...prev, stepIndex]));
@@ -134,8 +250,34 @@ const ProfileBuilder: React.FC = () => {
     }
   }, []);
 
-  const nextStep = () => {
+  const nextStep = async () => {
     if (currentStep < STEPS.length - 1) {
+      // Save current step data before moving to next
+      const currentStepId = STEPS[currentStep].id;
+      let sectionData = {};
+      
+      switch (currentStepId) {
+        case 'basic-info':
+          sectionData = profileData.basicInfo;
+          break;
+        case 'experience':
+          sectionData = { experiences: profileData.workExperience };
+          break;
+        case 'education':
+          sectionData = { institutions: profileData.education };
+          break;
+        case 'skills':
+          sectionData = profileData.skills;
+          break;
+        case 'projects':
+          sectionData = { projects: profileData.projects };
+          break;
+      }
+      
+      if (Object.keys(sectionData).length > 0) {
+        await saveProfileSection(currentStepId, sectionData);
+      }
+      
       markStepComplete(currentStep);
       setCurrentStep(currentStep + 1);
     }
@@ -172,6 +314,52 @@ const ProfileBuilder: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Gamification Score - Show when available */}
+            {profileScore && (
+              <div className="mb-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-3 border border-blue-200">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-2xl">{profileScore.overall_score.badge}</span>
+                    <div>
+                      <div className="text-sm font-medium text-gray-700">
+                        Profile Completion: {profileScore.overall_score.level}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {profileScore.overall_score.points}/{profileScore.overall_score.max_points} points
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-16 h-2 bg-gray-200 rounded-full">
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${profileScore.overall_score.percentage}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-gray-700">
+                      {Math.round(profileScore.overall_score.percentage)}%
+                    </span>
+                  </div>
+                </div>
+                {profileScore.next_milestone.points_needed > 0 && (
+                  <div className="mt-2 text-xs text-gray-600">
+                    Next milestone: {profileScore.next_milestone.title} ({profileScore.next_milestone.points_needed} points needed)
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Save Message */}
+            {saveMessage && (
+              <div className={`mb-3 p-2 rounded-lg text-sm font-medium ${
+                saveMessage.includes('✅') 
+                  ? 'bg-green-50 text-green-700 border border-green-200' 
+                  : 'bg-red-50 text-red-700 border border-red-200'
+              }`}>
+                {saveMessage}
+              </div>
+            )}
             
             {/* Progress Steps - Mobile Optimized */}
             <div className="block sm:hidden">
@@ -228,26 +416,45 @@ const ProfileBuilder: React.FC = () => {
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-4 sm:py-6 lg:py-8">
         {/* Responsive Content Container */}
         <div className="max-w-none lg:max-w-7xl xl:max-w-none 2xl:max-w-screen-2xl mx-auto">
-          <AnimatePresence mode="wait">
+          {isLoading ? (
             <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 xl:p-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="bg-white rounded-xl shadow-lg p-8 text-center"
             >
-              <CurrentStepComponent
-                data={profileData}
-                updateData={updateProfileData}
-                onNext={nextStep}
-                onPrev={prevStep}
-                onJumpToStep={goToStep}
-                isFirstStep={currentStep === 0}
-                isLastStep={currentStep === STEPS.length - 1}
-              />
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Loading your profile data...
+              </h3>
+              <p className="text-gray-600">
+                Please wait while we load your saved information.
+              </p>
             </motion.div>
-          </AnimatePresence>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 xl:p-10"
+              >
+                <CurrentStepComponent
+                  data={profileData}
+                  updateData={updateData}
+                  onNext={nextStep}
+                  onPrev={prevStep}
+                  onPrevious={prevStep}
+                  onJumpToStep={goToStep}
+                  isFirstStep={currentStep === 0}
+                  isLastStep={currentStep === STEPS.length - 1}
+                />
+              </motion.div>
+            </AnimatePresence>
+          )}
         </div>
       </div>
 

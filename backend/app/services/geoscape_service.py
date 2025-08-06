@@ -81,7 +81,6 @@ class GeoscapeService:
             endpoint: API endpoint path
             params: Query parameters or request body
             method: HTTP method (GET, POST, etc.)
-            use_oauth: Whether to try OAuth 2.0 first
             
         Returns:
             API response as dictionary
@@ -95,7 +94,7 @@ class GeoscapeService:
             
             logger.info(f"Making {method} request to Geoscape API: {url}")
             logger.info(f"Request params: {params}")
-            logger.info(f"Using authentication: {'OAuth 2.0' if use_oauth and self.oauth_service else 'Simple API Key'}")
+            logger.info(f"Using authentication: Simple API Key")
             
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 if method.upper() == "GET":
@@ -119,15 +118,13 @@ class GeoscapeService:
                     
         except httpx.TimeoutException:
             logger.error("Geoscape API request timed out")
-            raise Exception("API request timed out")
+            raise Exception("Address validation service is temporarily unavailable. Please enter your address manually.")
         except httpx.RequestError as e:
             logger.error(f"Geoscape API request error: {e}")
-            if "getaddrinfo failed" in str(e) or "Name or service not known" in str(e):
-                raise Exception("DNS resolution failed - check network connectivity")
-            raise Exception(f"API request error: {e}")
+            raise Exception("Address validation service is temporarily unavailable. Please enter your address manually.")
         except Exception as e:
             logger.error(f"Unexpected error in Geoscape API request: {e}")
-            raise
+            raise Exception("Address validation service is temporarily unavailable. Please enter your address manually.")
     
     def _get_mock_response(self, endpoint: str, params: Optional[Dict[str, Any]] = None, method: str = "GET") -> Dict[str, Any]:
         """
@@ -375,8 +372,23 @@ class GeoscapeService:
             Dictionary with coordinates and address details
         """
         try:
-            # Since the validate endpoint might not be available, we'll use the search endpoint
-            # and try to find a matching address
+            # First try to get coordinates from the property details endpoint if we have a property_id
+            if property_id:
+                try:
+                    property_details = await self.get_property_details(property_id)
+                    if property_details.get("success") and property_details.get("coordinates"):
+                        return {
+                            "success": True,
+                            "latitude": property_details["coordinates"]["latitude"],
+                            "longitude": property_details["coordinates"]["longitude"],
+                            "address": property_details.get("address", {}),
+                            "property_id": property_id,
+                            "confidence_score": 0.9
+                        }
+                except Exception as e:
+                    logger.warning(f"Failed to get property details for {property_id}: {e}")
+            
+            # Fallback to search endpoint
             search_results = await self.search_addresses(address, limit=5)
             
             if search_results:
@@ -392,9 +404,46 @@ class GeoscapeService:
                     best_match = search_results[0]
                 
                 if best_match:
-                    # For now, we'll use default coordinates based on state
-                    # since the search endpoint doesn't provide coordinates
-                    state = best_match.get("data", {}).get("state", "NSW")
+                    # Try to get coordinates from the search result data
+                    address_data = best_match.get("data", {})
+                    latitude = address_data.get("latitude")
+                    longitude = address_data.get("longitude")
+                    
+                    # If we have actual coordinates from the search, use them
+                    if latitude is not None and longitude is not None:
+                        address_data.update({
+                            "latitude": latitude,
+                            "longitude": longitude
+                        })
+                        
+                        return {
+                            "success": True,
+                            "latitude": latitude,
+                            "longitude": longitude,
+                            "address": address_data,
+                            "property_id": best_match.get("id"),
+                            "confidence_score": 0.8
+                        }
+                    
+                    # If no coordinates in search result, try to get them from property details
+                    property_id = best_match.get("id")
+                    if property_id:
+                        try:
+                            property_details = await self.get_property_details(property_id)
+                            if property_details.get("success") and property_details.get("coordinates"):
+                                return {
+                                    "success": True,
+                                    "latitude": property_details["coordinates"]["latitude"],
+                                    "longitude": property_details["coordinates"]["longitude"],
+                                    "address": address_data,
+                                    "property_id": property_id,
+                                    "confidence_score": 0.7
+                                }
+                        except Exception as e:
+                            logger.warning(f"Failed to get property details for {property_id}: {e}")
+                    
+                    # Last resort: use default coordinates based on state
+                    state = address_data.get("state", "NSW")
                     
                     # Get default coordinates for the state
                     state_coords = {
@@ -411,7 +460,6 @@ class GeoscapeService:
                     default_lat, default_lng = state_coords.get(state, [-33.8688, 151.2093])
                     
                     # Include coordinates in the address object as well
-                    address_data = best_match.get("data", {})
                     address_data.update({
                         "latitude": default_lat,
                         "longitude": default_lng
@@ -422,8 +470,8 @@ class GeoscapeService:
                         "latitude": default_lat,
                         "longitude": default_lng,
                         "address": address_data,
-                        "property_id": best_match.get("id"),
-                        "confidence_score": 0.8  # Default confidence for search-based coordinates
+                        "property_id": property_id,
+                        "confidence_score": 0.5  # Lower confidence for default coordinates
                     }
             
             logger.warning(f"No address match found for: {address}")

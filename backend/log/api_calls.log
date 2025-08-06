@@ -3625,3 +3625,1023 @@
   "status_code": 200,
   "response_time_ms": 1041.12
 }
+2025-08-05 14:10:57,157 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:10:57.157646",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "name 'use_oauth' is not defined",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 786.0
+}
+2025-08-05 14:11:00,947 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:11:00.946999",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn Pl",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "name 'use_oauth' is not defined",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn Pl",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 781.0
+}
+2025-08-05 14:11:01,826 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:11:01.826473",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn P",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "name 'use_oauth' is not defined",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn P",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 772.0
+}
+2025-08-05 14:11:03,810 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:11:03.810153",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn Place",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "name 'use_oauth' is not defined",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn Place",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 743.0
+}
+2025-08-05 14:33:05,860 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:33:05.859969",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "name 'use_oauth' is not defined",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 978.0
+}
+2025-08-05 14:44:03,345 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:44:03.345729",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "test",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "error": "Address lookup service is not available",
+    "message": "name 'use_oauth' is not defined",
+    "suggestions": [],
+    "total_count": 0,
+    "query": "test",
+    "country": "AU"
+  },
+  "status_code": 503,
+  "response_time_ms": 935.0
+}
+2025-08-05 14:51:33,827 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T14:51:33.827201",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "MILBURN 3305 SNOWY MOUNTAINS HWY, DRY PLAIN NSW 2630",
+        "id": "GANSW717088765",
+        "data": {
+          "streetNumber": "MILBURN",
+          "streetName": "3305 SNOWY MOUNTAINS",
+          "streetType": "HWY",
+          "suburb": "DRY PLAIN",
+          "state": "NSW",
+          "postcode": "2630",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "MILBURN 67 ARRAWATTA RD, OAKWOOD NSW 2360",
+        "id": "GANSW716987356",
+        "data": {
+          "streetNumber": "MILBURN",
+          "streetName": "67 ARRAWATTA",
+          "streetType": "RD",
+          "suburb": "OAKWOOD",
+          "state": "NSW",
+          "postcode": "2360",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "MILBURN CREEK 1505 PINE MOUNT RD, DARBYS FALLS NSW 2793",
+        "id": "GANSW706583167",
+        "data": {
+          "streetNumber": "MILBURN",
+          "streetName": "CREEK 1505 PINE MOUNT",
+          "streetType": "RD",
+          "suburb": "DARBYS FALLS",
+          "state": "NSW",
+          "postcode": "2793",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "MILBURN CREEK 1507 PINE MOUNT RD, DARBYS FALLS NSW 2793",
+        "id": "GANSW707537907",
+        "data": {
+          "streetNumber": "MILBURN",
+          "streetName": "CREEK 1507 PINE MOUNT",
+          "streetType": "RD",
+          "suburb": "DARBYS FALLS",
+          "state": "NSW",
+          "postcode": "2793",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "MILBURN PARK 109 MANILLA RD, OXLEY VALE NSW 2340",
+        "id": "GANSW705603541",
+        "data": {
+          "streetNumber": "MILBURN",
+          "streetName": "PARK 109 MANILLA",
+          "streetType": "RD",
+          "suburb": "OXLEY VALE",
+          "state": "NSW",
+          "postcode": "2340",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 595.96
+}
+2025-08-05 15:22:57,095 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:22:57.095801",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "219 Nor",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "219 NORMAN ST, BALLARAT NORTH VIC 3350",
+        "id": "GAVIC423834288",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORMAN",
+          "streetType": "ST",
+          "suburb": "BALLARAT NORTH",
+          "state": "VIC",
+          "postcode": "3350",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "219 NORRING RD, WEDGECARRUP WA 6315",
+        "id": "GAWA_162256790",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORRING",
+          "streetType": "RD",
+          "suburb": "WEDGECARRUP",
+          "state": "WA",
+          "postcode": "6315",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "219 NORRIS RD, BRACKEN RIDGE QLD 4017",
+        "id": "GAQLD156304488",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORRIS",
+          "streetType": "RD",
+          "suburb": "BRACKEN RIDGE",
+          "state": "QLD",
+          "postcode": "4017",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "219 NORTH BEACH DR, TUART HILL WA 6060",
+        "id": "GAWA_162412697",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORTH BEACH",
+          "streetType": "DR",
+          "suburb": "TUART HILL",
+          "state": "WA",
+          "postcode": "6060",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "219 NORTH CURRAMORE RD, CURRAMORE NSW 2533",
+        "id": "GANSW704548627",
+        "data": {
+          "streetNumber": "219",
+          "streetName": "NORTH CURRAMORE",
+          "streetType": "RD",
+          "suburb": "CURRAMORE",
+          "state": "NSW",
+          "postcode": "2533",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "219 Nor",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 799.1
+}
+2025-08-05 15:44:12,868 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:44:12.868537",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 582.86
+}
+2025-08-05 15:44:16,404 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:44:16.404128",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 milburn pl",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 milburn pl",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 493.64
+}
+2025-08-05 15:44:19,155 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:44:19.155506",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+    "property_id": "GANSW706441690",
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "PL",
+      "suburb": "ST IVES CHASE",
+      "state": "NSW",
+      "postcode": "2075",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW706441690",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 489.28
+}
+2025-08-05 15:48:24,742 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:48:24.742850",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 549.05
+}
+2025-08-05 15:48:25,902 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:48:25.902656",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn ",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN CCT, BOOLAROO NSW 2284",
+        "id": "GANSW720344230",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "BOOLAROO",
+          "state": "NSW",
+          "postcode": "2284",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN CCT, CAROLINE SPRINGS VIC 3023",
+        "id": "GAVIC420040188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CCT",
+          "suburb": "CAROLINE SPRINGS",
+          "state": "VIC",
+          "postcode": "3023",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN CT, ENDEAVOUR HILLS VIC 3802",
+        "id": "GAVIC421009161",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "ENDEAVOUR HILLS",
+          "state": "VIC",
+          "postcode": "3802",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      },
+      {
+        "address": "4 MILBURN CT, TRARALGON EAST VIC 3844",
+        "id": "GAVIC421231088",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "CT",
+          "suburb": "TRARALGON EAST",
+          "state": "VIC",
+          "postcode": "3844",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.7
+      },
+      {
+        "address": "4 MILBURN GR, ST KILDA EAST VIC 3183",
+        "id": "GAVIC420748655",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "GR",
+          "suburb": "ST KILDA EAST",
+          "state": "VIC",
+          "postcode": "3183",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.6
+      }
+    ],
+    "total_count": 5,
+    "query": "4 Milburn ",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 459.87
+}
+2025-08-05 15:48:27,112 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:48:27.112539",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn pl",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 Milburn pl",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 492.85
+}
+2025-08-05 15:48:28,704 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:48:28.704702",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn pl, ",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, CRAIGIEBURN VIC 3064",
+        "id": "GAVIC420842188",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "CRAIGIEBURN",
+          "state": "VIC",
+          "postcode": "3064",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      },
+      {
+        "address": "4 MILBURN PL, GLENORCHY TAS 7010",
+        "id": "GATAS702299578",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "GLENORCHY",
+          "state": "TAS",
+          "postcode": "7010",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.9
+      },
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 0.8
+      }
+    ],
+    "total_count": 3,
+    "query": "4 Milburn pl, ",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 478.14
+}
+2025-08-05 15:48:30,069 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:48:30.069206",
+  "endpoint": "/api/address/search",
+  "method": "GET",
+  "request_data": {
+    "query": "4 Milburn pl, st",
+    "country": "AU",
+    "limit": 5
+  },
+  "response_data": {
+    "suggestions": [
+      {
+        "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+        "id": "GANSW706441690",
+        "data": {
+          "streetNumber": "4",
+          "streetName": "MILBURN",
+          "streetType": "PL",
+          "suburb": "ST IVES CHASE",
+          "state": "NSW",
+          "postcode": "2075",
+          "country": "AU",
+          "latitude": null,
+          "longitude": null,
+          "propertyType": null,
+          "landArea": null,
+          "floorArea": null
+        },
+        "confidence": 1.0
+      }
+    ],
+    "total_count": 1,
+    "query": "4 Milburn pl, st",
+    "country": "AU"
+  },
+  "status_code": 200,
+  "response_time_ms": 528.83
+}
+2025-08-05 15:48:32,612 - INFO - API_CALL: {
+  "timestamp": "2025-08-05T15:48:32.612873",
+  "endpoint": "/api/address/coordinates",
+  "method": "POST",
+  "request_data": {
+    "address": "4 MILBURN PL, ST IVES CHASE NSW 2075",
+    "property_id": "GANSW706441690",
+    "country": "AU"
+  },
+  "response_data": {
+    "success": true,
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+    "address": {
+      "streetNumber": "4",
+      "streetName": "MILBURN",
+      "streetType": "PL",
+      "suburb": "ST IVES CHASE",
+      "state": "NSW",
+      "postcode": "2075",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "propertyType": null,
+      "landArea": null,
+      "floorArea": null
+    },
+    "property_id": "GANSW706441690",
+    "confidence_score": 0.8
+  },
+  "status_code": 200,
+  "response_time_ms": 510.23
+}

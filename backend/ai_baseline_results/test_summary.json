@@ -1,0 +1,23 @@
+{
+  "test_timestamp": "2025-08-06T14:25:00.205136",
+  "resume_file": "..\\Resume\\Anthony Keevy Resume 202506.docx",
+  "ai_extraction_summary": {
+    "personal_info_fields": 4,
+    "work_experience_entries": 4,
+    "education_entries": 8,
+    "skills_categories": 4,
+    "certifications_entries": 2,
+    "projects_entries": 0,
+    "has_summary": true
+  },
+  "files_created": [
+    "ai_baseline_results\\*.json",
+    "ai_baseline_results\\*.csv"
+  ],
+  "next_steps": [
+    "1. Review the CSV files and manually correct any errors",
+    "2. Update the baseline_template.json with corrected data",
+    "3. Use the corrected baseline for future prompt testing",
+    "4. Run comparison tests against this baseline"
+  ]
+}

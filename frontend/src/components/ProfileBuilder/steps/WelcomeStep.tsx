@@ -5,7 +5,7 @@ import {
   BriefcaseIcon, 
   CodeBracketIcon,
   ChartBarIcon,
-  CheckCircleIcon,
+  // CheckCircleIcon,
   ClockIcon,
   SparklesIcon,
   ListBulletIcon,
