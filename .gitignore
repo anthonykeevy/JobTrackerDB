@@ -2,3 +2,13 @@
 .env
 frontend/.env
 backend/.env 
+# Build/cache and tooling
+**/node_modules/
+**/venv/
+**/__pycache__/**
+*.pyc
+*.log
+# Service env files
+project-core/backend/.env
+project-core/frontend/.env
+

@@ -1,0 +1,394 @@
+{
+  "personal_info": {
+    "name": "Anthony Keevy",
+    "email": "anthonykeevy@gmail.com",
+    "phone": "0414785260",
+    "location": "Australia",
+    "linkedin": "LinkedIn"
+  },
+  "summary": "Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.",
+  "work_experience": [
+    {
+      "company": "Inchcape Global",
+      "position": "Data Lead and Product Manager",
+      "location": "Digital Parts",
+      "start_date": "Nov 2022",
+      "end_date": "May 2025",
+      "description": "Defined and led the enterprise data vision and delivery strategy for PartsLane's B2B e-commerce platform across multiple international markets.",
+      "achievements": [
+        "Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model",
+        "Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem",
+        "Enabled automated product lifecycle management via rule-based triggers, improving accuracy and reducing manual intervention",
+        "Achieved and maintained EMPS scores >80% while actively representing data in strategic customer forums and onboarding sessions",
+        "Sustained 70% team focus on innovation and platform evolution by implementing a structured pipeline for project prioritization and delivery"
+      ],
+      "technologies": [
+        "SAP Commerce Cloud",
+        "Machine Learning",
+        "Data Pipelines",
+        "APIs",
+        "SAP ERP",
+        "Autoline DMS"
+      ]
+    },
+    {
+      "company": "Inchcape Australia",
+      "position": "IT Manager",
+      "location": "Peugeot Citro\u00ebn Australia",
+      "start_date": "Dec 2020",
+      "end_date": "Jan 2023",
+      "description": "Managed all IT systems and services across distribution and retail operations, including ERP, CRM, application development, and vendor relationships.",
+      "achievements": [
+        "Delivered improved reporting and operational stability through end-to-end system automation",
+        "Successfully implemented a modern digital portal, streamlining dealer access and communications"
+      ],
+      "technologies": [
+        "ERP",
+        "CRM",
+        "APIs",
+        "ITIL",
+        "SLA"
+      ]
+    },
+    {
+      "company": "Inchcape Australia",
+      "position": "Automation Lead",
+      "location": "Finance",
+      "start_date": "Mar 2020",
+      "end_date": "Nov 2020",
+      "description": "Established and led a UiPath-based RPA Center of Excellence, defining governance, infrastructure, and delivery frameworks.",
+      "achievements": [
+        "Reduced invoice processing effort by 60% through AP automation",
+        "Automated 70% of bank-statement reconciliation using RPA and ML",
+        "Delivered cross-system automation for SAP, Concur, Coupa, and Basware"
+      ],
+      "technologies": [
+        "UiPath",
+        "RPA",
+        "SAP",
+        "Concur",
+        "Coupa",
+        "Basware",
+        "Machine Learning"
+      ]
+    },
+    {
+      "company": "Inchcape Australia",
+      "position": "Infrastructure Engineer",
+      "location": "IT",
+      "start_date": "Feb 2018",
+      "end_date": "Feb 2020",
+      "description": "Rolled out Office 365 across two major business units (300+ users).",
+      "achievements": [
+        "Achieved a 20% telco cost reduction through analytical review and renegotiation",
+        "Improved infrastructure ROI through targeted system reviews"
+      ],
+      "technologies": [
+        "Office 365",
+        "Cisco",
+        "UiPath"
+      ]
+    },
+    {
+      "company": "Dicker Data Ltd",
+      "position": "Network & Infrastructure Administrator",
+      "location": "ANZ",
+      "start_date": "Mar 2015",
+      "end_date": "Feb 2018",
+      "description": "Managed IT infrastructure and applications for 500 users across 10 sites in ANZ.",
+      "achievements": [
+        "Migrated 90% of on-prem servers to a data centre with zero downtime",
+        "Rolled out Office 365 and transitioned workloads to Azure, reducing storage and licensing costs"
+      ],
+      "technologies": [
+        "Office 365",
+        "Azure",
+        "Data Centre",
+        "Infrastructure"
+      ]
+    },
+    {
+      "company": "Fuji Xerox Asia Pacific",
+      "position": "IT Manager \u2013 Asia Pacific",
+      "location": "FXPC",
+      "start_date": "Jan 2010",
+      "end_date": "Feb 2015",
+      "description": "Led all IT services for the Printer Channel across 12 countries and 8 offices, supporting 350 users.",
+      "achievements": [
+        "Designed and implemented a custom CRM system for distributor performance, lead tracking, and quote configuration",
+        "Offshored application development to India and outsourced desktop support, reducing costs by 42% and 20% respectively",
+        "Virtualized regional server infrastructure, reducing licensing and power costs by over 30%",
+        "Delivered regional web-based customer portals and operational tools, improving communication efficiency by 50%",
+        "Recognized with the President Club Award (FY2008) for outstanding contribution"
+      ],
+      "technologies": [
+        "CRM",
+        "Virtualization",
+        "Web Portals",
+        "Infrastructure"
+      ]
+    },
+    {
+      "company": "Fuji Xerox Asia Pacific",
+      "position": "Supply Chain Project Manager",
+      "location": "FXPC",
+      "start_date": "Oct 2007",
+      "end_date": "Dec 2009",
+      "description": "Project managed the regional rollout of Infor Demand Planner across 12 countries.",
+      "achievements": [
+        "Delivered a scalable, forecast-driven MRP implementation that significantly improved planning accuracy",
+        "Reduced regional inventory by 40% and streamlined replenishment through enriched data insights"
+      ],
+      "technologies": [
+        "Infor Demand Planner",
+        "MRP",
+        "Data Architecture"
+      ]
+    },
+    {
+      "company": "Fuji Xerox Asia Pacific",
+      "position": "Regional Supply Chain Analyst & Demand Planner",
+      "location": "FXPC",
+      "start_date": "Jan 2005",
+      "end_date": "Sep 2007",
+      "description": "Developed and deployed automated demand planning tools using Excel and MS Access.",
+      "achievements": [
+        "Built and rolled out automated planning solutions to 8 countries, significantly reducing manual workload and improving forecast reliability",
+        "Initiated evaluation of commercial MRP systems, leading to Infor's selection"
+      ],
+      "technologies": [
+        "Excel",
+        "MS Access",
+        "Demand Planning",
+        "MRP"
+      ]
+    },
+    {
+      "company": "Teleperformance Australia",
+      "position": "IT Manager",
+      "location": "Australia",
+      "start_date": "Sep 2002",
+      "end_date": "Jan 2005",
+      "description": "IT management role at Teleperformance Australia.",
+      "achievements": [],
+      "technologies": []
+    }
+  ],
+  "education": [
+    {
+      "institution": "UNSW",
+      "degree": "Accounting",
+      "field_of_study": "Accounting",
+      "graduation_date": "2004",
+      "gpa": ""
+    },
+    {
+      "institution": "UNSW",
+      "degree": "Project Management",
+      "field_of_study": "Project Management",
+      "graduation_date": "2004",
+      "gpa": ""
+    },
+    {
+      "institution": "UNSW",
+      "degree": "Marketing for Technical Managers",
+      "field_of_study": "Marketing",
+      "graduation_date": "2005",
+      "gpa": ""
+    }
+  ],
+  "skills": [
+    {
+      "category": "Strategic Leadership & Management",
+      "skills": [
+        "Team Leadership",
+        "Project Management",
+        "Agile",
+        "Waterfall",
+        "SCRUM Master",
+        "Vendor Management",
+        "ITIL",
+        "SDLC",
+        "Process Engineering",
+        "Planning & Budgeting",
+        "Outsourcing"
+      ]
+    },
+    {
+      "category": "Data & Analytics",
+      "skills": [
+        "Data Strategy",
+        "ETL Pipeline Design",
+        "Data Modeling",
+        "Data Governance",
+        "SQL Server",
+        "Power BI",
+        "Operational Data Warehouses",
+        "Data Analysis",
+        "Reporting",
+        "AI Model Development",
+        "Machine Learning",
+        "Categorization"
+      ]
+    },
+    {
+      "category": "Automation & Systems",
+      "skills": [
+        "Robotic Process Automation",
+        "RPA",
+        "UiPath",
+        "Power Automate",
+        "API Development",
+        "API Integration",
+        "System Automation",
+        "ERP Systems",
+        "Oracle 11i",
+        "Pronto",
+        "SAP",
+        "AS400",
+        "CRM",
+        "Microsoft CRM",
+        "Salesforce",
+        "MRP",
+        "Infor",
+        "Office 365",
+        "Azure",
+        "AWS",
+        "Zabbix",
+        "VDI",
+        "Apigee"
+      ]
+    },
+    {
+      "category": "Key Technologies",
+      "skills": [
+        "Python",
+        "SQL Server",
+        "Azure Data Factory",
+        "Databricks",
+        "CI/CD",
+        "UiPath",
+        "Azure",
+        "SSIS",
+        "Power Automate",
+        "Office 365",
+        "SAP",
+        "IDS(AS400)",
+        "ERA",
+        "Autoline",
+        "SAP Commerce cloud",
+        "Emarsys",
+        "Salesforce Marketing Cloud",
+        "Oracle 11i eBS",
+        "BI",
+        "Cognos",
+        "TM1",
+        "Yellowfin",
+        "SSRS",
+        "Microsoft Exchange",
+        "SharePoint",
+        "Lync",
+        ".NET",
+        "Cursor",
+        "ChatGPT Suite",
+        "Loveable",
+        "Gemini Suite"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "T-SQL05 Writing & Queries in SQL Server 2005",
+      "issuer": "New Horizons",
+      "date_earned": "2008",
+      "expiry_date": ""
+    },
+    {
+      "name": "XPPS Operations",
+      "issuer": "Xerox Corporation USA",
+      "date_earned": "2010",
+      "expiry_date": ""
+    },
+    {
+      "name": "XOS Technical Analyst",
+      "issuer": "Fuji Xerox Australia",
+      "date_earned": "2010",
+      "expiry_date": ""
+    },
+    {
+      "name": "SCRUM Master",
+      "issuer": "Access Agile",
+      "date_earned": "2014",
+      "expiry_date": ""
+    },
+    {
+      "name": "Implementing Office 365",
+      "issuer": "Microsoft (Certified)",
+      "date_earned": "2015",
+      "expiry_date": ""
+    }
+  ],
+  "projects": [
+    {
+      "name": "Machine Learning Classification Model",
+      "description": "Designed and deployed a machine learning classification model for product categorization",
+      "achievements": [
+        "Reduced product categorization effort by 80%",
+        "Improved accuracy and reduced manual intervention"
+      ],
+      "technologies": [
+        "Machine Learning",
+        "Python",
+        "Data Science"
+      ],
+      "url": ""
+    },
+    {
+      "name": "Multi-Country Data Supply Chain",
+      "description": "Delivered a harmonized multi-country data supply chain for PartsLane's B2B e-commerce platform",
+      "achievements": [
+        "Transformed fragmented ERP outputs into a scalable, production-grade ecosystem",
+        "Supported real-time product, pricing, and service data flows"
+      ],
+      "technologies": [
+        "SAP Commerce Cloud",
+        "Data Pipelines",
+        "APIs",
+        "SAP ERP"
+      ],
+      "url": ""
+    },
+    {
+      "name": "Custom CRM System",
+      "description": "Designed and implemented a custom CRM system for distributor performance and lead tracking",
+      "achievements": [
+        "Improved visibility of sales pipelines across APAC",
+        "Enhanced quote configuration capabilities"
+      ],
+      "technologies": [
+        "CRM",
+        "Custom Development",
+        "APAC"
+      ],
+      "url": ""
+    },
+    {
+      "name": "RPA Center of Excellence",
+      "description": "Established and led a UiPath-based RPA Center of Excellence",
+      "achievements": [
+        "Reduced invoice processing effort by 60% through AP automation",
+        "Automated 70% of bank-statement reconciliation using RPA and ML"
+      ],
+      "technologies": [
+        "UiPath",
+        "RPA",
+        "Machine Learning",
+        "SAP",
+        "Concur",
+        "Coupa",
+        "Basware"
+      ],
+      "url": ""
+    }
+  ]
+}

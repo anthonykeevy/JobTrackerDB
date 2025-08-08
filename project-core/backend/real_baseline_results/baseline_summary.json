@@ -1,0 +1,24 @@
+{
+  "baseline_creation_timestamp": "2025-08-06T10:53:47.694107",
+  "source_resume": "Anthony Keevy Resume 202506.docx",
+  "dataset_summary": {
+    "personal_info_fields": 5,
+    "work_experience_entries": 9,
+    "education_entries": 3,
+    "skills_categories": 4,
+    "total_skills": 77,
+    "certifications_entries": 5,
+    "projects_entries": 4,
+    "summary_length": 388
+  },
+  "files_created": [
+    "real_baseline_results\\real_baseline_dataset_20250806_105347.json",
+    "real_baseline_results\\*.csv"
+  ],
+  "usage_instructions": [
+    "1. This baseline represents the 'ground truth' extracted from Anthony's real resume",
+    "2. Use this baseline to test AI prompt effectiveness",
+    "3. Compare AI extraction results against this baseline to measure accuracy",
+    "4. Update this baseline if you find any errors or missing information"
+  ]
+}

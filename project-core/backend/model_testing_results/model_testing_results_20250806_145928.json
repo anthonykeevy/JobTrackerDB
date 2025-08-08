@@ -1,0 +1,1035 @@
+{
+  "gpt-4o-mini": {
+    "accuracy_scores": {
+      "personal_info": 60.0,
+      "work_experience": 75.0,
+      "education": 0.0,
+      "skills": 25.862068965517242,
+      "certifications": 100.0,
+      "projects": 100,
+      "summary": 100.0
+    },
+    "overall_accuracy": 65.83743842364532,
+    "pricing": {
+      "input_cost_per_1k": 0.00015,
+      "output_cost_per_1k": 0.0006,
+      "description": "Very cost-effective"
+    },
+    "result": {
+      "personal_info": {
+        "name": "Anthony Keevy",
+        "email": "anthonykeevy@gmail.com",
+        "phone": "0414785260",
+        "location": "Australia",
+        "linkedin": "LinkedIn",
+        "website": null,
+        "github": null
+      },
+      "summary": "Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.",
+      "work_experience": [
+        {
+          "company": "Inchcape Global",
+          "position": "Data Lead and Product Manager",
+          "location": "Australia",
+          "start_date": "2022-11",
+          "end_date": "2025-05",
+          "description": "Defined and led the enterprise data vision and delivery strategy for PartsLane\u2019s B2B e-commerce platform across multiple international markets. Directed the architecture and implementation of data infrastructure, pipelines, and APIs to support real-time product, pricing, and service data flows into SAP Commerce Cloud. Established and enforced enterprise-wide data governance, quality controls, and compliance with security and operational standards. Managed cross-functional engineering teams and offshore resources, growing the data function to 13 members and scaling delivery through structured onboarding and process alignment. Championed integration strategies across SAP ERP, Autoline DMS, and external vendors, enabling standardized ingestion and transformation of heterogeneous data. Oversaw platform automation initiatives, continuous improvement cycles, and cost optimization through proactive service review frameworks.",
+          "achievements": [
+            "Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model.",
+            "Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem.",
+            "Enabled automated product lifecycle management via rule-based triggers, improving accuracy and reducing manual intervention.",
+            "Achieved and maintained EMPS scores >80% while actively representing data in strategic customer forums and onboarding sessions.",
+            "Sustained 70% team focus on innovation and platform evolution by implementing a structured pipeline for project prioritization and delivery."
+          ],
+          "technologies": [
+            "Python",
+            "SQL Server",
+            "Azure Data Factory",
+            "Databricks",
+            "UiPath",
+            "SAP Commerce Cloud"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "IT Manager",
+          "location": "Australia",
+          "start_date": "2020-12",
+          "end_date": "2023-01",
+          "description": "Managed all IT systems and services across distribution and retail operations, including ERP, CRM, application development, and vendor relationships. Oversaw ITIL-aligned service delivery, contract management, and SLA compliance. Directed implementation of a new dealer portal, replacing legacy infrastructure. Led the development of APIs to synchronize internal systems with external vendors, enhancing integration and data reliability.",
+          "achievements": [
+            "Delivered improved reporting and operational stability through end-to-end system automation.",
+            "Successfully implemented a modern digital portal, streamlining dealer access and communications."
+          ],
+          "technologies": [
+            "ERP",
+            "CRM",
+            "API Development"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Automation Lead",
+          "location": "Australia",
+          "start_date": "2020-03",
+          "end_date": "2020-11",
+          "description": "Established and led a UiPath-based RPA Center of Excellence, defining governance, infrastructure, and delivery frameworks. Engaged with stakeholders to prioritize automation opportunities and manage full lifecycle delivery.",
+          "achievements": [
+            "Reduced invoice processing effort by 60% through AP automation.",
+            "Automated 70% of bank-statement reconciliation using RPA and ML.",
+            "Delivered cross-system automation for SAP, Concur, Coupa, and Basware."
+          ],
+          "technologies": [
+            "UiPath",
+            "RPA",
+            "Machine Learning"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Infrastructure Engineer",
+          "location": "Australia",
+          "start_date": "2018-02",
+          "end_date": "2020-02",
+          "description": "Rolled out Office 365 across two major business units (300+ users). Led the deployment of UiPath servers and Cisco telephony systems. Reviewed telco and print service contracts, driving substantial cost reductions.",
+          "achievements": [
+            "Achieved a 20% telco cost reduction through analytical review and renegotiation."
+          ],
+          "technologies": [
+            "Office 365",
+            "UiPath",
+            "Cisco"
+          ]
+        },
+        {
+          "company": "Fuji Xerox Asia Pacific",
+          "position": "IT Manager Asia Pacific",
+          "location": "Australia",
+          "start_date": "2005-01",
+          "end_date": "2015-02",
+          "description": "Managed IT operations across the Asia Pacific region, overseeing multiple projects and teams.",
+          "achievements": [],
+          "technologies": []
+        }
+      ],
+      "education": [
+        {
+          "institution": "UNSW",
+          "degree": "Bachelor",
+          "field_of_study": "Accounting",
+          "graduation_date": "2004-01",
+          "gpa": null
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Bachelor",
+          "field_of_study": "Project Management",
+          "graduation_date": "2004-01",
+          "gpa": null
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Certificate",
+          "field_of_study": "Marketing for Technical Managers",
+          "graduation_date": "2005-01",
+          "gpa": null
+        },
+        {
+          "institution": "New Horizons",
+          "degree": "Certification",
+          "field_of_study": "T-SQL05 Writing & Queries in SQL Server 2005",
+          "graduation_date": "2008-01",
+          "gpa": null
+        },
+        {
+          "institution": "Xerox Corporation USA",
+          "degree": "Certification",
+          "field_of_study": "XPPS Operations",
+          "graduation_date": "2010-01",
+          "gpa": null
+        },
+        {
+          "institution": "Fuji Xerox Australia",
+          "degree": "Certification",
+          "field_of_study": "XOS Technical Analyst",
+          "graduation_date": "2010-01",
+          "gpa": null
+        },
+        {
+          "institution": "Access Agile",
+          "degree": "Certification",
+          "field_of_study": "SCRUM Master",
+          "graduation_date": "2014-01",
+          "gpa": null
+        },
+        {
+          "institution": "Microsoft",
+          "degree": "Certification",
+          "field_of_study": "Implementing Office 365",
+          "graduation_date": "2015-01",
+          "gpa": null
+        }
+      ],
+      "skills": [
+        {
+          "category": "Technical",
+          "skills": [
+            "Data Strategy",
+            "ETL Pipeline Design & Implementation",
+            "Data Modeling",
+            "Data Governance",
+            "SQL Server",
+            "Power BI",
+            "Robotic Process Automation",
+            "API Development & Integration",
+            "Machine Learning"
+          ]
+        },
+        {
+          "category": "Management",
+          "skills": [
+            "Team Leadership",
+            "Project Management",
+            "Vendor Management",
+            "ITIL",
+            "SDLC",
+            "Process Engineering"
+          ]
+        }
+      ],
+      "certifications": [
+        {
+          "name": "SCRUM Master",
+          "issuer": "Access Agile",
+          "date_earned": "2014-01",
+          "expiry_date": null
+        },
+        {
+          "name": "Implementing Office 365",
+          "issuer": "Microsoft",
+          "date_earned": "2015-01",
+          "expiry_date": null
+        }
+      ],
+      "projects": []
+    }
+  },
+  "gpt-3.5-turbo": {
+    "accuracy_scores": {
+      "personal_info": 60.0,
+      "work_experience": 100.0,
+      "education": 100.0,
+      "skills": 100.0,
+      "certifications": 100.0,
+      "projects": 100,
+      "summary": 100.0
+    },
+    "overall_accuracy": 94.28571428571429,
+    "pricing": {
+      "input_cost_per_1k": 0.0015,
+      "output_cost_per_1k": 0.002,
+      "description": "Fast and cost-effective"
+    },
+    "result": {
+      "personal_info": {
+        "name": "Anthony Keevy",
+        "email": "anthonykeevy@gmail.com",
+        "phone": "0414785260",
+        "location": "Australia",
+        "linkedin": "LinkedIn"
+      },
+      "summary": "Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.",
+      "work_experience": [
+        {
+          "company": "Inchcape Global",
+          "position": "Data Lead & Product Manager",
+          "location": "Australia",
+          "start_date": "2022-11",
+          "end_date": "2025-05",
+          "description": "Defined and led the enterprise data vision and delivery strategy for PartsLane\u2019s B2B e-commerce platform across multiple international markets.",
+          "achievements": [
+            "Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model.",
+            "Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem."
+          ],
+          "technologies": [
+            "SAP Commerce cloud",
+            "Autoline DMS",
+            "ERP Systems"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "IT Manager",
+          "location": "Australia",
+          "start_date": "2020-12",
+          "end_date": "2023-01",
+          "description": "Managed all IT systems and services across distribution and retail operations, including ERP, CRM, application development, and vendor relationships.",
+          "achievements": [
+            "Delivered improved reporting and operational stability through end-to-end system automation.",
+            "Successfully implemented a modern digital portal, streamlining dealer access and communications."
+          ],
+          "technologies": [
+            "ERP",
+            "CRM",
+            "APIs"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Automation Lead",
+          "location": "Australia",
+          "start_date": "2020-03",
+          "end_date": "2020-11",
+          "description": "Established and led a UiPath-based RPA Center of Excellence, defining governance, infrastructure, and delivery frameworks.",
+          "achievements": [
+            "Reduced invoice processing effort by 60% through AP automation.",
+            "Automated 70% of bank-statement reconciliation using RPA and ML."
+          ],
+          "technologies": [
+            "UiPath",
+            "RPA",
+            "ML"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Infrastructure Engineer",
+          "location": "Australia",
+          "start_date": "2018-02",
+          "end_date": "2020-02",
+          "description": "Rolled out Office 365 across two major business units (300+ users).",
+          "achievements": [
+            "Achieved a 20% telco cost reduction through analytical review and renegotiation.",
+            "Improved infrastructure ROI through targeted system re"
+          ],
+          "technologies": [
+            "Office 365",
+            "UiPath",
+            "Cisco"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "institution": "UNSW",
+          "degree": "Accounting",
+          "field_of_study": "Accounting",
+          "graduation_date": "2004"
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Project Management",
+          "field_of_study": "Project Management",
+          "graduation_date": "2004"
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Marketing for Technical Managers",
+          "field_of_study": "Marketing",
+          "graduation_date": "2005"
+        },
+        {
+          "institution": "New Horizons",
+          "degree": "T-SQL05 Writing & Queries in SQL Server 2005",
+          "field_of_study": "SQL Server",
+          "graduation_date": "2008"
+        },
+        {
+          "institution": "Xerox Corporation USA",
+          "degree": "XPPS Operations",
+          "field_of_study": "Operations",
+          "graduation_date": "2010"
+        },
+        {
+          "institution": "Fuji Xerox Australia",
+          "degree": "XOS Technical Analyst",
+          "field_of_study": "Technical Analysis",
+          "graduation_date": "2010"
+        },
+        {
+          "institution": "Access Agile",
+          "degree": "SCRUM Master",
+          "field_of_study": "Agile Methodologies",
+          "graduation_date": "2014"
+        },
+        {
+          "institution": "Microsoft",
+          "degree": "Implementing Office 365",
+          "field_of_study": "Office 365 Implementation",
+          "graduation_date": "2015"
+        }
+      ],
+      "skills": [
+        {
+          "category": "Strategic Leadership & Management",
+          "skills": [
+            "Team Leadership",
+            "Project Management",
+            "Vendor Management",
+            "ITIL",
+            "SDLC",
+            "Process Engineering",
+            "Planning & Budgeting",
+            "Outsourcing"
+          ]
+        },
+        {
+          "category": "Data & Analytics",
+          "skills": [
+            "Data Strategy",
+            "ETL Pipeline Design & Implementation",
+            "Data Modeling",
+            "Data Governance",
+            "SQL Server",
+            "Power BI",
+            "Operational Data Warehouses",
+            "Data Analysis",
+            "Reporting",
+            "AI Model Development",
+            "Machine Learning"
+          ]
+        },
+        {
+          "category": "Automation & Systems",
+          "skills": [
+            "Robotic Process Automation",
+            "API Development & Integration",
+            "System Automation",
+            "ERP Systems",
+            "CRM",
+            "MRP",
+            "Office 365",
+            "Azure",
+            "AWS",
+            "Zabbix",
+            "VDI",
+            "Apigee"
+          ]
+        },
+        {
+          "category": "Key Technologies",
+          "skills": [
+            "Python",
+            "SQL Server",
+            "Azure Data Factory",
+            "Databricks",
+            "CI/CD",
+            "UiPath",
+            "Azure",
+            "SSIS",
+            "Power Automate",
+            "Office 365",
+            "SAP",
+            "IDS",
+            "ERA",
+            "Autoline",
+            "SAP Commerce cloud",
+            "Emarsys",
+            "Salesforce Marketing Cloud",
+            "Oracle 11i eBS",
+            "BI",
+            "Microsoft Exchange",
+            "SharePoint",
+            "Lync",
+            ".NET",
+            "Cursor",
+            "ChatGPT Suite",
+            "Loveable",
+            "Gemini Suite"
+          ]
+        }
+      ],
+      "certifications": [
+        {
+          "name": "SCRUM Master",
+          "issuer": "Access Agile",
+          "date_earned": "2014"
+        },
+        {
+          "name": "Implementing Office 365",
+          "issuer": "Microsoft",
+          "date_earned": "2015"
+        }
+      ],
+      "projects": []
+    }
+  },
+  "gpt-4o": {
+    "accuracy_scores": {
+      "personal_info": 60.0,
+      "work_experience": 75.0,
+      "education": 100.0,
+      "skills": 100.0,
+      "certifications": 0.0,
+      "projects": 100,
+      "summary": 100.0
+    },
+    "overall_accuracy": 76.42857142857143,
+    "pricing": {
+      "input_cost_per_1k": 0.005,
+      "output_cost_per_1k": 0.015,
+      "description": "Latest model, good performance"
+    },
+    "result": {
+      "personal_info": {
+        "name": "Anthony Keevy",
+        "email": "anthonykeevy@gmail.com",
+        "phone": "0414785260",
+        "location": "Australia",
+        "linkedin": "LinkedIn",
+        "website": null,
+        "github": null
+      },
+      "summary": "Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.",
+      "work_experience": [
+        {
+          "company": "Inchcape Global",
+          "position": "Data Lead and Product Manager",
+          "location": "Australia",
+          "start_date": "2022-11",
+          "end_date": "2025-05",
+          "description": "Defined and led the enterprise data vision and delivery strategy for PartsLane\u2019s B2B e-commerce platform across multiple international markets. Directed the architecture and implementation of data infrastructure, pipelines, and APIs to support real-time product, pricing, and service data flows into SAP Commerce Cloud. Established and enforced enterprise-wide data governance, quality controls, and compliance with security and operational standards. Managed cross-functional engineering teams and offshore resources, growing the data function to 13 members and scaling delivery through structured onboarding and process alignment. Championed integration strategies across SAP ERP, Autoline DMS, and external vendors, enabling standardized ingestion and transformation of heterogeneous data. Oversaw platform automation initiatives, continuous improvement cycles, and cost optimization through proactive service review frameworks.",
+          "achievements": [
+            "Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model.",
+            "Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem.",
+            "Enabled automated product lifecycle management via rule-based triggers, improving accuracy and reducing manual intervention.",
+            "Achieved and maintained EMPS scores >80% while actively representing data in strategic customer forums and onboarding sessions.",
+            "Sustained 70% team focus on innovation and platform evolution by implementing a structured pipeline for project prioritization and delivery."
+          ],
+          "technologies": [
+            "SAP Commerce Cloud",
+            "SAP ERP",
+            "Autoline DMS"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "IT Manager",
+          "location": "Australia",
+          "start_date": "2020-12",
+          "end_date": "2023-01",
+          "description": "Managed all IT systems and services across distribution and retail operations, including ERP, CRM, application development, and vendor relationships. Oversaw ITIL-aligned service delivery, contract management, and SLA compliance. Directed implementation of a new dealer portal, replacing legacy infrastructure. Led the development of APIs to synchronize internal systems with external vendors, enhancing integration and data reliability.",
+          "achievements": [
+            "Delivered improved reporting and operational stability through end-to-end system automation.",
+            "Successfully implemented a modern digital portal, streamlining dealer access and communications."
+          ],
+          "technologies": [
+            "ERP",
+            "CRM",
+            "API"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Automation Lead",
+          "location": "Australia",
+          "start_date": "2020-03",
+          "end_date": "2020-11",
+          "description": "Established and led a UiPath-based RPA Center of Excellence, defining governance, infrastructure, and delivery frameworks. Engaged with stakeholders to prioritize automation opportunities and manage full lifecycle delivery.",
+          "achievements": [
+            "Reduced invoice processing effort by 60% through AP automation.",
+            "Automated 70% of bank-statement reconciliation using RPA and ML.",
+            "Delivered cross-system automation for SAP, Concur, Coupa, and Basware."
+          ],
+          "technologies": [
+            "UiPath",
+            "RPA",
+            "SAP",
+            "Concur",
+            "Coupa",
+            "Basware"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Infrastructure Engineer",
+          "location": "Australia",
+          "start_date": "2018-02",
+          "end_date": "2020-02",
+          "description": "Rolled out Office 365 across two major business units (300+ users). Led the deployment of UiPath servers and Cisco telephony systems. Reviewed telco and print service contracts, driving substantial cost reductions.",
+          "achievements": [
+            "Achieved a 20% telco cost reduction through analytical review and renegotiation.",
+            "Improved infrastructure ROI through targeted system re"
+          ],
+          "technologies": [
+            "Office 365",
+            "UiPath",
+            "Cisco"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "institution": "UNSW",
+          "degree": "Accounting",
+          "field_of_study": "Accounting",
+          "graduation_date": "2004-01",
+          "gpa": null
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Project Management",
+          "field_of_study": "Project Management",
+          "graduation_date": "2004-01",
+          "gpa": null
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Marketing for Technical Managers",
+          "field_of_study": "Marketing",
+          "graduation_date": "2005-01",
+          "gpa": null
+        },
+        {
+          "institution": "New Horizons",
+          "degree": "T-SQL05 Writing & Queries in SQL Server 2005",
+          "field_of_study": "SQL Server",
+          "graduation_date": "2008-01",
+          "gpa": null
+        },
+        {
+          "institution": "Xerox Corporation USA",
+          "degree": "XPPS Operations",
+          "field_of_study": "Operations",
+          "graduation_date": "2010-01",
+          "gpa": null
+        },
+        {
+          "institution": "Fuji Xerox Australia",
+          "degree": "XOS Technical Analyst",
+          "field_of_study": "Technical Analysis",
+          "graduation_date": "2010-01",
+          "gpa": null
+        },
+        {
+          "institution": "Access Agile",
+          "degree": "SCRUM Master",
+          "field_of_study": "Agile",
+          "graduation_date": "2014-01",
+          "gpa": null
+        },
+        {
+          "institution": "Microsoft",
+          "degree": "Implementing Office 365",
+          "field_of_study": "Office 365",
+          "graduation_date": "2015-01",
+          "gpa": null
+        }
+      ],
+      "skills": [
+        {
+          "category": "Strategic Leadership & Management",
+          "skills": [
+            "Team Leadership",
+            "Project Management",
+            "Vendor Management",
+            "ITIL",
+            "SDLC",
+            "Process Engineering",
+            "Planning & Budgeting",
+            "Outsourcing"
+          ]
+        },
+        {
+          "category": "Data & Analytics",
+          "skills": [
+            "Data Strategy",
+            "ETL Pipeline Design & Implementation",
+            "Data Modeling",
+            "Data Governance",
+            "SQL Server",
+            "Power BI",
+            "Operational Data Warehouses",
+            "Data Analysis",
+            "Reporting",
+            "AI Model Development",
+            "Machine Learning"
+          ]
+        },
+        {
+          "category": "Automation & Systems",
+          "skills": [
+            "Robotic Process Automation",
+            "API Development & Integration",
+            "System Automation",
+            "ERP Systems",
+            "CRM",
+            "MRP",
+            "Office 365",
+            "Azure",
+            "AWS",
+            "Zabbix",
+            "VDI",
+            "Apigee"
+          ]
+        },
+        {
+          "category": "Key Technologies",
+          "skills": [
+            "Python",
+            "SQL Server",
+            "Azure Data Factory",
+            "Databricks",
+            "CI/CD",
+            "UiPath",
+            "Azure",
+            "SSIS",
+            "Power Automate",
+            "Office 365",
+            "SAP",
+            "IDS(AS400)",
+            "ERA",
+            "Autoline",
+            "SAP Commerce cloud",
+            "Emarsys",
+            "Salesforce Marketing Cloud",
+            "Oracle 11i eBS",
+            "BI",
+            "Microsoft Exchange",
+            "SharePoint",
+            "Lync",
+            ".NET",
+            "Cursor",
+            "ChatGPT Suite",
+            "Loveable",
+            "Gemini Suite"
+          ]
+        }
+      ],
+      "certifications": [],
+      "projects": []
+    }
+  },
+  "gpt-4-turbo": {
+    "accuracy_scores": {
+      "personal_info": 60.0,
+      "work_experience": 75.0,
+      "education": 0.0,
+      "skills": 51.724137931034484,
+      "certifications": 0.0,
+      "projects": 100,
+      "summary": 100.0
+    },
+    "overall_accuracy": 55.24630541871921,
+    "pricing": {
+      "input_cost_per_1k": 0.01,
+      "output_cost_per_1k": 0.03,
+      "description": "Good balance of capability and cost"
+    },
+    "result": {
+      "personal_info": {
+        "name": "Anthony Keevy",
+        "email": "anthonykeevy@gmail.com",
+        "phone": "0414785260",
+        "location": "Australia",
+        "linkedin": "full LinkedIn URL if available",
+        "website": null,
+        "github": null
+      },
+      "summary": "Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.",
+      "work_experience": [
+        {
+          "company": "Inchcape Global",
+          "position": "Data Lead and Product Manager",
+          "location": "Australia",
+          "start_date": "2022-11",
+          "end_date": "2025-05",
+          "description": "Defined and led the enterprise data vision and delivery strategy for PartsLane\u2019s B2B e-commerce platform across multiple international markets. Directed the architecture and implementation of data infrastructure, pipelines, and APIs to support real-time product, pricing, and service data flows into SAP Commerce Cloud. Established and enforced enterprise-wide data governance, quality controls, and compliance with security and operational standards. Managed cross-functional engineering teams and offshore resources, growing the data function to 13 members and scaling delivery through structured onboarding and process alignment. Championed integration strategies across SAP ERP, Autoline DMS, and external vendors, enabling standardized ingestion and transformation of heterogeneous data. Oversaw platform automation initiatives, continuous improvement cycles, and cost optimization through proactive service review frameworks.",
+          "achievements": [
+            "Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model.",
+            "Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem.",
+            "Enabled automated product lifecycle management via rule-based triggers, improving accuracy and reducing manual intervention.",
+            "Achieved and maintained EMPS scores >80% while actively representing data in strategic customer forums and onboarding sessions.",
+            "Sustained 70% team focus on innovation and platform evolution by implementing a structured pipeline for project prioritization and delivery."
+          ],
+          "technologies": [
+            "SAP Commerce Cloud",
+            "SAP ERP",
+            "Autoline DMS",
+            "Machine Learning"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "IT Manager",
+          "location": "Australia",
+          "start_date": "2020-12",
+          "end_date": "2023-01",
+          "description": "Managed all IT systems and services across distribution and retail operations, including ERP, CRM, application development, and vendor relationships. Oversaw ITIL-aligned service delivery, contract management, and SLA compliance. Directed implementation of a new dealer portal, replacing legacy infrastructure. Led the development of APIs to synchronize internal systems with external vendors, enhancing integration and data reliability.",
+          "achievements": [
+            "Delivered improved reporting and operational stability through end-to-end system automation.",
+            "Successfully implemented a modern digital portal, streamlining dealer access and communications."
+          ],
+          "technologies": [
+            "ERP",
+            "CRM",
+            "APIs"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Automation Lead",
+          "location": "Australia",
+          "start_date": "2020-03",
+          "end_date": "2020-11",
+          "description": "Established and led a UiPath-based RPA Center of Excellence, defining governance, infrastructure, and delivery frameworks. Engaged with stakeholders to prioritize automation opportunities and manage full lifecycle delivery.",
+          "achievements": [
+            "Reduced invoice processing effort by 60% through AP automation.",
+            "Automated 70% of bank-statement reconciliation using RPA and ML.",
+            "Delivered cross-system automation for SAP, Concur, Coupa, and Basware."
+          ],
+          "technologies": [
+            "UiPath",
+            "RPA",
+            "ML"
+          ]
+        },
+        {
+          "company": "Inchcape Australia",
+          "position": "Infrastructure Engineer",
+          "location": "Australia",
+          "start_date": "2018-02",
+          "end_date": "2020-02",
+          "description": "Rolled out Office 365 across two major business units (300+ users). Led the deployment of UiPath servers and Cisco telephony systems. Reviewed telco and print service contracts, driving substantial cost reductions.",
+          "achievements": [
+            "Achieved a 20% telco cost reduction through analytical review and renegotiation.",
+            "Improved infrastructure ROI through targeted system re"
+          ],
+          "technologies": [
+            "Office 365",
+            "UiPath",
+            "Cisco"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "institution": "UNSW",
+          "degree": null,
+          "field_of_study": "Accounting",
+          "graduation_date": "2004-01",
+          "gpa": null
+        },
+        {
+          "institution": "UNSW",
+          "degree": null,
+          "field_of_study": "Project Management",
+          "graduation_date": "2004-01",
+          "gpa": null
+        },
+        {
+          "institution": "UNSW",
+          "degree": null,
+          "field_of_study": "Marketing for Technical Managers",
+          "graduation_date": "2005-01",
+          "gpa": null
+        }
+      ],
+      "skills": [
+        {
+          "category": "Technical",
+          "skills": [
+            "Python",
+            "SQL Server",
+            "Azure Data Factory",
+            "Databricks",
+            "CI/CD",
+            "UiPath",
+            "Azure",
+            "SSIS",
+            "Power Automate",
+            "Office 365",
+            "SAP",
+            "IDS(AS400)",
+            "ERA",
+            "Autoline",
+            "SAP Commerce cloud",
+            "Emarsys",
+            "Salesforce Marketing Cloud",
+            "Oracle 11i eBS",
+            "BI (Cognos, TM1, Yellowfin, SSRS)",
+            "Microsoft Exchange",
+            "SharePoint",
+            "Lync",
+            ".NET",
+            "Cursor",
+            "ChatGPT Suite",
+            "Loveable",
+            "Gemini Suite"
+          ]
+        },
+        {
+          "category": "Soft",
+          "skills": [
+            "Strategic Leadership & Management",
+            "Data & Analytics",
+            "Automation & Systems"
+          ]
+        }
+      ],
+      "certifications": [],
+      "projects": []
+    }
+  },
+  "gpt-4": {
+    "accuracy_scores": {
+      "personal_info": 60.0,
+      "work_experience": 0.0,
+      "education": 100.0,
+      "skills": 51.724137931034484,
+      "certifications": 100.0,
+      "projects": 100,
+      "summary": 100.0
+    },
+    "overall_accuracy": 73.10344827586206,
+    "pricing": {
+      "input_cost_per_1k": 0.03,
+      "output_cost_per_1k": 0.06,
+      "description": "Most capable but expensive"
+    },
+    "result": {
+      "personal_info": {
+        "name": "Anthony Keevy",
+        "email": "anthonykeevy@gmail.com",
+        "phone": "0414785260",
+        "location": "Australia",
+        "linkedin": "Not Available",
+        "website": "Not Available",
+        "github": "Not Available"
+      },
+      "summary": "Results-driven Data & Product Lead with extensive experience spearheading strategic IT transformation, particularly in Data, Automation, and AI. Proven ability to build and scale high-performing teams, design robust data ecosystems, and implement innovative continuous improvement solutions that consistently deliver significant business impact and achieve ambitious organizational goals.",
+      "work_experience": [
+        {
+          "company": "Inchcape Global",
+          "position": "Data Lead and Product Manager",
+          "location": "Australia",
+          "start_date": "2022-11",
+          "end_date": "2025-05",
+          "description": "Defined and led the enterprise data vision and delivery strategy for PartsLane\u2019s B2B e-commerce platform across multiple international markets. Directed the architecture and implementation of data infrastructure, pipelines, and APIs to support real-time product, pricing, and service data flows into SAP Commerce Cloud. Established and enforced enterprise-wide data governance, quality controls, and compliance with security and operational standards. Managed cross-functional engineering teams and offshore resources, growing the data function to 13 members and scaling delivery through structured onboarding and process alignment. Championed integration strategies across SAP ERP, Autoline DMS, and external vendors, enabling standardized ingestion and transformation of heterogeneous data. Oversaw platform automation initiatives, continuous improvement cycles, and cost optimization through proactive service review frameworks.",
+          "achievements": [
+            "Reduced product categorization effort by 80% through the design and deployment of a machine learning classification model.",
+            "Delivered a harmonized multi-country data supply chain, transforming fragmented ERP outputs into a scalable, production-grade ecosystem.",
+            "Enabled automated product lifecycle management via rule-based triggers, improving accuracy and reducing manual intervention.",
+            "Achieved and maintained EMPS scores >80% while actively representing data in strategic customer forums and onboarding sessions.",
+            "Sustained 70% team focus on innovation and platform evolution by implementing a structured pipeline for project prioritization and delivery."
+          ],
+          "technologies": [
+            "SAP Commerce Cloud",
+            "SAP ERP",
+            "Autoline DMS"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "institution": "UNSW",
+          "degree": "Accounting",
+          "field_of_study": "Accounting",
+          "graduation_date": "2004",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Project Management",
+          "field_of_study": "Project Management",
+          "graduation_date": "2004",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "UNSW",
+          "degree": "Marketing for Technical Managers",
+          "field_of_study": "Marketing",
+          "graduation_date": "2005",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "New Horizons",
+          "degree": "T-SQL05 Writing & Queries in SQL Server 2005",
+          "field_of_study": "SQL Server",
+          "graduation_date": "2008",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "Xerox Corporation USA",
+          "degree": "XPPS Operations",
+          "field_of_study": "Operations",
+          "graduation_date": "2010",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "Fuji Xerox Australia",
+          "degree": "XOS Technical Analyst",
+          "field_of_study": "Technical Analysis",
+          "graduation_date": "2010",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "Access Agile",
+          "degree": "SCRUM Master",
+          "field_of_study": "Agile",
+          "graduation_date": "2014",
+          "gpa": "Not Available"
+        },
+        {
+          "institution": "Microsoft",
+          "degree": "Implementing Office 365",
+          "field_of_study": "Office 365",
+          "graduation_date": "2015",
+          "gpa": "Not Available"
+        }
+      ],
+      "skills": [
+        {
+          "category": "Technical",
+          "skills": [
+            "Strategic Leadership & Management",
+            "Data & Analytics",
+            "Automation & Systems",
+            "Python",
+            "SQL Server",
+            "Azure Data Factory",
+            "Databricks",
+            "CI/CD",
+            "UiPath",
+            "Azure",
+            "SSIS",
+            "Power Automate",
+            "Office 365",
+            "SAP",
+            "IDS(AS400)",
+            "ERA",
+            "Autoline",
+            "SAP Commerce cloud",
+            "Emarsys",
+            "Salesforce Marketing Cloud",
+            "Oracle 11i eBS",
+            "BI (Cognos, TM1, Yellowfin, SSRS)",
+            "Microsoft Exchange",
+            "SharePoint",
+            "Lync",
+            ".NET",
+            "Cursor",
+            "ChatGPT Suite",
+            "Loveable",
+            "Gemini Suite"
+          ]
+        }
+      ],
+      "certifications": [
+        {
+          "name": "SCRUM Master",
+          "issuer": "Access Agile",
+          "date_earned": "2014",
+          "expiry_date": "Not Available"
+        },
+        {
+          "name": "Implementing Office 365",
+          "issuer": "Microsoft",
+          "date_earned": "2015",
+          "expiry_date": "Not Available"
+        }
+      ],
+      "projects": []
+    }
+  }
+}

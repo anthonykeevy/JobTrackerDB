@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "jobtrackerdb-api-collection",
+		"name": "JobTrackerDB API - Address Validation",
+		"description": "API collection for testing the JobTrackerDB address validation endpoints and direct Geoscape API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JobTrackerDB API",
+			"item": [
+				{
+					"name": "Address Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/search?q={{query}}&country={{country}}&limit={{limit}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "{{query}}",
+									"description": "Address search query (minimum 3 characters)"
+								},
+								{
+									"key": "country",
+									"value": "{{country}}",
+									"description": "Country code (AU for Australia)"
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}",
+									"description": "Maximum number of suggestions (1-50)"
+								}
+							]
+						},
+						"description": "Search for addresses using autocomplete functionality"
+					},
+					"response": []
+				},
+				{
+					"name": "Address Validation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address\": \"{{address}}\",\n  \"country\": \"{{country}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/validate",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"validate"
+							]
+						},
+						"description": "Validate and geocode an address"
+					},
+					"response": []
+				},
+				{
+					"name": "API Health Check",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/address/health",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"address",
+								"health"
+							]
+						},
+						"description": "Check the health status of the address validation API"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Geoscape API (Direct)",
+			"item": [
+
+
+
+				{
+					"name": "Geoscape Address Search (Working Format)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{geoscape_api_key}}",
+								"description": "Direct API Key (no Bearer prefix)"
+							}
+						],
+						"url": {
+							"raw": "https://api.psma.com.au/v1/predictive/address?query={{geoscape_query}}&limit={{geoscape_limit}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"psma",
+								"com",
+								"au"
+							],
+							"port": "443",
+							"path": [
+								"v1",
+								"predictive",
+								"address"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "{{geoscape_query}}",
+									"description": "Address search query"
+								},
+								{
+									"key": "limit",
+									"value": "{{geoscape_limit}}",
+									"description": "Maximum number of suggestions"
+								}
+							]
+						},
+						"description": "Direct Geoscape API address search using working format"
+					},
+					"response": []
+				},
+
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "query",
+			"value": "4 Milburn",
+			"type": "string",
+			"description": "Address search query"
+		},
+		{
+			"key": "country",
+			"value": "AU",
+			"type": "string",
+			"description": "Country code"
+		},
+		{
+			"key": "limit",
+			"value": "5",
+			"type": "string",
+			"description": "Maximum number of suggestions"
+		},
+		{
+			"key": "address",
+			"value": "4 Milburn Place, St Ives Chase NSW 2075",
+			"type": "string",
+			"description": "Full address to validate"
+		},
+		{
+			"key": "geoscape_api_key",
+			"value": "9x4fpNyrr8VxVqWvPeKnuEWaH9vxgGxS",
+			"type": "string",
+			"description": "Geoscape API Key"
+		},
+		{
+			"key": "geoscape_consumer_secret",
+			"value": "8XkTgtu0Sz1D0aG9",
+			"type": "string",
+			"description": "Geoscape Consumer Secret"
+		},
+		{
+			"key": "geoscape_query",
+			"value": "4 Milburn",
+			"type": "string",
+			"description": "Geoscape API search query"
+		},
+		{
+			"key": "geoscape_country",
+			"value": "AU",
+			"type": "string",
+			"description": "Geoscape API country code"
+		},
+		{
+			"key": "geoscape_limit",
+			"value": "5",
+			"type": "string",
+			"description": "Geoscape API limit for suggestions"
+		},
+		{
+			"key": "geoscape_address",
+			"value": "4 Milburn Place, St Ives Chase NSW 2075",
+			"type": "string",
+			"description": "Geoscape API address for validation"
+		},
+
+	]
+} 

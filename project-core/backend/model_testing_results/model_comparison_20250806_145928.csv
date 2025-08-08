@@ -1,0 +1,6 @@
+Model,Overall_Accuracy,Input_Cost_Per_1K,Output_Cost_Per_1K,Description,personal_info_accuracy,work_experience_accuracy,education_accuracy,skills_accuracy,certifications_accuracy,projects_accuracy,summary_accuracy
+gpt-4o-mini,65.83743842364532,0.00015,0.0006,Very cost-effective,60.0,75.0,0.0,25.862068965517242,100.0,100,100.0
+gpt-3.5-turbo,94.28571428571429,0.0015,0.002,Fast and cost-effective,60.0,100.0,100.0,100.0,100.0,100,100.0
+gpt-4o,76.42857142857143,0.005,0.015,"Latest model, good performance",60.0,75.0,100.0,100.0,0.0,100,100.0
+gpt-4-turbo,55.24630541871921,0.01,0.03,Good balance of capability and cost,60.0,75.0,0.0,51.724137931034484,0.0,100,100.0
+gpt-4,73.10344827586206,0.03,0.06,Most capable but expensive,60.0,0.0,100.0,51.724137931034484,100.0,100,100.0

@@ -1,0 +1,5 @@
+Prompt,Overall_Accuracy,personal_info_accuracy,work_experience_accuracy,education_accuracy,skills_accuracy,certifications_accuracy,projects_accuracy,summary_accuracy
+Resume Parser v1.4 (Explicit),80.0,60.0,0.0,100.0,100.0,100.0,100,100.0
+Resume Parser v1.5 (Enhanced Personal Info),94.03940886699509,60.0,100.0,100.0,98.27586206896551,100.0,100,100.0
+Resume Parser v1.6 (Enhanced Work Experience),68.57142857142857,80.0,0.0,100.0,100.0,0.0,100,100.0
+Resume Parser v1.7 (Comprehensive Enhanced),85.12924686404958,60.0,100.0,100.0,98.27586206896551,100.0,100,37.628865979381445

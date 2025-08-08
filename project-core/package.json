@@ -1,0 +1,40 @@
+{
+  "name": "jobtracker-db",
+  "version": "1.0.0",
+  "description": "JobTrackerDB - Full Stack Job Tracking Application",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:stable": "concurrently \"npm run dev:backend:stable\" \"npm run dev:frontend\"",
+    "dev:backend": "powershell -ExecutionPolicy Bypass -File start-backend.ps1",
+    "dev:backend:stable": "powershell -ExecutionPolicy Bypass -File start-backend-stable.ps1",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start:backend": "powershell -ExecutionPolicy Bypass -File start-backend-stable.ps1",
+    "start:frontend": "cd frontend && npm run dev",
+    "stop:backend": "powershell -ExecutionPolicy Bypass -File stop-backend.ps1",
+    "stop:frontend": "powershell -ExecutionPolicy Bypass -File stop-frontend.ps1",
+    "restart:backend": "npm run stop:backend && npm run start:backend",
+    "restart:frontend": "npm run stop:frontend && npm run start:frontend",
+    "status:backend": "powershell -ExecutionPolicy Bypass -File status-backend.ps1",
+    "status:frontend": "powershell -ExecutionPolicy Bypass -File status-frontend.ps1",
+    "install:all": "powershell -ExecutionPolicy Bypass -File install-dependencies.ps1",
+    "build": "cd frontend && npm run build",
+    "test": "cd frontend && npm run test",
+    "lint": "cd frontend && npm run lint",
+    "clean": "concurrently \"npm run clean:backend\" \"npm run clean:frontend\"",
+    "clean:backend": "cd backend && python -c \"import os; [os.remove(f) for f in os.listdir('.') if f.endswith('.pyc') or f.endswith('__pycache__')]\"",
+    "clean:frontend": "cd frontend && rm -rf node_modules/.cache dist",
+    "kill:ports": "powershell -ExecutionPolicy Bypass -File manage-services.ps1 cleanup",
+    "cleanup": "powershell -ExecutionPolicy Bypass -File manage-services.ps1 cleanup"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^4.15.0",
+    "@azure/msal-react": "^3.0.15",
+    "@react-oauth/google": "^0.12.2",
+    "axios": "^1.10.0",
+    "react-facebook-login-lite": "^1.0.0",
+    "react-router-dom": "^7.7.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

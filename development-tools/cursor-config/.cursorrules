@@ -1,0 +1,36 @@
+# JobTrackerDB Cursor Configuration
+# This file helps Cursor manage the development environment better
+
+# Prevent auto-reloading of backend during development
+# The backend should only be restarted manually when needed
+backend/:
+  - "*.py": "Manual restart required - use 'npm run restart' to restart services"
+  - "migrations/": "Database migrations - restart backend after running"
+
+# Frontend can auto-reload safely
+frontend/:
+  - "*.tsx": "Auto-reload safe"
+  - "*.ts": "Auto-reload safe"
+  - "*.css": "Auto-reload safe"
+
+# Root level files that might trigger restarts
+*.json:
+  - "package.json": "Manual restart required - use 'npm run restart'"
+  - "*.config.js": "Manual restart required - use 'npm run restart'"
+
+# Database and migration files
+*.sql:
+  - "Manual restart required after database changes"
+
+# Environment files
+.env:
+  - "Manual restart required after environment changes"
+
+# Service Management Commands
+# Use these commands to manage services:
+# - npm run status    : Check service status
+# - npm run start     : Start services
+# - npm run stop      : Stop services  
+# - npm run restart   : Restart services
+# - npm run cleanup   : Clean up all processes
+# - quick-manage.bat  : Quick management script 
