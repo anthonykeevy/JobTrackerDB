@@ -16,7 +16,7 @@ const ForgotPassword: React.FC = () => {
       // This endpoint should be implemented in your backend
       await axios.post("/api/v1/auth/forgot-password", { email });
       setMessage("If an account with that email exists, a reset link has been sent.");
-    } catch (err: any) {
+    } catch {
       setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);

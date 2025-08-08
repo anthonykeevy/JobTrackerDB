@@ -25,7 +25,7 @@ const ResetPassword: React.FC = () => {
       // This endpoint should be implemented in your backend
       await axios.post("/api/v1/auth/reset-password", { token, password });
       setMessage("Your password has been reset! You can now log in.");
-    } catch (err: any) {
+    } catch {
       setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);

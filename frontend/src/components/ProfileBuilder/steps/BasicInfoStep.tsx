@@ -21,12 +21,11 @@ import MapComponent from '../../Map/MapComponent';
 import apiLogger from '../../../utils/apiLogger';
 
 // Simple debounce function
-type AnyFunction = (...args: unknown[]) => void;
-const debounce = (func: AnyFunction, delay: number) => {
+const debounce = (func: Function, delay: number) => {
   let timeoutId: number;
-  return (...args: unknown[]) => {
+  return (...args: any[]) => {
     clearTimeout(timeoutId);
-    timeoutId = window.setTimeout(() => func(...args), delay);
+    timeoutId = setTimeout(() => func.apply(null, args), delay);
   };
 };
 
@@ -252,7 +251,7 @@ const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
     setIsSearching(true);
 
-    searchTimeoutRef.current = window.setTimeout(async () => {
+    searchTimeoutRef.current = setTimeout(async () => {
       try {
         setAddressValidation({ status: 'validating' });
         

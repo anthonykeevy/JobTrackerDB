@@ -5,16 +5,21 @@ Create UAT user account for regression testing
 
 import sys
 import os
+import secrets
+from dotenv import load_dotenv, find_dotenv
+
+# Load environment variables
+load_dotenv(find_dotenv(), override=False)
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from app.models import User, Profile
 import hashlib
-import secrets
 
-# Database connection
-DATABASE_URL = "mssql+pyodbc://localhost/JobTrackerDB_Dev?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
+# Database connection - use environment variable
+DATABASE_URL = os.getenv("DATABASE_URL", "mssql+pyodbc://localhost/JobTrackerDB_Dev?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes")
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -24,6 +29,20 @@ def hash_password(password: str) -> str:
     hash_obj = hashlib.sha256((password + salt).encode())
     return f"{salt}${hash_obj.hexdigest()}"
 
+def generate_uat_credentials():
+    """Generate UAT credentials from environment or use defaults"""
+    # Try to get from environment variables first
+    uat_email = os.getenv("UAT_EMAIL", "uat@JobTrackerDB.com")
+    uat_password = os.getenv("UAT_PASSWORD")
+    
+    # If no password in env, generate a secure random one
+    if not uat_password:
+        uat_password = secrets.token_urlsafe(12)  # Generate secure random password
+        print(f"⚠️  No UAT_PASSWORD in environment, generated: {uat_password}")
+        print(f"   Add UAT_PASSWORD={uat_password} to your .env file for consistency")
+    
+    return uat_email, uat_password
+
 def create_uat_user():
     """Create UAT user account"""
     
@@ -32,8 +51,11 @@ def create_uat_user():
     try:
         print("🔧 Creating UAT user account...")
         
+        # Generate credentials
+        uat_email, uat_password = generate_uat_credentials()
+        
         # Check if UAT user already exists
-        existing_user = db.query(User).filter(User.EmailAddress == "uat@JobTrackerDB.com").first()
+        existing_user = db.query(User).filter(User.EmailAddress == uat_email).first()
         
         if existing_user:
             print(f"✅ UAT user already exists (ID: {existing_user.UserID})")
@@ -42,12 +64,11 @@ def create_uat_user():
             return existing_user.UserID
         
         # Create new UAT user
-        password = "UAT@JobTrackerDB2025"
-        hashed_password = hash_password(password)
+        hashed_password = hash_password(uat_password)
         
         uat_user = User(
-            EmailAddress="uat@JobTrackerDB.com",
-            Username="uat@JobTrackerDB.com",
+            EmailAddress=uat_email,
+            Username=uat_email,
             HashedPassword=hashed_password,
             IsActive=True,
             createdDate=text("GETDATE()"),
@@ -58,7 +79,7 @@ def create_uat_user():
         uat_profile = Profile(
             FirstName="UAT",
             LastName="Tester",
-            EmailAddress="uat@JobTrackerDB.com",
+            EmailAddress=uat_email,
             PhoneNumber="",
             DateOfBirth=None,
             CountryOfBirth="",
@@ -76,8 +97,8 @@ def create_uat_user():
         
         # Now create user with ProfileID
         uat_user = User(
-            EmailAddress="uat@JobTrackerDB.com",
-            Username="uat@JobTrackerDB.com",
+            EmailAddress=uat_email,
+            Username=uat_email,
             HashedPassword=hashed_password,
             IsActive=True,
             ProfileID=uat_profile.ProfileID,
@@ -93,7 +114,7 @@ def create_uat_user():
         print(f"   UserID: {uat_user.UserID}")
         print(f"   Email: {uat_user.EmailAddress}")
         print(f"   Username: {uat_user.Username}")
-        print(f"   Password: {password}")
+        print(f"   Password: {uat_password}")
         print(f"   ProfileID: {uat_user.ProfileID}")
         
         return uat_user.UserID

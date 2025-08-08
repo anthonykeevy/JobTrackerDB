@@ -62,7 +62,7 @@ interface ParsedResumeData {
 const ResumeUploadStep: React.FC<ResumeUploadStepProps> = ({ data, updateData, onNext }) => {
   const [uploadState, setUploadState] = useState<'idle' | 'uploading' | 'processing' | 'success' | 'error'>('idle');
   const [dragActive, setDragActive] = useState(false);
-  const [processingProgress, _setProcessingProgress] = useState(0);
+  const [processingProgress, setProcessingProgress] = useState(0);
   const [parsedData, setParsedData] = useState<ParsedResumeData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
 

@@ -18,6 +18,7 @@ interface MapComponentProps {
 const MapComponent: React.FC<MapComponentProps> = ({ 
   latitude, 
   longitude, 
+  address, 
   className = "" 
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);

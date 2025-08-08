@@ -9,8 +9,7 @@ import {
   TrashIcon,
   ComputerDesktopIcon,
   ChatBubbleLeftRightIcon,
-  LanguageIcon,
-  CheckBadgeIcon
+  LanguageIcon
 } from '@heroicons/react/24/outline';
 import type { ProfileData } from '../types.ts';
 

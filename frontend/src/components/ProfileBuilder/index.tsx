@@ -37,7 +37,7 @@ const ProfileBuilder: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [profileScore, setProfileScore] = useState<any>(null);
   const [saveMessage, setSaveMessage] = useState('');
-  const [_isSaving, setIsSaving] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData>({
     resumeData: undefined,
     basicInfo: {
@@ -244,7 +244,7 @@ const ProfileBuilder: React.FC = () => {
       });
 
       if (response.ok) {
-        await response.json();
+        const result = await response.json();
         setSaveMessage('✅ Data saved successfully!');
         
         // Reload profile score after saving
